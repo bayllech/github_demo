@@ -39,12 +39,13 @@
         function sendGet(name) {
             var xmlHttp = createXmlHttp();
             xmlHttp.open("get","/ajax?name=" + name);
+//            xmlHttp.open("get","/ajax?name=" + name + "&_time=" + new Date().getTime());
             xmlHttp.send();
         };
 
         function sendPost(name) {
             var xmlHttp = createXmlHttp();
-            xmlHttp.open("post","/ajax");
+            xmlHttp.open("post", "/ajax");
             xmlHttp.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
             xmlHttp.onreadystatechange = function () {
                 var state = xmlHttp.readyState;

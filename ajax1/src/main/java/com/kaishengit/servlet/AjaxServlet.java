@@ -17,7 +17,12 @@ public class AjaxServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String name = req.getParameter("name");
         name = new String(name.getBytes("ISO8859-1"), "UTF-8");
-        System.out.println("Hello,ajax doget" + name);
+        System.out.println("Hello,ajax doget --> " + name);
+
+        resp.setContentType("text/html;charset=utf-8");
+        resp.addHeader("pragma","no-cache");
+        resp.addHeader("cache-control","no-cache");
+        resp.addHeader("expires","0");
 
         PrintWriter out = resp.getWriter();
         out.print("Hello,ajax");
