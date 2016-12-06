@@ -18,9 +18,26 @@
 <button id="btn">sendRequest</button>
 <div id="result"></div>
 
+<script src="static/js/ajax.js"></script>
 <script>
     (function(){
-        function createXmlHttp() {
+        document.querySelector("#btn").onclick = function () {
+            var name = document.querySelector("#name").value;
+            ajax.sendPost({
+                url : "/ajax",
+                data : "name="+name+"&age=23",
+                success : function (result) {
+                    alert(result);
+                },
+                error : function () {
+                    alert("服务器异常")
+                }
+            });
+        };
+
+
+
+      /*  function createXmlHttp() {
             var xmlHttp = null;
             if (window.ActiveXObject) {   //注意细节，好不嘞
                 xmlHttp = new ActiveXObject("Microsoft.XMLHTTP");
@@ -66,7 +83,7 @@
             }
             xmlHttp.send("name="+name+"&age=23");
 
-        }
+        }*/
     })();
 </script>
 </body>

@@ -40,10 +40,10 @@ public class AjaxServlet extends HttpServlet {
         String name = req.getParameter("name");
         PrintWriter out = resp.getWriter();
         if ("tom".equals(name)) {
-            System.out.println("账号已被使用");
+//            System.out.println("账号已被使用");
             out.print("不能用");
         } else {
-            System.out.println("账号可用");
+//            System.out.println("账号可用");
             out.print("能用");
         }
         System.out.println("Hello,ajax dopost -> " + name);
