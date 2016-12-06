@@ -46,7 +46,7 @@ public class AjaxServlet extends HttpServlet {
             System.out.println("账号可用");
             out.print("能用");
         }
-        System.out.println("Hello,ajax dopost" + name);
+        System.out.println("Hello,ajax dopost -> " + name);
 
         out.flush();
         out.close();
