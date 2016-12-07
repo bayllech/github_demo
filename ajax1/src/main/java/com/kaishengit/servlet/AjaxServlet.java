@@ -25,7 +25,7 @@ public class AjaxServlet extends HttpServlet {
         resp.addHeader("expires","0");
 
         PrintWriter out = resp.getWriter();
-        out.print("Hello,ajax");
+        out.print("Hello," + name);
         out.flush();
         out.close();
 

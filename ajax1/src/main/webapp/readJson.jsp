@@ -1,5 +1,3 @@
-<%--suppress JSAnnotator --%>
-<%--suppress ALL --%>
 <%--
   Created by IntelliJ IDEA.
   User: 帅比
@@ -20,7 +18,7 @@
     <script>
         (function () {
             document.querySelector("#btn").onclick = function () {
-              var xmlHttp = new  XMLHttpRequest();
+              var xmlHttp = new XMLHttpRequest();
               xmlHttp.open("get", "/data.json");
               xmlHttp.onreadystatechange = function () {
                   if (xmlHttp.readyState == 4) {

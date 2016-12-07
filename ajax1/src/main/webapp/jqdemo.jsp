@@ -22,10 +22,10 @@
         $(function () {
             $("#username").blur(function () {
                 var name = $(this).val();
-                $.get("/ajax",{"name":"ajax"},function (data) {
+             /*   $.get("/ajax",{"name":name},function (data) {
                     alert(data);
-                });
-               /* $.post("/ajax",{"name":name,"age":23})  //post()不可用？？？
+                });*/
+              /*  $.post("/ajax",{"name":name,"age":23})  //post()不可用？？？
                     .done(function(data){
                         $("#text").text(data);
                     })
@@ -34,7 +34,7 @@
                     });*/
                $.ajax({
                    url : "/ajax",
-                   type : post,
+                   type : "post",
                    data : {"name":name,"age":23},
                    timeout : 1000,
                    beforeSend : function () {

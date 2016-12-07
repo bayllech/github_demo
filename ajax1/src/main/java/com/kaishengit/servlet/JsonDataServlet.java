@@ -10,14 +10,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.nio.charset.Charset;
 import java.util.Arrays;
 import java.util.List;
 
 /**
  * Created by 帅比 on 2016/12/6.
  */
-@WebServlet("date.json")
+@WebServlet("/data.json")  //细节，细节，细节
 public class JsonDataServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
