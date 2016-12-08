@@ -1,10 +1,3 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: 帅比
-  Date: 2016/11/23
-  Time: 17:00
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
@@ -97,7 +90,6 @@
     <script src="/static/js/jquery.twbsPagination.min.js"></script>
     <script>
         $(function () {
-            //分页插件的使用
             $("#pagination").twbsPagination({
                 totalPages:${bookPage.totalPages},
                 visiblePages:5,

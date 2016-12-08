@@ -104,7 +104,7 @@
 
                 $("#formSubmit").submit();
             });
-            
+
             $("#formSubmit").validate({
               //  errorLabelContainer: $("#formSubmit div.alert-danger"),
                 errorElement:"span",
