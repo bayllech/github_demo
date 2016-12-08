@@ -22,11 +22,9 @@
             color: #878e98;
             line-height: 1.5;
         }
-
         .box{
             margin-top: 214px;
         }
-
         a:link {
             color: #878e98;
             text-decoration: none;
@@ -78,14 +76,12 @@
                     </tr>
                     </c:forEach>
                 </tbody>
-
             </table>
 
             <nav>
                 <ul id="pagination" class="pagination pull-right"></ul>
             </nav>
         </div>
-
     <div class="fotter box">
         <div class="container">
             <div class="row text-center">
@@ -93,17 +89,13 @@
                     <a href="http://bayllech.cn"><strong>备有网</strong></a> <br>
                     <a href="maito:bayllech@gmail.com">邮箱:bayllech@gmail.com</a> <br>
                     <a href="http://www.miit.gov.cn/" style="text-shadow: 0 1px 2px rgba(0,0,0,0.3);color: #878e98;font-size:12px">豫ICP备16037326号</a>
-
                 </div>
             </div>
         </div>
     </div>
-
-
     <script src="/static/js/jquery-1.11.3.min.js"></script>
     <script src="/static/js/jquery.twbsPagination.min.js"></script>
     <script>
-
         $(function () {
             //分页插件的使用
             $("#pagination").twbsPagination({
