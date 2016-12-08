@@ -22,12 +22,9 @@
             color: #878e98;
             line-height: 1.5;
         }
-
         .box{
             margin-top: 54px;
         }
-
-
         a:link {
             color: #878e98;
             text-decoration: none;
@@ -71,8 +68,6 @@
             </form>
         </div>
     </div>
-
-
 </div>
 
 <div class="fotter box">
@@ -82,7 +77,6 @@
                 <a href="http://bayllech.cn"><strong>备有网</strong></a> <br>
                 <a href="maito:bayllech@gmail.com">邮箱:bayllech@gmail.com</a> <br>
                 <a href="http://www.miit.gov.cn/" style="text-shadow: 0 1px 2px rgba(0,0,0,0.3);color: #878e98;font-size:12px">豫ICP备16037326号</a>
-
             </div>
         </div>
     </div>
