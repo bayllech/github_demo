@@ -17,7 +17,6 @@
             color: #878e98;
             line-height: 1.5;
         }
-
         .box{
             margin-top: 73px;
         }
@@ -27,7 +26,6 @@
             width: 160px;
             height: 70px;
         }
-
         a:link {
             color: #878e98;
             text-decoration: none;
@@ -83,8 +81,6 @@
                     <br>
                     <span>验证码:</span><input type="text" name="code">
                 </div>
-
-
                     <div class="checkbox">
                         <label>
                             <input type="checkbox" name="remeberme" value="remeberme" >记住账号
@@ -104,7 +100,6 @@
                 <a href="http://bayllech.cn"><strong>备有网</strong></a> <br>
                 <a href="maito:bayllech@gmail.com">邮箱:bayllech@gmail.com</a> <br>
                 <a href="http://www.miit.gov.cn/" style="text-shadow: 0 1px 2px rgba(0,0,0,0.3);color: #878e98;font-size:12px">豫ICP备16037326号</a>
-
             </div>
         </div>
     </div>
