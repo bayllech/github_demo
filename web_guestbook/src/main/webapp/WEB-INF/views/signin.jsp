@@ -21,9 +21,6 @@
         .box{
             margin-top: 165px;
         }
-        .error{
-            color:red;
-        }
     </style>
 </head>
 <body>
@@ -94,7 +91,7 @@
 
 
             $("#formSubmit").validate({
-                errorLabelContainer: $("#formSubmit div.error"),
+                errorLabelContainer: $("#formSubmit div.alert-danger"),
 //                errorElement:"span",
                 rules:{
                     username : {
@@ -127,6 +124,9 @@
                         equalTo:"两次密码不一致"
                     }
                 },
+                submitHandler:{
+                    
+                }
 
 
 

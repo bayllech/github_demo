@@ -15,8 +15,22 @@
 <body>
     <button id="btn">load json</button>
 
+    <script src="static/js/jquery-1.11.3.min.js"></script>
     <script>
-        (function () {
+        $("#btn").click(function () {
+            $.getJSON("/data.json").done(function(data){
+                for (var i=0;i<data.length;i++) {
+                    var user = data[i];
+                    alert(user.name + "->" + user.address);
+                }
+            }).error(function () {
+                alert("服务器异常")
+            });
+            
+        });
+
+
+        /*(function () {
             document.querySelector("#btn").onclick = function () {
               var xmlHttp = new XMLHttpRequest();
               xmlHttp.open("get", "/data.json");
@@ -36,7 +50,7 @@
               }
               xmlHttp.send();
             };
-        })();
+        })();*/
     </script>
 </body>
 </html>
