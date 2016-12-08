@@ -13,14 +13,12 @@ public class AdminSevice {
      * 注册查找用户名
      * @param username
      */
-    public void findByName(String username) {
+    public Admin findByName(String username) {
         AdminDao adminDao = new AdminDao();
-        Admin admin = adminDao.findByName(username);
-
-        if (admin != null) {
-            throw new ServiceException("账号已被使用");
-        }
+        return adminDao.findByName(username);
     }
+
+
 
     /**
      * 登录验证账号密码

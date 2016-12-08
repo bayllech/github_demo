@@ -18,7 +18,7 @@ public class AdminDao {
      * @param password
      */
     public void addAdmin(String username, String password) {
-        String sql = "insert into t_admin(username,password) values(?,?)";
+        String sql = "insert into t_admin(name,password) values(?,?)";
         DbHelp.update(sql,username,password);
     }
 }

@@ -26,6 +26,24 @@
         .box{
             margin-top: 214px;
         }
+
+        a:link {
+            color: #878e98;
+            text-decoration: none;
+        }
+        a:visited {
+            text-decoration: none;
+            color:#878e98;
+        }
+        a:hover {
+            text-decoration: underline;
+            color: #878e98;
+        }
+        a:active {
+            text-decoration: none;
+            color: #878e98;
+        }
+
     </style>
 </head>
 <body>
@@ -33,8 +51,8 @@
         <div class="text-center"><h3>每个账号只能看到自己的留言</h3></div>
     </nav>
     <div class="container">
-            <a href="/add" class="btn btn-primary">添加留言</a>
-            <a href="/logout" class="btn btn-default">安全退出</a>
+            <a style="color:#000000" href="/add" class="btn btn-primary">添加留言</a>
+            <a style="color:#000000" href="/logout" class="btn btn-default">安全退出</a>
             <table class="table">
                 <thead>
                     <tr>
@@ -72,8 +90,8 @@
         <div class="container">
             <div class="row text-center">
                 <div class="span9">
-                    <strong>备有网</strong> <br>
-                    电子邮件：bayllech@gmail.com <br>
+                    <a href="http://bayllech.cn"><strong>备有网</strong></a> <br>
+                    <a href="maito:bayllech@gmail.com">邮箱:bayllech@gmail.com</a> <br>
                     <a href="http://www.miit.gov.cn/" style="text-shadow: 0 1px 2px rgba(0,0,0,0.3);color: #878e98;font-size:12px">豫ICP备16037326号</a>
 
                 </div>

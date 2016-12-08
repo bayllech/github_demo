@@ -5,6 +5,41 @@
 <head>
     <title>添加留言</title>
     <link rel="stylesheet" href="/static/css/bootstrap.min.css">
+    <style>
+        body{
+            background-color: #e8ebef;
+        }
+        .fotter{
+            padding: 40px 0px;
+            background-color: #34495e;
+            text-shadow: 0 1px 2px rgba(0,0,0,0.3);
+            color: #878e98;
+            line-height: 1.5;
+        }
+
+        .box{
+            margin-top: 214px;
+        }
+
+
+        a:link {
+            color: #878e98;
+            text-decoration: none;
+        }
+        a:visited {
+            text-decoration: none;
+            color:#878e98;
+        }
+        a:hover {
+            text-decoration: underline;
+            color: #878e98;
+        }
+        a:active {
+            text-decoration: none;
+            color: #878e98;
+        }
+
+    </style>
 </head>
 <body>
 
@@ -31,5 +66,18 @@
             </div>
         </div>
     </div>
+
+<div class="fotter box">
+    <div class="container">
+        <div class="row text-center">
+            <div class="span9">
+                <a href="http://bayllech.cn"><strong>备有网</strong></a> <br>
+                <a href="maito:bayllech@gmail.com">邮箱:bayllech@gmail.com</a> <br>
+                <a href="http://www.miit.gov.cn/" style="text-shadow: 0 1px 2px rgba(0,0,0,0.3);color: #878e98;font-size:12px">豫ICP备16037326号</a>
+
+            </div>
+        </div>
+    </div>
+</div>
 </body>
 </html>

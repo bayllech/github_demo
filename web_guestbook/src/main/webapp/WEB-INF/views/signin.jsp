@@ -5,10 +5,11 @@
 <head>
     <title>注册账号</title>
     <link rel="stylesheet" href="/static/css/bootstrap.min.css">
+    <%--<link href="http://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">--%>
+    <%--<link href="http://cdn.bootcss.com/animate.css/3.5.2/animate.min.css" rel="stylesheet">--%>
     <style>
         body{
             background-color: #e8ebef;
-
         }
         .fotter{
             padding: 40px 0px;
@@ -21,6 +22,25 @@
         .box{
             margin-top: 165px;
         }
+
+
+        a:link {
+            color: #878e98;
+            text-decoration: none;
+        }
+        a:visited {
+            text-decoration: none;
+            color:#878e98;
+        }
+        a:hover {
+            text-decoration: underline;
+            color: #878e98;
+        }
+        a:active {
+            text-decoration: none;
+            color: #878e98;
+        }
+
     </style>
 </head>
 <body>
@@ -35,7 +55,8 @@
             </c:if>
 
             <div class="col-md-4">
-                <form id="formSubmit" method="post" >
+
+                <form id="formSubmit" method="post">
                     <div class="form-group">
                         <lable>账号：</lable>
                         <input type="text" name="username" value="" class="form-control">
@@ -52,6 +73,7 @@
                     </div>
                     <button type="button" id="buttonSignin" class="btn btn-success">注册</button>
                 </form>
+
             </div>
 
         </div>
@@ -91,12 +113,14 @@
 
 
             $("#formSubmit").validate({
-                errorLabelContainer: $("#formSubmit div.alert-danger"),
-//                errorElement:"span",
+              //  errorLabelContainer: $("#formSubmit div.alert-danger"),
+                errorElement:"span",
+                errorClass:"text-danger",
                 rules:{
                     username : {
                         required : true,
-                        minlength: 3
+                        minlength: 3,
+                        remote: "/signin"
                     },
                     t_password : {
                         required : true,
@@ -112,7 +136,8 @@
                 messages:{
                     username : {
                         required : "请输入账号",
-                        minlength: "账号最少3个字符"
+                        minlength: "账号最少3个字符",
+                        remote:"账号已被使用"
                     },
                     t_password : {
                         required : "请输入密码",
@@ -124,18 +149,27 @@
                         equalTo:"两次密码不一致"
                     }
                 },
-                submitHandler:{
-                    
-                }
-
-
+                
+               /* submitHandler:function () {
+                    $.ajax({
+                        url:"/signin",
+                        type:"post",
+                        data:$("#formSubmit").serialize(),
+                        beforeSend:function(){
+                            $("#buttonSignin").attr("disabled","disabled");//.append($("<i class='fa fa-spinner fa-spin'></i>"))
+                        },
+                        complete:function () {
+                            $("#buttonSignin").removeAttr("disable", "disable");//.html("注册")
+                        },
+                        success:function (data) {
+                            if (data.state == "success") {
+                                location.href="/login?signin=200";
+                            }
+                        }
+                    });
+                }*/
 
             });
-
-
-
-
-
         });
     </script>
 

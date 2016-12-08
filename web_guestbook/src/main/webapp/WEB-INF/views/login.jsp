@@ -52,6 +52,7 @@
 <body>
 <div class="container">
     <div class="row">
+
         <nav class="navbar navbar-default" role="navigation">
             <div class="text-center"><h3>谢谢你的支持同时你也将成为网站内测第一批用户</h3></div>
         </nav>
