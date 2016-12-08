@@ -16,12 +16,9 @@
             color: #878e98;
             line-height: 1.5;
         }
-
         .box{
             margin-top: 214px;
         }
-
-
         a:link {
             color: #878e98;
             text-decoration: none;
