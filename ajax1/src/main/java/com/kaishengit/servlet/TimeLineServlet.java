@@ -26,5 +26,6 @@ public class TimeLineServlet extends BaseServlet {
 
         MessageService messageService = new MessageService();
         List<Message> messageList = messageService.findByMaxId(id);
+        renderJson(messageList,resp);
     }
 }
