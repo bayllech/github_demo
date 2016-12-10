@@ -12,7 +12,7 @@ import java.util.List;
 public class MessageDao {
 
     public List<Message> findByMaxId(int id) {
-        String sql = "select * from t_message where id = ? order by id dec";
+        String sql = "select * from t_message where id > ? order by id desc";
         return DbHelp.query(sql, new BeanListHandler<>(Message.class),id);
     }
 }

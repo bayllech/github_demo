@@ -10,8 +10,8 @@
     <script src="static/js/jquery-1.11.3.min.js"></script>
     <script>
         $(function () {
+            var maxId = 0;
             function call() {
-                var maxId = 0;
                 $.get("/timeline",{"maxId":maxId}).done(function(data){
                    if (data.length) {
                        for (var i = 0;i<data.length;i++) {
@@ -26,7 +26,7 @@
                        maxId = data[0].id;
                    }
                 }).error(function () {
-                    alert("服务器异常");
+                    alert("服务器异常...");
                     clearInterval(st);
                 });
             };

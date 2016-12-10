@@ -1,8 +1,5 @@
 package com.kaishengit.entity;
 
-/**
- * Created by 帅比 on 2016/12/9.
- */
 public class Message {
     private Integer id;
     private  String message;

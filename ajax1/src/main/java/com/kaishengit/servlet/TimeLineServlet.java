@@ -11,9 +11,6 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
 
-/**
- * Created by 帅比 on 2016/12/9.
- */
 @WebServlet("/timeline")
 public class TimeLineServlet extends BaseServlet {
     @Override
