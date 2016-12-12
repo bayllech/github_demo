@@ -36,7 +36,7 @@
                 swf:"static/js/webupload/Uploader.swf",
                 server:"http://up-z1.qiniu.com/",
                 pick:"#picker",
-                formData:{"token":"${token}"},
+                formData:{"token":"${token}","x:uid":"${id}"},
                 fileVal:"file",
                 auto:true
             });
@@ -48,6 +48,7 @@
 
                 var url = "http://ohyf2mhv9.bkt.clouddn.com/" + data.key + "?imageView2/1/w/150";
                 $("<img>").attr("src", url).addClass("img-circle").appendTo($("#result"));
+                alert(data["x:uid"]);
             });
             upload.on("uploadError",function (file) {
                 alert("上传错误");

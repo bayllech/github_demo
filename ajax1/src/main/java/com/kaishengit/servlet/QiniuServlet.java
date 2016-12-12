@@ -23,6 +23,7 @@ public class QiniuServlet extends BaseServlet {
 
         String token = auth.uploadToken(bucketName);
 
+        req.setAttribute("id",12);
         req.setAttribute("token", token);
         req.getRequestDispatcher("upload.jsp").forward(req,resp);
     }
