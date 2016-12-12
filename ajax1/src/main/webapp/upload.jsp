@@ -16,7 +16,7 @@
 </head>
 <body>
     <div id="picker">选择文件</div>
-    <div class="result"></div>
+    <div id="result"></div>
     <%--<button id="startBtn">开始上传</button>--%>
     <ul id="fileList"></ul>
 
@@ -46,8 +46,8 @@
                     img.remove();
                 }
 
-                var url = "http://ohyf2mhv9.bkt.clouddn.com" + data.key;
-                $("img").attr("src", url).addClass("img-circle").appendTo($("#result"));
+                var url = "http://ohyf2mhv9.bkt.clouddn.com/" + data.key + "?imageView2/1/w/150";
+                $("<img>").attr("src", url).addClass("img-circle").appendTo($("#result"));
             });
             upload.on("uploadError",function (file) {
                 alert("上传错误");
