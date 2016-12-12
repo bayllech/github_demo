@@ -15,7 +15,9 @@
     <link rel="stylesheet" href="static/css/bootstrap.min.css">
 </head>
 <body>
-    <div id="picker">选择文件</div> <button id="startBtn">开始上传</button>
+    <div id="picker">选择文件</div>
+    <div class="result"></div>
+    <%--<button id="startBtn">开始上传</button>--%>
     <ul id="fileList"></ul>
 
     <script src="static/js/jquery-1.11.3.min.js"></script>
@@ -30,13 +32,26 @@
 
     <script>
         $(function () {
-            var uploader = WebUploader.create({
+            var upload = WebUploader.create({
                 swf:"static/js/webupload/Uploader.swf",
-                server:"/upload",
+                server:"http://up-z1.qiniu.com/",
                 pick:"#picker",
+                formData:{"token":"${token}"},
                 fileVal:"file",
                 auto:true
             });
+            upload.on("uploadSuccess",function (file, data) {
+                var img = $("#result").find("img");
+                if (img[0]) {
+                    img.remove();
+                }
+
+                var url = "http://ohyf2mhv9.bkt.clouddn.com" + data.key;
+                $("img").attr("src", url).addClass("img-circle").appendTo($("#result"));
+            });
+            upload.on("uploadError",function (file) {
+                alert("上传错误");
+            })
         });
     </script>
 </body>
