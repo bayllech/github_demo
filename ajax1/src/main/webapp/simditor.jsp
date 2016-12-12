@@ -11,11 +11,17 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <link rel="stylesheet" href="static/css/bootstrap.min.css">
     <link rel="stylesheet" href="static/css/simditor.css">
 </head>
 <body>
 
-    <textarea id="editor" placeholder="请输入..." autofocus></textarea>
+    <div class="container">
+        <form action="/send" method="post">
+            <textarea id="editor" name="message" placeholder="请输入..." autofocus></textarea>
+            <button class="btn-primary">发布</button>
+        </form>
+    </div>
 
     <script src="static/js/jquery-1.11.3.min.js"></script>
     <script src="static/js/scripts//module.js"></script>
