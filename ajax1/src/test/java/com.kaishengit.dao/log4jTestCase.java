@@ -13,7 +13,7 @@ public class log4jTestCase {
 //        Logger logger = Logger.getLogger(log4jTestCase.class);
         Logger logger = LoggerFactory.getLogger(log4jTestCase.class);
 
-        logger.trace("trace message");
+        logger.trace("{}-{} trace message","tom","hello");
         logger.debug("debug message");
         logger.info("info message");
         logger.warn("warn message");
