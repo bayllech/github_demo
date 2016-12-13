@@ -7,6 +7,12 @@
   <version>1.0-SNAPSHOT</version>
   <name>Ajax Maven Webapp</name>
   <url>http://maven.apache.org</url>
+
+  <properties>
+      <junit-version>4.12</junit-version>
+
+  </properties>
+
   <dependencies>
       <dependency>
           <groupId>javax.servlet</groupId>
@@ -60,8 +66,14 @@
               </exclusion>
           </exclusions>
       </dependency>
+      <dependency>
+          <groupId>junit</groupId>
+          <artifactId>junit</artifactId>
+          <version>${junit-version}</version>
+      </dependency>
 
   </dependencies>
+    
   <build>
     <finalName>Ajax</finalName>
       <plugins>
