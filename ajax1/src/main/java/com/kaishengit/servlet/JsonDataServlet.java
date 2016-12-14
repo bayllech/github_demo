@@ -1,3 +1,4 @@
+/*
 package com.kaishengit.servlet;
 
 import com.google.gson.Gson;
@@ -13,9 +14,11 @@ import java.io.PrintWriter;
 import java.util.Arrays;
 import java.util.List;
 
+*/
 /**
  * Created by 帅比 on 2016/12/6.
- */
+ *//*
+
 @WebServlet("/data.json")  //细节，细节，细节
 public class JsonDataServlet extends HttpServlet {
     @Override
@@ -40,3 +43,4 @@ public class JsonDataServlet extends HttpServlet {
         out.close();
     }
 }
+*/
