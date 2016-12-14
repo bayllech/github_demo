@@ -12,9 +12,10 @@ import static org.junit.Assert.*;
  */
 public class UserServiceTest {
     private UserService userService = new UserService();
+    private UserServiceWithGuava userServiceWithGuava = new UserServiceWithGuava();
     @Test
     public void findById() throws Exception {
-        User user = userService.findById(1);
+        User user = userServiceWithGuava.findById(1);
 
         System.out.println(user);
     }
