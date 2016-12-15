@@ -21,6 +21,7 @@
         <logback-version>1.1.8</logback-version>
         <ehcache-version>2.6.11</ehcache-version>
         <guave-version>20.0</guave-version>
+        <lang3-version>3.5</lang3-version>
     </properties>
 
     <dependencies>
@@ -57,6 +58,12 @@
             <version>${dbutil-version}</version>
         </dependency>
         <dependency>
+            <groupId>com.google.guava</groupId>
+            <artifactId>guava</artifactId>
+            <version>${guave-version}</version>
+        </dependency>
+
+        <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-api</artifactId>
             <version>${slf4j-version}</version>
@@ -71,18 +78,18 @@
             <artifactId>logback-classic</artifactId>
             <version>${logback-version}</version>
         </dependency>
-
         <dependency>
             <groupId>net.sf.ehcache</groupId>
             <artifactId>ehcache-core</artifactId>
             <version>${ehcache-version}</version>
         </dependency>
-
         <dependency>
-            <groupId>com.google.guava</groupId>
-            <artifactId>guava</artifactId>
-            <version>${guave-version}</version>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+            <version>${lang3-version}</version>
         </dependency>
+
+
     </dependencies>
 
     <build>
