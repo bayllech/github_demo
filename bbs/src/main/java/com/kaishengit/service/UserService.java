@@ -7,15 +7,19 @@ import com.kaishengit.dao.UserDao;
 import com.kaishengit.entity.User;
 import com.kaishengit.util.Config;
 
+import com.kaishengit.util.EmailUtil;
 import org.apache.commons.codec.digest.DigestUtils;
 
 import java.util.UUID;
+import java.util.concurrent.TimeUnit;
 
 /**
  * Created by bayllech on 2016/12/15.
  */
 public class UserService {
-    
+    private static Cache<String ,String> cache = CacheBuilder.newBuilder()
+            .expireAfterWrite(1, TimeUnit.HOURS)
+            .build();
 
     UserDao userDao = new UserDao();
 
@@ -45,9 +49,12 @@ public class UserService {
                 String uuid = UUID.randomUUID().toString();
                 String url = "http://bbs.bayllech.com/user/active?_="+uuid;
 
-
+                cache.put(uuid,username);
+                String html ="<h3>Dear "+username+":</h3></br>请点击<a href='"+url+"'>该链接</a>去激活你的账号. <br> 备有网";
+                EmailUtil.sendHtmlEmail(email, "备有网用户激活", html);
             }
         });
+        thread.start();
 
     }
 
