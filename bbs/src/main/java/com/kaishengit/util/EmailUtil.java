@@ -20,6 +20,7 @@ public class EmailUtil {
 
         try {
             htmlEmail.setFrom(Config.get("email.fromemail"));
+            htmlEmail.setCharset("utf-8");
             htmlEmail.setSubject(subject);
             htmlEmail.setHtmlMsg(context);
             htmlEmail.addTo(toAddress);

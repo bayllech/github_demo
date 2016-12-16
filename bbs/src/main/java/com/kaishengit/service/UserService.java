@@ -23,8 +23,8 @@ public class UserService {
 
     UserDao userDao = new UserDao();
 
-    public boolean validateUsername(String username) {
-        User user = userDao.validateUsername(username);
+    public boolean findUserByName(String username) {
+        User user = userDao.findUserByName(username);
         if (user == null) {
             return true;
         } else {
@@ -58,7 +58,7 @@ public class UserService {
 
     }
 
-    public User validateEmail(String email) {
-        return  userDao.validateEmail(email);
+    public User findUserByEmail(String email) {
+        return  userDao.findUserByEmail(email);
     }
 }

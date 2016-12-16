@@ -20,11 +20,11 @@ public class ValidateEmailServlet extends BaseServlet {
         String email = req.getParameter("email");
 
         UserService userService = new UserService();
-        User user = userService.validateEmail(email);
+        User user = userService.findUserByEmail(email);
         if (user == null) {
             renderText("true", resp);
         } else {
-            renderText("error", resp);
+            renderText("false", resp);
         }
     }
 }

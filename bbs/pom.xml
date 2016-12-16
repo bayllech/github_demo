@@ -102,11 +102,7 @@
             <artifactId>ehcache-core</artifactId>
             <version>${ehcache-version}</version>
         </dependency>
-        <dependency>
-            <groupId>net.sf.ehcache</groupId>
-            <artifactId>ehcache</artifactId>
-            <version>${ehcache-version}</version>
-        </dependency>
+
         <dependency>
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-email</artifactId>

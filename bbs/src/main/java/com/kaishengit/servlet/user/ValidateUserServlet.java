@@ -22,7 +22,7 @@ public class ValidateUserServlet extends BaseServlet {
         username = StringUtils.toUtf(username);
 
         UserService userService = new UserService();
-        boolean result = userService.validateUsername(username);
+        boolean result = userService.findUserByName(username);
         if (result) {
             renderText("true", resp);
         } else {
