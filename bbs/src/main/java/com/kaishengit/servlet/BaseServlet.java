@@ -10,7 +10,7 @@ import java.io.PrintWriter;
 public class BaseServlet extends HttpServlet {
 
     public void forward(String path, HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        req.getRequestDispatcher("/WEB-INF/views/user"+path+".jsp").forward(req,resp);
+        req.getRequestDispatcher("/WEB-INF/views/"+path+".jsp").forward(req,resp);
     }
 
     public void renderText(String str,HttpServletResponse response) throws IOException {

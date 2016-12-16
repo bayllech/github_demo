@@ -22,6 +22,7 @@
         <ehcache-version>2.6.11</ehcache-version>
         <guave-version>20.0</guave-version>
         <lang3-version>3.5</lang3-version>
+        <codec-version>1.10</codec-version>
     </properties>
 
     <dependencies>
@@ -46,6 +47,11 @@
             <artifactId>mysql-connector-java</artifactId>
             <version>${mysql-version}</version>
         </dependency>
+        <dependency>
+            <groupId>commons-codec</groupId>
+            <artifactId>commons-codec</artifactId>
+            <version>${codec-version}</version>
+        </dependency>
 
         <dependency>
             <groupId>org.apache.commons</groupId>
@@ -58,11 +64,16 @@
             <version>${dbutil-version}</version>
         </dependency>
         <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+            <version>${lang3-version}</version>
+        </dependency>
+
+        <dependency>
             <groupId>com.google.guava</groupId>
             <artifactId>guava</artifactId>
             <version>${guave-version}</version>
         </dependency>
-
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-api</artifactId>
@@ -83,12 +94,6 @@
             <artifactId>ehcache-core</artifactId>
             <version>${ehcache-version}</version>
         </dependency>
-        <dependency>
-            <groupId>org.apache.commons</groupId>
-            <artifactId>commons-lang3</artifactId>
-            <version>${lang3-version}</version>
-        </dependency>
-
 
     </dependencies>
 
