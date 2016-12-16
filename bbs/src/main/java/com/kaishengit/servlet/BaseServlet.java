@@ -1,5 +1,7 @@
 package com.kaishengit.servlet;
 
+import com.google.gson.Gson;
+
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -19,6 +21,14 @@ public class BaseServlet extends HttpServlet {
         out.print(str);
         out.flush();
         out.close();
+    }
+
+    public void renderJSON(Object obj, HttpServletResponse response) throws IOException {
+        response.setContentType("application/json;charset=utf-8");
+        PrintWriter writer = response.getWriter();
+        writer.print(new Gson().toJson(obj));
+        writer.flush();
+        writer.close();
     }
 
 }

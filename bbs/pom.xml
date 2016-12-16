@@ -23,6 +23,8 @@
         <guave-version>20.0</guave-version>
         <lang3-version>3.5</lang3-version>
         <codec-version>1.10</codec-version>
+        <gson-version>2.7</gson-version>
+        <email-version>1.4</email-version>
     </properties>
 
     <dependencies>
@@ -75,6 +77,12 @@
             <version>${guave-version}</version>
         </dependency>
         <dependency>
+            <groupId>com.google.code.gson</groupId>
+            <artifactId>gson</artifactId>
+            <version>${gson-version}</version>
+        </dependency>
+
+        <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-api</artifactId>
             <version>${slf4j-version}</version>
@@ -93,6 +101,16 @@
             <groupId>net.sf.ehcache</groupId>
             <artifactId>ehcache-core</artifactId>
             <version>${ehcache-version}</version>
+        </dependency>
+        <dependency>
+            <groupId>net.sf.ehcache</groupId>
+            <artifactId>ehcache</artifactId>
+            <version>${ehcache-version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-email</artifactId>
+            <version>${email-version}</version>
         </dependency>
 
     </dependencies>

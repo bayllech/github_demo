@@ -1,6 +1,5 @@
 package com.kaishengit.util;
 
-import java.sql.Connection;
 import java.sql.SQLException;
 
 import org.apache.commons.dbutils.QueryRunner;
@@ -13,10 +12,6 @@ import org.slf4j.LoggerFactory;
 public class DbHelp {
 
     private static Logger logger = LoggerFactory.getLogger(DbHelp.class);
-
-    private static Connection getConnection() {
-        return ConnectionManager.getConnection();
-    }
 
     public static void update(String sql,Object... params) throws DataAccessException {
         try {
@@ -44,7 +39,7 @@ public class DbHelp {
         }
     }
 
-    private static void close(Connection connection) {
+  /*  private static void close(Connection connection) {
         if(connection != null) {
             try {
                 connection.close();
@@ -54,6 +49,6 @@ public class DbHelp {
             }
         }
 
-    }
+    }*/
 
 }

@@ -3,7 +3,6 @@ package com.kaishengit.util;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.SQLException;
-import java.util.Properties;
 
 import com.kaishengit.exception.DataAccessException;
 import org.apache.commons.dbcp2.BasicDataSource;
@@ -19,17 +18,19 @@ public class ConnectionManager {
     private static BasicDataSource dataSource = new BasicDataSource();
 
     static {
+       /*移到util/congig中读取并加载
         //加载并读取config.properties文件
-        Properties prop = new Properties();
-        try {
-            prop.load(ConnectionManager.class.getClassLoader().getResourceAsStream("config.properties"));
-            DRIVER = prop.getProperty("jdbc.driver");
-            URL = prop.getProperty("jdbc.url");
-            USERNAME = prop.getProperty("jdbc.username");
-            PASSWORD = prop.getProperty("jdbc.password");
-        } catch (IOException e) {
+        Properties prop = new Properties();*/
+      //  try {
+//            prop.load(ConnectionManager.class.getClassLoader().getResourceAsStream("config.properties"));
+
+            DRIVER = Config.get("jdbc.driver"); //prop.getProperty("jdbc.driver");
+            URL = Config.get("jdbc.url");
+            USERNAME = Config.get("jdbc.username");
+            PASSWORD = Config.get("jdbc.password");
+      /*  } catch (IOException e) {
             throw new DataAccessException("读取config.properties文件异常",e);
-        }
+        }*/
 
 
         dataSource.setDriverClassName(DRIVER);
