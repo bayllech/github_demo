@@ -59,10 +59,10 @@ public class UserService {
             @Override
             public void run() {
                 String uuid = UUID.randomUUID().toString();
-                String url = "http://bbs.bayllech.com/user/active?_="+uuid;
+                String url = "http://bbs.bayllech.cn/user/active?_="+uuid;
 
                 cache.put(uuid,username);
-                String html ="<h3>Dear "+username+":</h3></br>  请点击<a href='"+url+"'><button>此处</button></a>去激活你的账号. <br> 备有网";
+                String html ="<h3>Dear "+username+":</h3>请点击<a href='"+url+"'><button>此处</button></a>去激活你的账号. <br> 备有网";
                 EmailUtil.sendHtmlEmail(email, "备有网用户激活", html);
             }
         });
