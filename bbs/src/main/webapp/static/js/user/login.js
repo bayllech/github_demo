@@ -19,7 +19,7 @@ $(function () {
         },
         messages:{
             username:{
-                required:"请输入登录账号"
+                required:"请输入账号"
             },
             password:{
                 required:"请输入密码"
