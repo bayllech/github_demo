@@ -32,6 +32,13 @@ public class UserService {
             .expireAfterWrite(30, TimeUnit.SECONDS)
             .build();
 
+    /**
+     * 限制操作频率缓存设置
+     */
+    private static Cache<String ,String> activeCache = CacheBuilder.newBuilder()
+            .expireAfterWrite(1, TimeUnit.SECONDS)
+            .build();
+
 
     UserDao userDao = new UserDao();
 
@@ -96,5 +103,37 @@ public class UserService {
             }
         }
 
+    }
+
+    /**
+     * 用户忘记密码找回
+     * @param sessionId 用户客户端的，用于限制操作频率
+     * @param type 邮箱或手机找回类型
+     * @param value 邮箱或手机号
+     */
+    public void forgetPassword(String sessionId, String type, String value) {
+        if (activeCache.getIfPresent(sessionId) == null) {
+            if ("email".equals(type)) {
+                User user = userDao.findUserByEmail(value);
+                if (user != null) {
+                    Thread thread = new Thread(new Runnable() {
+                        @Override
+                        public void run() {
+                            String uuid = UUID.randomUUID().toString();
+                            String url = "http://bbs.bayllech.cn/forgetPassword/newPassword?token="+uuid;
+                            passwordCache.put(uuid,user.getUsername());
+
+                            String html = "<h3>"+user.getUsername()+"</h3>请点击<a href='"+url+"'><button>此处</button></a>进行找回密码操作，30分钟内有效";
+                            EmailUtil.sendHtmlEmail(value,"密码找回邮件，勿回复",html);
+                        }
+                    });
+                    thread.start();
+                }
+            } else {
+                //TODO根据手机号验证
+            }
+        } else {
+            throw new ServiceException("操作频率过快，请稍后再试");
+        }
     }
 }
