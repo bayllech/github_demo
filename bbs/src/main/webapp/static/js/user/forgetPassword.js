@@ -28,7 +28,7 @@ $(function () {
                   required:"该项必填"
               }
           },
-          submitHandler:function () {
+          submitHandler:function (form) {
               $.ajax({
                   url: "/forgetPassword",
                   type: "post",

@@ -24,7 +24,7 @@ public class ForgetPasswordServlet extends BaseServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String type = req.getParameter("type");
-        String value = req.getParameter("vlue");
+        String value = req.getParameter("value");
 
        /* HttpSession session = req.getSession();
         String sessionId = session.getId();*/
@@ -40,6 +40,7 @@ public class ForgetPasswordServlet extends BaseServlet {
             map.put("state", "error");
             map.put("message",e.getMessage());
         }
+        renderJSON(map,resp);
 
     }
 }

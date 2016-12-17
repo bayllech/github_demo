@@ -10,6 +10,8 @@ import com.kaishengit.util.Config;
 
 import com.kaishengit.util.EmailUtil;
 import org.apache.commons.codec.digest.DigestUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.UUID;
 import java.util.concurrent.TimeUnit;
@@ -18,6 +20,10 @@ import java.util.concurrent.TimeUnit;
  * Created by bayllech on 2016/12/15.
  */
 public class UserService {
+
+    UserDao userDao = new UserDao();
+    private Logger logger = LoggerFactory.getLogger(UserService.class);
+
     /**
      * 发送激活邮件缓存设置
      */
@@ -29,18 +35,15 @@ public class UserService {
      * 找回密码邮件缓存设置
      */
     private static Cache<String ,String> passwordCache = CacheBuilder.newBuilder()
-            .expireAfterWrite(30, TimeUnit.SECONDS)
+            .expireAfterWrite(30, TimeUnit.MINUTES)
             .build();
 
     /**
      * 限制操作频率缓存设置
      */
     private static Cache<String ,String> activeCache = CacheBuilder.newBuilder()
-            .expireAfterWrite(1, TimeUnit.SECONDS)
+            .expireAfterWrite(60, TimeUnit.SECONDS)
             .build();
-
-
-    UserDao userDao = new UserDao();
 
     public boolean findUserByName(String username) {
         User user = userDao.findUserByName(username);
@@ -116,6 +119,7 @@ public class UserService {
             if ("email".equals(type)) {
                 User user = userDao.findUserByEmail(value);
                 if (user != null) {
+//                    System.out.println("查到了："+value);
                     Thread thread = new Thread(new Runnable() {
                         @Override
                         public void run() {
@@ -123,17 +127,62 @@ public class UserService {
                             String url = "http://bbs.bayllech.cn/forgetPassword/newPassword?token="+uuid;
                             passwordCache.put(uuid,user.getUsername());
 
-                            String html = "<h3>"+user.getUsername()+"</h3>请点击<a href='"+url+"'><button>此处</button></a>进行找回密码操作，30分钟内有效";
+                            String html = "<h3>"+user.getUsername()+":"+"</h3>请点击<a href='"+url+"'><button>此处</button></a>进行找回密码操作，30分钟内有效";
                             EmailUtil.sendHtmlEmail(value,"密码找回邮件，勿回复",html);
                         }
                     });
                     thread.start();
+                } else {
+                    throw new ServiceException("该邮箱账号不存在");
                 }
             } else {
                 //TODO根据手机号验证
             }
+            activeCache.put(sessionId,"xxxooo");
         } else {
             throw new ServiceException("操作频率过快，请稍后再试");
+        }
+    }
+
+    /**
+     * 根据token查找用户，用于找回密码
+     * @param token
+     * @return
+     */
+    public User foundPasswordByToken(String token) {
+        String cacheUser = passwordCache.getIfPresent(token);
+//        System.out.println("cacheUser:"+cacheUser);
+        if (cacheUser == null) {
+            throw new ServiceException("验证信息已过期或无效");
+        } else {
+            User user = userDao.findUserByName(cacheUser);
+            if (user == null) {
+                throw new ServiceException("账户不存在");
+            } else {
+                return user;
+            }
+        }
+    }
+
+    /**
+     * 根据token设置密码，用于找回密码
+     * @param token
+     * @param name
+     * @param password
+     */
+    public void resetpassword(String token, String name, String password) {
+        if (passwordCache.getIfPresent(token) == null) {
+            throw new ServiceException("验证信息已过期或无效");
+        } else {
+            System.out.println(name);
+            User user = userDao.findUserByName(name);
+            if (user == null) {
+                throw new ServiceException("账户不存在");
+            } else {
+                user.setPassword(DigestUtils.md5Hex(Config.get("user.password.salt") + password));
+                userDao.update(user);
+                logger.info("{}重置了密码",user.getUsername());
+            }
         }
     }
 }

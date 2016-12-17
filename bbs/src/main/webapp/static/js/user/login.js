@@ -25,7 +25,7 @@ $(function () {
                 required:"请输入密码"
             }
         },
-        submitHandler:function () {
+        submitHandler:function (form) {
             $.ajax({
                 url: "/login",
                 type: "post",
