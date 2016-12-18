@@ -69,7 +69,7 @@ $(function(){
                 },
                 success:function(data){
                     if(data.state == 'success') {
-                        alert("注册成功，请登录");
+                        alert("注册成功，请登录并及时去邮箱验证！");
                         window.location.href = "/login";
                     } else {
                         alert(data.message);

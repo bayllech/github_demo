@@ -13,6 +13,8 @@ import org.apache.commons.codec.digest.DigestUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.util.Arrays;
+import java.util.List;
 import java.util.UUID;
 import java.util.concurrent.TimeUnit;
 
@@ -46,12 +48,19 @@ public class UserService {
             .build();
 
     public boolean findUserByName(String username) {
-        User user = userDao.findUserByName(username);
+        //保留账号
+        String names = Config.get("no.singup.names");
+        List<String> nameList = Arrays.asList(names.split(","));
+        if (nameList.contains(username)) {
+            return false;
+        }
+        return userDao.findUserByName(username) == null;
+       /* User user = userDao.findUserByName(username);
         if (user == null) {
             return true;
         } else {
             return false;
-        }
+        }*/
     }
 
     public void saveUser(String username, String password, String email, String phone) {

@@ -19,7 +19,7 @@ public class EmailUtil {
         htmlEmail.setStartTLSEnabled(true);
 
         try {
-            htmlEmail.setFrom(Config.get("email.fromemail"));
+            htmlEmail.setFrom(Config.get("email.fromemail"),"备有网");
             htmlEmail.setCharset("utf-8");
             htmlEmail.setSubject(subject);
             htmlEmail.setHtmlMsg(context);
