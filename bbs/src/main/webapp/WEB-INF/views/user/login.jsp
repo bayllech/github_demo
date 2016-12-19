@@ -21,6 +21,11 @@
                     ${requestScope.message}
             </div>
         </c:if>
+        <c:if test="${not empty param.redirect}">
+            <div class="alert alert-success">
+                    请登陆后再继续
+            </div>
+        </c:if>
 
         <form action="" class="form-horizontal" id="formLogin">
             <div class="control-group">
