@@ -228,4 +228,21 @@ public class UserService {
         userDao.update(user);
     }
 
+    /**
+     * 修改密码
+     * @param oldpassword
+     * @param newpassword
+     * @param user
+     */
+    public void updatePassword(String oldpassword,String newpassword, User user) {
+        if (DigestUtils.md5Hex(Config.get("user.password.salt") + oldpassword).equals(user.getPassword())) {
+            newpassword = DigestUtils.md5Hex(Config.get("user.password.salt") + newpassword);
+            user.setPassword(newpassword);
+            userDao.update(user);
+            logger.info("{}修改了密码",user.getUsername());
+        } else {
+            throw new ServiceException("原始密码错误");
+        }
+
+    }
 }
