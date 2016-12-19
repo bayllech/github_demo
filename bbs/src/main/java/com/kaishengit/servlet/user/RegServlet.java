@@ -1,5 +1,6 @@
 package com.kaishengit.servlet.user;
 
+import com.kaishengit.exception.ServiceException;
 import com.kaishengit.service.UserService;
 import com.kaishengit.servlet.BaseServlet;
 
@@ -35,8 +36,7 @@ public class RegServlet extends BaseServlet {
             userService.saveUser(username, password, email, phone);
 
             map.put("state", "success");
-        } catch (Exception e) {
-            e.printStackTrace();
+        } catch (ServiceException e) {
             map.put("state", "error");
             map.put("message", "账号注册失败");
         }

@@ -34,11 +34,11 @@ $(function () {
                     $("#loginbtn").text("登录中...").attr("disabled", "disabled");
                 },
                 success: function (data) {
-                    if (date.state == "success") {
+                    if (data.state == "success") {
                         alert("登录成功！");
                         window.location.href="/home";
                     } else {
-                        alert(data.messages);
+                        alert(data.message);
                     }
                 },
                 error: function () {

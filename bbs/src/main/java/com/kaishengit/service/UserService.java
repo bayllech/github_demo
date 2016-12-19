@@ -3,7 +3,9 @@ package com.kaishengit.service;
 import com.google.common.cache.Cache;
 import com.google.common.cache.CacheBuilder;
 
+import com.kaishengit.dao.LoginLogDao;
 import com.kaishengit.dao.UserDao;
+import com.kaishengit.entity.LoginLog;
 import com.kaishengit.entity.User;
 import com.kaishengit.exception.ServiceException;
 import com.kaishengit.util.Config;
@@ -192,6 +194,26 @@ public class UserService {
                 userDao.update(user);
                 logger.info("{}重置了密码",user.getUsername());
             }
+        }
+    }
+
+    /**
+     * 用户登录
+     * @param name
+     * @param password
+     * @param ip
+     * @return
+     */
+    public User login(String name, String password, String ip) {
+        //判断账号密码
+        User user = userDao.findUserByName(name);
+        if (user == null || !user.getPassword().equals(DigestUtils.md5Hex(Config.get("user.password.salt") + password))) {
+            throw new ServiceException("账号或密码错误");
+        } else {
+            LoginLogService loginLogService = new LoginLogService();
+            loginLogService.saveIp(user.getId(),ip);
+            logger.info("{}在ip:{}处登录",user.getUsername(),ip);
+            return user;
         }
     }
 }
