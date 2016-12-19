@@ -76,6 +76,11 @@ public class UserService {
 
         userDao.saveUser(user);
 
+        sendEmail(username,email);
+
+    }
+
+    public void sendEmail(String username, String email) {
         Thread thread = new Thread(new Runnable() {
             @Override
             public void run() {
@@ -88,7 +93,6 @@ public class UserService {
             }
         });
         thread.start();
-
     }
 
     public User findUserByEmail(String email) {
@@ -104,7 +108,6 @@ public class UserService {
         if (cacheUsername == null) {
             throw new ServiceException("验证信息已过期或无效");
         } else  {
-            UserDao userDao = new UserDao();
             User user = userDao.findUserByName(cacheUsername);
             if (user == null) {
                 throw new ServiceException("用户信息不存在，请查证");
@@ -216,4 +219,13 @@ public class UserService {
             return user;
         }
     }
+
+    /**
+     * 修改当前用户信息
+     * @param user
+     */
+    public void update(User user) {
+        userDao.update(user);
+    }
+
 }
