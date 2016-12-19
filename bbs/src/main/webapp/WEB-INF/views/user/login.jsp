@@ -16,6 +16,12 @@
             <span class="title"><i class="fa fa-sign-in"></i> 登录</span>
         </div>
 
+        <c:if test="${not empty requestScope.message}">
+            <div class="alert alert-success">
+                    ${requestScope.message}
+            </div>
+        </c:if>
+
         <form action="" class="form-horizontal" id="formLogin">
             <div class="control-group">
                 <label class="control-label">账号</label>
