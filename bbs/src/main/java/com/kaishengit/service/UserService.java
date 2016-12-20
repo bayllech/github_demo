@@ -147,7 +147,7 @@ public class UserService {
                     });
                     thread.start();
                 } else {
-                    throw new ServiceException("该邮箱账号不存在");
+                    throw new ServiceException("该邮箱账号未注册");
                 }
             } else {
                 //TODO根据手机号验证

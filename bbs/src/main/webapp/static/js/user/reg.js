@@ -69,10 +69,35 @@ $(function(){
                 },
                 success:function(data){
                     if(data.state == 'success') {
-                        alert("注册成功，请登录并及时去邮箱验证！");
-                        window.location.href = "/login";
+                        // alert("注册成功，请登录并及时去邮箱验证！");
+                        // window.location.href = "/login";
+                        swal({
+                                title: "注册成功，是否去登录？",
+                                text: "",
+                                type: "success",
+                                showCancelButton: true,
+                                confirmButtonColor: "#4352dd",
+                                confirmButtonText: "确定",
+                                cancelButtonText: "取消",
+                                closeOnConfirm: false,
+                                closeOnCancel: false
+                            },
+                            function(isConfirm){
+                                if (isConfirm) {
+                                    window.location.href = "/login";
+                                } else {
+                                    window.location.href="/home";
+                                }
+                            });
                     } else {
-                        alert(data.message);
+                        // alert(data.message);
+                        swal({
+                            title: data.message,
+                            text: "",
+                            type:"error",
+                            timer: 1200,
+                            showConfirmButton: true
+                        });
                     }
                 },
                 error:function(){

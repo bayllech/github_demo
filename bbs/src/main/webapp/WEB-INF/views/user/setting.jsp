@@ -5,9 +5,10 @@
     <meta charset="UTF-8">
     <title>设置</title>
     <link href="http://cdn.bootcss.com/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet">
-    <link href="http://cdn.bootcss.com/bootstrap/2.3.1/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/static/css/bootstrap.css" rel="stylesheet">
     <link rel="stylesheet" href="/static/css/style.css">
     <link rel="stylesheet" href="/static/js/webuploader/webuploader.css">
+    <link rel="stylesheet" href="/static/css/sweetalert.css">
 </head>
 <body>
 <%@ include file="../include/navbar.jsp"%>
@@ -106,6 +107,7 @@
 <script src="/static/js/jquery.validate.min.js"></script>
 <script src="/static/js/webuploader/webuploader.min.js"></script>
 <script src="/static/js/user/setting.js"></script>
+<script src="/static/js/sweetalert.min.js"></script>
 <script>
     var uploder = WebUploader.create({
             swf : "/static/js/webuploader/Uploader.swf",

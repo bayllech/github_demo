@@ -40,12 +40,14 @@ $(function () {
                       if (data.state == "success") {
                           var type = $("#type").val();
                           if (type == "email") {
-                              alert("请到邮件中查收并操作");
+                              // alert("请到邮件中查收并操作");
+                              swal("邮件已发送！","请到邮箱中查收并操作","success")
                           } else {
                               //TODO 手机号码验证
                           }
                       } else {
-                          alert(data.message);
+                          // alert(data.message);
+                          swal("出问题了-_-",data.message,"error");
                       }
                   },
                   error: function () {

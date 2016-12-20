@@ -1,5 +1,6 @@
 package com.kaishengit.servlet.user;
 
+import com.kaishengit.exception.ServiceException;
 import com.kaishengit.service.UserService;
 import com.kaishengit.servlet.BaseServlet;
 
@@ -36,7 +37,7 @@ public class ForgetPasswordServlet extends BaseServlet {
             UserService userService = new UserService();
             userService.forgetPassword(sessionId,type,value);
             map.put("state", "success");
-        } catch (Exception e) {
+        } catch (ServiceException e) {
             map.put("state", "error");
             map.put("message",e.getMessage());
         }

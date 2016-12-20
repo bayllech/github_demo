@@ -41,10 +41,31 @@ $(function () {
                   },
                   success: function (data) {
                       if (data.state == "success") {
-                          alert("密码设置成功，请登录！");
-                          window.location.href = "/login";
+                          // alert("密码设置成功，请登录！");
+                          // window.location.href = "/login";
+                          swal({
+                                  title: "密码设置成功，请您重新登录",
+                                  text: "",
+                                  type: "success",
+                                  // showCancelButton: true,
+                                  confirmButtonColor: "#4352dd",
+                                  confirmButtonText: "确定"
+                                  // cancelButtonText: "取消",
+                              },
+                              function(isConfirm){
+                                  if (isConfirm) {
+                                      window.location.href = "/login";
+                                  }
+                              });
                       } else {
-                          alert(data.message);
+                          // alert(data.message);
+                          swal({
+                              title: data.message,
+                              text: "",
+                              type:"error",
+                              timer: 1200,
+                              showConfirmButton: true
+                          });
                       }
                   },
                   error: function () {
