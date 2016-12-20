@@ -25,6 +25,7 @@
         <codec-version>1.10</codec-version>
         <gson-version>2.7</gson-version>
         <email-version>1.4</email-version>
+        <qiniu-version>7.1.0</qiniu-version>
     </properties>
 
     <dependencies>
@@ -107,6 +108,11 @@
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-email</artifactId>
             <version>${email-version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.qiniu</groupId>
+            <artifactId>qiniu-java-sdk</artifactId>
+            <version>${qiniu-version}</version>
         </dependency>
 
     </dependencies>

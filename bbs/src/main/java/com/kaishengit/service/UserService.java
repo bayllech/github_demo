@@ -224,7 +224,9 @@ public class UserService {
      * 修改当前用户信息
      * @param user
      */
-    public void update(User user) {
+    public void updateEmail(User user,String email) {
+        user.setEmail(email);
+        user.setState(User.USERSTATE_UNACTIVE);
         userDao.update(user);
     }
 
@@ -244,5 +246,15 @@ public class UserService {
             throw new ServiceException("原始密码错误");
         }
 
+    }
+
+    /**
+     * 修改用户头像
+     * @param user
+     * @param fileKey
+     */
+    public void updateAvatar(User user, String fileKey) {
+        user.setAvatar(fileKey);
+        userDao.update(user);
     }
 }

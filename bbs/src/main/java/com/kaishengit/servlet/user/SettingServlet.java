@@ -4,6 +4,8 @@ import com.kaishengit.entity.User;
 import com.kaishengit.exception.ServiceException;
 import com.kaishengit.service.UserService;
 import com.kaishengit.servlet.BaseServlet;
+import com.kaishengit.util.Config;
+import com.qiniu.util.Auth;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -18,6 +20,9 @@ import java.io.IOException;
 public class SettingServlet extends BaseServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        Auth auth = Auth.create(Config.get("ak"), Config.get("sk"));
+        String token = auth.uploadToken(Config.get("bucket"));
+        req.setAttribute("token", token);
         forward("user/setting",req,resp);
     }
 
@@ -32,6 +37,20 @@ public class SettingServlet extends BaseServlet {
         if ("password".equals(active)) {
             updatePassword(req, resp);
         }
+        //修改头像
+        if ("avatar".equals(active)) {
+            updateAvatar(req, resp);
+        }
+    }
+
+    private void updateAvatar(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+        String fileKey = req.getParameter("fileKey");
+        User user = getCurrentUser(req);
+        UserService userService = new UserService();
+        userService.updateAvatar(user, fileKey);
+
+        renderJsonSuccess(resp);
+
     }
 
     private void updatePassword(HttpServletRequest req, HttpServletResponse resp) throws IOException {
@@ -54,10 +73,8 @@ public class SettingServlet extends BaseServlet {
         User user = getCurrentUser(req);
 
         if (!user.getEmail().equals(email)) {
-            user.setEmail(email);
-            user.setState(User.USERSTATE_UNACTIVE);
             UserService userService = new UserService();
-            userService.update(user);
+            userService.updateEmail(user,email);
             //发送激活邮件验证邮箱
             userService.sendEmail(user.getUsername(),user.getEmail());
 
