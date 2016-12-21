@@ -45,6 +45,12 @@ public class BaseServlet extends HttpServlet {
         map.put("message", message);
         renderJSON(map,response);
     }
+    public void renderJsonObject(HttpServletResponse response, Object object) throws IOException {
+        Map<String, Object> map = new HashMap<>();
+        map.put("state", "success");
+        map.put("topic", object);
+        renderJSON(map,response);
+    }
 
     public User getCurrentUser(HttpServletRequest request) {
         HttpSession session = request.getSession();

@@ -6,6 +6,7 @@ import com.google.common.cache.CacheBuilder;
 import com.kaishengit.dao.LoginLogDao;
 import com.kaishengit.dao.UserDao;
 import com.kaishengit.entity.LoginLog;
+import com.kaishengit.entity.Topic;
 import com.kaishengit.entity.User;
 import com.kaishengit.exception.ServiceException;
 import com.kaishengit.util.Config;
@@ -257,4 +258,5 @@ public class UserService {
         user.setAvatar(fileKey);
         userDao.update(user);
     }
+
 }
