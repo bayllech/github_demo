@@ -14,7 +14,7 @@ import java.io.IOException;
 /**
  * Created by bayllech on 2016/12/21.
  */
-@WebServlet("/tipicDetail")
+@WebServlet("/topicDetail")
 public class TopicDetailServlet extends BaseServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -22,8 +22,10 @@ public class TopicDetailServlet extends BaseServlet {
         TopicService topicService = new TopicService();
         try {
             Topic topic = topicService.findTopicById(topicid);
+            req.setAttribute("topic", topic);
+            forward("topic/topicDetail",req,resp);
         } catch (ServiceException e) {
-
+            resp.sendError(404);
         }
     }
 }

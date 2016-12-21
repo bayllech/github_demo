@@ -7,6 +7,7 @@ import com.kaishengit.entity.Node;
 import com.kaishengit.entity.Topic;
 import com.kaishengit.entity.User;
 import com.kaishengit.exception.ServiceException;
+import com.kaishengit.util.Config;
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.List;
@@ -60,7 +61,7 @@ public class TopicService {
             if (topic != null) {
                 User user = userDao.findUserById(topic.getUserid());
                 Node node = nodeDao.findNodeById(topic.getNodeid());
-
+                user.setAvatar(Config.get("domain")+user.getAvatar());
                 topic.setUser(user);
                 topic.setNode(node);
                 return topic;
