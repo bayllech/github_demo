@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <title>主题页</title>
     <link href="http://cdn.bootcss.com/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet">
-    <link href="http://cdn.bootcss.com/bootstrap/2.3.1/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/static/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="/static/css/style.css">
     <link rel="stylesheet" href="/static/js/editer/styles/simditor.css">
     <style>
@@ -150,11 +150,13 @@
     </div>
 
     <c:choose>
-        <c:when test="${not empty requestScope.curr_user}">
+        <c:when test="${not empty sessionScope.curr_user}">
+            <a name="reply"></a>
             <div class="box" style="margin:20px 0px;">
                 <div class="talk-item muted" style="font-size: 12px"><i class="fa fa-plus"></i> 添加一条新回复</div>
                 <form id="replyForm" action="" style="padding: 15px;margin-bottom:0px;">
-                    <textarea name="textarea" id="editor"></textarea>
+                    <input name="topicid" type="hidden" value="${topic.id}">
+                    <textarea name="contents" id="editor"></textarea>
                 </form>
                 <div class="talk-item muted" style="text-align: right;font-size: 12px">
                     <span class="pull-left">请尽量让自己的回复能够对别人有帮助</span>
@@ -177,6 +179,7 @@
 <script src="/static/js/editer/scripts/uploader.min.js"></script>
 <script src="/static/js/editer/scripts/simditor.min.js"></script>
 <script src="/static/js/jquery.validate.min.js"></script>
+<script src="/static/js/highlight.pack.js"></script>
 <script>
     $(function(){
         var editor = new Simditor({
@@ -193,28 +196,39 @@
                errorElement:'span',
                errorClass:'text-error',
                rules:{
-                   textarea:{
-                       required:ture
+                   contents:{
+                       required:true,
+                       coll_regex: true
                    }
                },
+               ignore:'',
                messages:{
-                   textarea:{
-                       required:"回复不能为空"
+                   contents:{
+                       required:"回复不能为空",
+                       coll_regex: "这是啥"
                    }
                },
-               submitHandler:function () {
+               submitHandler:function (form) {
                    $.ajax({
-                       url: "/newReply",
+                       url: "/newreply",
                        type: "post",
-                       data: $().serialize(),
+                       data: $(form).serialize(),
                        beforeSend: function () {
+                           $("#replyBtn").text("发布中").attr("disabled", "disabled");
                        },
                        success: function (data) {
+                            if (data.state == "success") {
+                                alert("回复成功！");
+                                window.location.href="/topicDetail?topicid="+${topic.id};
+                            } else {
+                                alert(data.message)
+                            }
                        },
                        error: function () {
                            alert("服务器异常")
                        },
                        complete: function () {
+                           $("#replyBtn").text("发布").removeAttr("disabled");
                        }
                    });
                }

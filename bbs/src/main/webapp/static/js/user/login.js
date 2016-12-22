@@ -63,7 +63,10 @@ $(function () {
                             function(isConfirm){
                                 if (isConfirm) {
                                     if (url) {
-                                        window.location.href=url;
+                                        var hash = location.hash;
+                                        if (hash != null) {
+                                            window.location.href= url + hash;
+                                        }
                                     } else {
                                         window.location.href="/home";
                                     }

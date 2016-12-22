@@ -1,6 +1,7 @@
 package com.kaishengit.service;
 
 import com.kaishengit.dao.NodeDao;
+import com.kaishengit.dao.ReplyDao;
 import com.kaishengit.dao.TopicDao;
 import com.kaishengit.dao.UserDao;
 import com.kaishengit.entity.Node;
@@ -11,7 +12,6 @@ import com.kaishengit.util.Config;
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.List;
-import java.util.ServiceConfigurationError;
 
 /**
  * Created by bayllech on 2016/12/21.
@@ -21,6 +21,7 @@ public class TopicService {
     TopicDao topicDao = new TopicDao();
     UserDao userDao = new UserDao();
     NodeDao nodeDao = new NodeDao();
+    ReplyDao replyDao = new ReplyDao();
 
     /**
      * 查找所有发帖类型
@@ -72,5 +73,19 @@ public class TopicService {
             throw new ServiceException("参数错误");
         }
 
+    }
+
+    /**
+     * 添加新回复
+     * @param content
+     * @param topicid
+     * @param user
+     */
+    public void addReply(String content, String topicid, User user) {
+        if (new TopicService().findTopicById(topicid) != null) {
+            replyDao.addReply(content,topicid,user.getId());
+        } else {
+            throw new ServiceException("帖子不存在或已被删除");
+        };
     }
 }
