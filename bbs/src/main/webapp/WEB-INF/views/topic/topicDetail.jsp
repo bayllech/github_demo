@@ -3,7 +3,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>主题页</title>
+    <title>备有论坛—${topic.title}</title>
     <link href="http://cdn.bootcss.com/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet">
     <link href="/static/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="/static/css/style.css">
@@ -29,7 +29,7 @@
         <div class="topic-head">
             <img class="img-rounded avatar" src="${requestScope.topic.user.avatar}?imageView2/1/w/60/h/60" alt="">
             <h3 class="title">${requestScope.topic.title}</h3>
-            <p class="topic-msg muted"><a href="">${requestScope.topic.user.username}</a> · ${requestScope.topic.creatTime}</p>
+            <p class="topic-msg muted"><a href="">${requestScope.topic.user.username}</a> · ${requestScope.topic.createTime}</p>
         </div>
         <div class="topic-body">
             ${requestScope.topic.content} </div>
@@ -40,9 +40,9 @@
                 <li><a href=""></a></li>
             </ul>
             <ul class="unstyled inline pull-right muted">
-                <li>434次点击</li>
-                <li>8人收藏</li>
-                <li>2人感谢</li>
+                <li>${requestScope.topic.clicknum}</li>
+                <li>${requestScope.topic.favnum}</li>
+                <li>${requestScope.topic.thankyounum}</li>
             </ul>
         </div>
     </div>

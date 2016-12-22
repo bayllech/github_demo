@@ -6,7 +6,7 @@ public class Topic {
     private Integer id;
     private String title;
     private String content;
-    private Timestamp creatTime;
+    private Timestamp createTime;
     private int clicknum;
     private int favnum;
     private int thankyounum;
@@ -42,12 +42,12 @@ public class Topic {
         this.content = content;
     }
 
-    public Timestamp getCreatTime() {
-        return creatTime;
+    public Timestamp getCreateTime() {
+        return createTime;
     }
 
-    public void setCreatTime(Timestamp creatTime) {
-        this.creatTime = creatTime;
+    public void setCreateTime(Timestamp createTime) {
+        this.createTime = createTime;
     }
 
     public int getClicknum() {
