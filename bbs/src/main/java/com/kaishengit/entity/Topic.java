@@ -1,51 +1,22 @@
 package com.kaishengit.entity;
 
+import java.sql.Timestamp;
+
 public class Topic {
     private Integer id;
     private String title;
     private String content;
-    private String creatTime;
+    private Timestamp creatTime;
     private int clicknum;
+    private int favnum;
     private int thankyounum;
     private int replynum;
-    private String lastReplyTime;
+    private Timestamp lastReplyTime;
     private Integer userid;
     private Integer nodeid;
 
     private User user;
     private Node node;
-
-    public String getCreatTime() {
-        return creatTime;
-    }
-
-    public void setCreatTime(String creatTime) {
-        this.creatTime = creatTime;
-    }
-
-    public String getLastReplyTime() {
-        return lastReplyTime;
-    }
-
-    public void setLastReplyTime(String lastReplyTime) {
-        this.lastReplyTime = lastReplyTime;
-    }
-
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
-    }
-
-    public Node getNode() {
-        return node;
-    }
-
-    public void setNode(Node node) {
-        this.node = node;
-    }
 
     public Integer getId() {
         return id;
@@ -71,12 +42,28 @@ public class Topic {
         this.content = content;
     }
 
+    public Timestamp getCreatTime() {
+        return creatTime;
+    }
+
+    public void setCreatTime(Timestamp creatTime) {
+        this.creatTime = creatTime;
+    }
+
     public int getClicknum() {
         return clicknum;
     }
 
     public void setClicknum(int clicknum) {
         this.clicknum = clicknum;
+    }
+
+    public int getFavnum() {
+        return favnum;
+    }
+
+    public void setFavnum(int favnum) {
+        this.favnum = favnum;
     }
 
     public int getThankyounum() {
@@ -95,6 +82,14 @@ public class Topic {
         this.replynum = replynum;
     }
 
+    public Timestamp getLastReplyTime() {
+        return lastReplyTime;
+    }
+
+    public void setLastReplyTime(Timestamp lastReplyTime) {
+        this.lastReplyTime = lastReplyTime;
+    }
+
     public Integer getUserid() {
         return userid;
     }
@@ -109,5 +104,21 @@ public class Topic {
 
     public void setNodeid(Integer nodeid) {
         this.nodeid = nodeid;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public Node getNode() {
+        return node;
+    }
+
+    public void setNode(Node node) {
+        this.node = node;
     }
 }

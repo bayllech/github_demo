@@ -3,6 +3,7 @@ package com.kaishengit.servlet.topic;
 import com.kaishengit.entity.Node;
 import com.kaishengit.entity.Topic;
 import com.kaishengit.entity.User;
+import com.kaishengit.service.NodeService;
 import com.kaishengit.service.TopicService;
 import com.kaishengit.service.UserService;
 import com.kaishengit.servlet.BaseServlet;
@@ -20,9 +21,10 @@ import java.util.List;
 @WebServlet("/newTopic")
 public class newTopicServlet extends BaseServlet {
     TopicService topicService = new TopicService();
+    NodeService nodeService = new NodeService();
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        List<Node> nodelist = topicService.findAllNode();
+        List<Node> nodelist = nodeService.findAllNode();
         req.setAttribute("nodelist",nodelist);
         forward("topic/newTopic",req,resp);
     }
@@ -34,6 +36,8 @@ public class newTopicServlet extends BaseServlet {
         String nodeid = req.getParameter("nodeid");
         User user = getCurrentUser(req);
 
+        Node node = nodeService.findNodeById(Integer.valueOf(nodeid));
+        nodeService.updateNode(node);
         Topic topic = topicService.addTopic(title,content,Integer.valueOf(nodeid),user.getId());
 
         renderJsonObject(resp,topic);

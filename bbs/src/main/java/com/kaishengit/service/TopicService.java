@@ -24,14 +24,6 @@ public class TopicService {
     ReplyDao replyDao = new ReplyDao();
 
     /**
-     * 查找所有发帖类型
-     * @return 所有发帖类型
-     */
-    public List<Node> findAllNode() {
-        return topicDao.findAllNode();
-    }
-
-    /**
      * 发布新帖
      * @param title 帖子主题
      * @param content 帖子内容
@@ -65,6 +57,11 @@ public class TopicService {
                 user.setAvatar(Config.get("domain")+user.getAvatar());
                 topic.setUser(user);
                 topic.setNode(node);
+
+                //点击数加1
+                topic.setClicknum(topic.getClicknum()+1);
+                topicDao.update(topic);
+
                 return topic;
             } else {
                 throw new ServiceException("帖子已删除或不存在");

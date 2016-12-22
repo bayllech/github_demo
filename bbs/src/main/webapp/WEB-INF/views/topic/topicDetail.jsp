@@ -173,7 +173,7 @@
 
 </div>
 <!--container end-->
-<script src="http://cdn.bootcss.com/jquery/1.11.2/jquery.min.js"></script>
+<script src="/static/js/jquery-1.11.1.js"></script>
 <script src="/static/js/editer/scripts/module.min.js"></script>
 <script src="/static/js/editer/scripts/hotkeys.min.js"></script>
 <script src="/static/js/editer/scripts/uploader.min.js"></script>
@@ -191,21 +191,24 @@
             $("#replyForm").submit();
         });
         hljs.initHighlightingOnLoad();
-
+        $("#replyForm").ready(function()
+        {
+            // Add Method too jQuery Validator
+            jQuery.validator.addMethod("noSpace", function(value, element)
+            { return value.indexOf(" ") < 0 && value != ""; }, "请不要输入空格");
         $("#replyForm").validate({
                errorElement:'span',
                errorClass:'text-error',
                rules:{
                    contents:{
                        required:true,
-                       coll_regex: true
+                       noSpace:true
                    }
                },
                ignore:'',
                messages:{
                    contents:{
                        required:"回复不能为空",
-                       coll_regex: "这是啥"
                    }
                },
                submitHandler:function (form) {
@@ -233,7 +236,7 @@
                    });
                }
            });
-
+        });
     });
 </script>
 
