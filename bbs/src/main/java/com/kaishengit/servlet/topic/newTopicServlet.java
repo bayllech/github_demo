@@ -7,6 +7,9 @@ import com.kaishengit.service.NodeService;
 import com.kaishengit.service.TopicService;
 import com.kaishengit.service.UserService;
 import com.kaishengit.servlet.BaseServlet;
+import com.kaishengit.util.Config;
+import com.qiniu.util.Auth;
+import com.qiniu.util.StringMap;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -24,6 +27,12 @@ public class newTopicServlet extends BaseServlet {
     NodeService nodeService = new NodeService();
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        Auth auth = Auth.create(Config.get("ak"), Config.get("sk"));
+        StringMap stringMap = new StringMap();
+        stringMap.put("returnBody","{ \"success\": true,\"file_path\": \""+Config.get("domain")+"${key}\"}");
+        String token = auth.uploadToken(Config.get("bucket"), null, 3600, stringMap);
+        req.setAttribute("token", token);
+
         List<Node> nodelist = nodeService.findAllNode();
         req.setAttribute("nodelist",nodelist);
         forward("topic/newTopic",req,resp);
