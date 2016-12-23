@@ -8,7 +8,7 @@
     <version>1.0-SNAPSHOT</version>
 
     <name>论坛</name>
-    <url>http://bbs.bayllech.com</url>
+    <url>http://bbs.bayllech.cn</url>
 
     <properties>
         <junit-version>4.12</junit-version>
@@ -26,6 +26,7 @@
         <gson-version>2.7</gson-version>
         <email-version>1.4</email-version>
         <qiniu-version>7.1.0</qiniu-version>
+        <joda-version>2.5</joda-version>
     </properties>
 
     <dependencies>
@@ -113,6 +114,11 @@
             <groupId>com.qiniu</groupId>
             <artifactId>qiniu-java-sdk</artifactId>
             <version>${qiniu-version}</version>
+        </dependency>
+        <dependency>
+            <groupId>joda-time</groupId>
+            <artifactId>joda-time</artifactId>
+            <version>${joda-version}</version>
         </dependency>
 
     </dependencies>

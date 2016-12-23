@@ -50,89 +50,14 @@
 
     <div class="box" style="margin-top:20px;">
         <div class="talk-item muted" style="font-size: 12px">
-            9个回复 | 直到2015年12月25日 22:23:34
-        </div>
-        <div class="talk-item">
-            <table class="talk-table">
-                <tr>
-                    <td width="50">
-                        <img class="avatar" src="http://7xp5t4.com1.z0.glb.clouddn.com/Fqb8f9uDknAt2ilBoY-ipSZRMes-?imageView2/1/w/40/h/40" alt="">
-                    </td>
-                    <td width="auto">
-                        <a href="" style="font-size: 12px">fankay</a> <span style="font-size: 12px" class="reply">4小时前</span>
-                        <br>
-                        <p style="font-size: 14px">不知道国内有哪些公司开始用 react-native 了呢？我就知道天猫 Pad 版部分</p>
-                    </td>
-                    <td width="70" align="right" style="font-size: 12px">
-                        <a href="" title="回复"><i class="fa fa-reply"></i></a>&nbsp;
-                        <span class="badge">1</span>
-                    </td>
-                </tr>
-            </table>
+            ${requestScope.topic.replynum}个回复 | 直到${requestScope.topic.lastReplyTime}
         </div>
 
         <div class="talk-item">
             <table class="talk-table">
                 <tr>
                     <td width="50">
-                        <img class="avatar" src="http://7xp5t4.com1.z0.glb.clouddn.com/Fqb8f9uDknAt2ilBoY-ipSZRMes-?imageView2/1/w/40/h/40" alt="">
-                    </td>
-                    <td width="auto">
-                        <a href="" style="font-size: 12px">fankay</a> <span style="font-size: 12px" class="reply">4小时前</span>
-                        <br>
-                        <p style="font-size: 14px">不知道国内有哪些公司开始用 react-native 了呢？我就知道天猫 Pad 版部分</p>
-                    </td>
-                    <td width="70" align="right" style="font-size: 12px">
-                        <a href="" title="回复"><i class="fa fa-reply"></i></a>&nbsp;
-                        <span class="badge">2</span>
-                    </td>
-                </tr>
-            </table>
-        </div>
-
-        <div class="talk-item">
-            <table class="talk-table">
-                <tr>
-                    <td width="50">
-                        <img class="avatar" src="http://7xp5t4.com1.z0.glb.clouddn.com/Fqb8f9uDknAt2ilBoY-ipSZRMes-?imageView2/1/w/40/h/40" alt="">
-                    </td>
-                    <td width="auto">
-                        <a href="" style="font-size: 12px">fankay</a> <span style="font-size: 12px" class="reply">4小时前</span>
-                        <br>
-                        <p style="font-size: 14px">不知道国内有哪些公司开始用 react-native 了呢？我就知道天猫 Pad 版部分</p>
-                    </td>
-                    <td width="70" align="right" style="font-size: 12px">
-                        <a href="" title="回复"><i class="fa fa-reply"></i></a>&nbsp;
-                        <span class="badge">3</span>
-                    </td>
-                </tr>
-            </table>
-        </div>
-
-        <div class="talk-item">
-            <table class="talk-table">
-                <tr>
-                    <td width="50">
-                        <img class="avatar" src="http://7xp5t4.com1.z0.glb.clouddn.com/Fqb8f9uDknAt2ilBoY-ipSZRMes-?imageView2/1/w/40/h/40" alt="">
-                    </td>
-                    <td width="auto">
-                        <a href="" style="font-size: 12px">fankay</a> <span style="font-size: 12px" class="reply">4小时前</span>
-                        <br>
-                        <p style="font-size: 14px">不知道国内有哪些公司开始用 react-native 了呢？我就知道天猫 Pad 版部分</p>
-                    </td>
-                    <td width="70" align="right" style="font-size: 12px">
-                        <a href="" title="回复"><i class="fa fa-reply"></i></a>&nbsp;
-                        <span class="badge">4</span>
-                    </td>
-                </tr>
-            </table>
-        </div>
-
-        <div class="talk-item">
-            <table class="talk-table">
-                <tr>
-                    <td width="50">
-                        <img class="avatar" src="http://7xp5t4.com1.z0.glb.clouddn.com/Fqb8f9uDknAt2ilBoY-ipSZRMes-?imageView2/1/w/40/h/40" alt="">
+                        <img class="avatar" src="${requestScope.topic.user.avatar}?imageView2/1/w/40/h/40" alt="">
                     </td>
                     <td width="auto">
                         <a href="" style="font-size: 12px">fankay</a> <span style="font-size: 12px" class="reply">4小时前</span>
@@ -180,6 +105,8 @@
 <script src="/static/js/editer/scripts/simditor.min.js"></script>
 <script src="/static/js/jquery.validate.min.js"></script>
 <script src="/static/js/highlight.pack.js"></script>
+<script src="/static/js/moment.js"></script>
+<script src="/static/js/zh-cn.js"></script>
 <script>
     $(function(){
         var editor = new Simditor({
@@ -191,11 +118,11 @@
             $("#replyForm").submit();
         });
         hljs.initHighlightingOnLoad();
-        $("#replyForm").ready(function()
-        {
+        $("#replyForm").ready(function() {
             // Add Method too jQuery Validator
             jQuery.validator.addMethod("noSpace", function(value, element)
             { return value.indexOf(" ") < 0 && value != ""; }, "请不要输入空格");
+        });
         $("#replyForm").validate({
                errorElement:'span',
                errorClass:'text-error',
@@ -236,7 +163,8 @@
                    });
                }
            });
-        });
+
+
     });
 </script>
 

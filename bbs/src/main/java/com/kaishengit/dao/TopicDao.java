@@ -34,7 +34,7 @@ public class TopicDao {
     }
 
     public void update(Topic topic) {
-        String sql = "update t_topic set title=?,content=?,clicknum=?,favnum=?,thankyounum=?,lastreplytime=? where id = ?";
-        DbHelp.update(sql, topic.getTitle(), topic.getContent(), topic.getClicknum(), topic.getFavnum(), topic.getThankyounum(), topic.getLastReplyTime(), topic.getId());
+        String sql = "update t_topic set title=?,content=?,clicknum=?,favnum=?,thankyounum=?,replynum=?,lastreplytime=? where id = ?";
+        DbHelp.update(sql, topic.getTitle(), topic.getContent(), topic.getClicknum(), topic.getFavnum(), topic.getThankyounum(),topic.getReplynum(), topic.getLastReplyTime(), topic.getId());
     }
 }

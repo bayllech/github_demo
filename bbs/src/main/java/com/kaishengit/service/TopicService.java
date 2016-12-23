@@ -10,8 +10,10 @@ import com.kaishengit.entity.User;
 import com.kaishengit.exception.ServiceException;
 import com.kaishengit.util.Config;
 import org.apache.commons.lang3.StringUtils;
+import org.joda.time.DateTime;
 
-import java.util.List;
+import java.sql.Timestamp;
+import java.util.Date;
 
 /**
  * Created by bayllech on 2016/12/21.
@@ -37,6 +39,8 @@ public class TopicService {
          topic.setContent(content);
          topic.setNodeid(nodeid);
          topic.setUserid(userid);
+         //设置最后回复时间为发帖时间
+         topic.setLastReplyTime(new Timestamp(new Date().getTime()));
          Integer tipicId = topicDao.addTopic(topic);
          topic.setId(tipicId);
 
@@ -79,10 +83,19 @@ public class TopicService {
      * @param user
      */
     public void addReply(String content, String topicid, User user) {
-        if (new TopicService().findTopicById(topicid) != null) {
+        Topic topic = findTopicById(topicid);
+        if (topic != null) {
+            //设置最后回复时间和回复数
+            topic.setLastReplyTime(new Timestamp(new DateTime().getMillis()));
+            topic.setReplynum(topic.getReplynum()+1);
+            updateTopic(topic);
             replyDao.addReply(content,topicid,user.getId());
         } else {
             throw new ServiceException("帖子不存在或已被删除");
-        };
+        }
+    }
+
+    private void updateTopic(Topic topic) {
+        topicDao.update(topic);
     }
 }
