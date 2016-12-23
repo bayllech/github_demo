@@ -39,7 +39,7 @@
             <ul class="unstyled inline pull-left">
                 <li><a href="">加入收藏</a></li>
                 <li><a href="">感谢</a></li>
-                <c:if test="${sessionScope.curr_user.id == topic.userid }">
+                <c:if test="${sessionScope.curr_user.id == topic.userid and topic.edit}">
                     <li><a href="/topicEdit?topicId=${topic.id}">编辑</a></li>
                 </c:if>
             </ul>
