@@ -5,6 +5,7 @@ import com.kaishengit.dao.ReplyDao;
 import com.kaishengit.dao.TopicDao;
 import com.kaishengit.dao.UserDao;
 import com.kaishengit.entity.Node;
+import com.kaishengit.entity.Reply;
 import com.kaishengit.entity.Topic;
 import com.kaishengit.entity.User;
 import com.kaishengit.exception.ServiceException;
@@ -14,6 +15,7 @@ import org.joda.time.DateTime;
 
 import java.sql.Timestamp;
 import java.util.Date;
+import java.util.List;
 
 /**
  * Created by bayllech on 2016/12/21.
@@ -97,5 +99,13 @@ public class TopicService {
 
     private void updateTopic(Topic topic) {
         topicDao.update(topic);
+    }
+
+    /**
+     * 根据主题id查找回复列表
+     * @return
+     */
+    public List<Reply> replyListByTopicId(Integer topicid) {
+        return topicDao.replyListByTopicId(topicid);
     }
 }

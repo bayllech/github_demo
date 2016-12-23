@@ -1,4 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -24,15 +26,15 @@
     <div class="box">
         <ul class="breadcrumb" style="background-color: #fff;margin-bottom: 0px;">
             <li><a href="/home">首页</a> <span class="divider">/</span></li>
-            <li class="active">${requestScope.topic.node.nodename}</li>
+            <li class="active">${topic.node.nodename}</li>
         </ul>
         <div class="topic-head">
-            <img class="img-rounded avatar" src="${requestScope.topic.user.avatar}?imageView2/1/w/60/h/60" alt="">
-            <h3 class="title">${requestScope.topic.title}</h3>
-            <p class="topic-msg muted"><a href="">${requestScope.topic.user.username}</a> · ${requestScope.topic.createTime}</p>
+            <img class="img-rounded avatar" src="${topic.user.avatar}?imageView2/1/w/60/h/60" alt="">
+            <h3 class="title">${topic.title}</h3>
+            <p class="topic-msg muted"><a href="">${topic.user.username}</a> · <span id="topicTime">${topic.createTime}</span></p>
         </div>
         <div class="topic-body">
-            ${requestScope.topic.content} </div>
+            ${topic.content} </div>
         <div class="topic-toolbar">
             <ul class="unstyled inline pull-left">
                 <li><a href="">加入收藏</a></li>
@@ -50,27 +52,31 @@
 
     <div class="box" style="margin-top:20px;">
         <div class="talk-item muted" style="font-size: 12px">
-            ${requestScope.topic.replynum}个回复 | 直到${requestScope.topic.lastReplyTime}
+            <%--${topic.replynum}--%>
+            ${fn:length(replyList)}个回复 | 直到<span id="lasetReplyTime">${topic.lastReplyTime}</span>
+
         </div>
 
-        <div class="talk-item">
-            <table class="talk-table">
-                <tr>
-                    <td width="50">
-                        <img class="avatar" src="${requestScope.topic.user.avatar}?imageView2/1/w/40/h/40" alt="">
-                    </td>
-                    <td width="auto">
-                        <a href="" style="font-size: 12px">fankay</a> <span style="font-size: 12px" class="reply">4小时前</span>
-                        <br>
-                        <p style="font-size: 14px">不知道国内有哪些公司开始用 react-native 了呢？我就知道天猫 Pad 版部分</p>
-                    </td>
-                    <td width="70" align="right" style="font-size: 12px">
-                        <a href="" title="回复"><i class="fa fa-reply"></i></a>&nbsp;
-                        <span class="badge">50</span>
-                    </td>
-                </tr>
-            </table>
-        </div>
+        <c:forEach items="${replyList}" var="reply" varStatus="vs">
+            <div class="talk-item">
+                <table class="talk-table">
+                    <tr>
+                        <td width="50">
+                            <img class="avatar" src="${reply.user.avatar}?imageView2/1/w/40/h/40" alt="">
+                        </td>
+                        <td width="auto">
+                            <a href="" style="font-size: 12px">${reply.user.username}</a> <span style="font-size: 12px" class="reply">${reply.createtime}</span>
+                            <br>
+                            <p style="font-size: 14px">${reply.content}</p>
+                        </td>
+                        <td width="70" align="right" style="font-size: 12px">
+                            <a href="" title="回复"><i class="fa fa-reply"></i></a>&nbsp;
+                            <span class="badge">${vs.count}</span>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </c:forEach>
 
     </div>
 
@@ -164,6 +170,14 @@
                }
            });
 
+        $("#topicTime").text(moment($("#topicTime").text()).fromNow());
+        $("#lasetReplyTime").text(moment().format("YYYY年MM月DD日 HH:mm:ss"))
+        $(".reply").text(function () {
+            var time = $(this).text();
+            return moment(time).fromNow();
+        });
+
+        
 
     });
 </script>
