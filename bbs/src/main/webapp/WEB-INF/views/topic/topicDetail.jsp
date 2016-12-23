@@ -58,20 +58,20 @@
         </div>
 
         <c:forEach items="${replyList}" var="reply" varStatus="vs">
-            <div class="talk-item">
+            <div class="talk-item"><a href="" name="reply${vs.count}"></a>
                 <table class="talk-table">
                     <tr>
                         <td width="50">
                             <img class="avatar" src="${reply.user.avatar}?imageView2/1/w/40/h/40" alt="">
                         </td>
                         <td width="auto">
-                            <a href="" style="font-size: 12px">${reply.user.username}</a> <span style="font-size: 12px" class="reply">${reply.createtime}</span>
+                            <a href=""  style="font-size: 12px">${reply.user.username}</a> <span style="font-size: 12px" class="reply">${reply.createtime}</span>
                             <br>
                             <p style="font-size: 14px">${reply.content}</p>
                         </td>
                         <td width="70" align="right" style="font-size: 12px">
-                            <a href="" title="回复"><i class="fa fa-reply"></i></a>&nbsp;
-                            <span class="badge">${vs.count}</span>
+                            <a href="javascript:;" rel="${vs.count}" class="replyLink" title="回复"><i class="fa fa-reply"></i></a>&nbsp;
+                            <span class="badge">#${vs.count}</span>
                         </td>
                     </tr>
                 </table>
@@ -124,18 +124,18 @@
             $("#replyForm").submit();
         });
         hljs.initHighlightingOnLoad();
-        $("#replyForm").ready(function() {
+        /*$("#replyForm").ready(function() {
             // Add Method too jQuery Validator
             jQuery.validator.addMethod("noSpace", function(value, element)
             { return value.indexOf(" ") < 0 && value != ""; }, "请不要输入空格");
-        });
+        });*/
         $("#replyForm").validate({
                errorElement:'span',
                errorClass:'text-error',
                rules:{
                    contents:{
                        required:true,
-                       noSpace:true
+//                       noSpace:true
                    }
                },
                ignore:'',
@@ -177,7 +177,12 @@
             return moment(time).fromNow();
         });
 
-        
+        $(".replyLink").click(function () {
+            var count = $(this).attr("rel");
+            var html = "<a href='#reply"+count+"'>#"+count+"</a>";
+            editor.setValue(html + editor.getValue());
+            window.location.href = "#reply";
+        });
 
     });
 </script>
