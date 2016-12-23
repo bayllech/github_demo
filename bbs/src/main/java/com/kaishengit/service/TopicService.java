@@ -56,7 +56,7 @@ public class TopicService {
      */
     public Topic findTopicById(String topicid) {
         if (StringUtils.isNumeric(topicid)) {
-            Topic topic = topicDao.findTopicById(topicid);
+            Topic topic = topicDao.findTopicById(Integer.valueOf(topicid));
             if (topic != null) {
                 User user = userDao.findUserById(topic.getUserid());
                 Node node = nodeDao.findNodeById(topic.getNodeid());
@@ -107,5 +107,22 @@ public class TopicService {
      */
     public List<Reply> replyListByTopicId(Integer topicid) {
         return topicDao.replyListByTopicId(topicid);
+    }
+
+    /**
+     * 更新帖子
+     * @param title
+     * @param content
+     * @param nodeid
+     * @return
+     */
+    public Topic updateTopic(String title, String content, Integer nodeid,String topicId) {
+        Topic topic = findTopicById(topicId);
+        topic.setTitle(title);
+        topic.setContent(content);
+        topic.setNodeid(nodeid);
+
+        topicDao.update(topic);
+        return topic;
     }
 }

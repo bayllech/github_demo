@@ -39,12 +39,14 @@
             <ul class="unstyled inline pull-left">
                 <li><a href="">加入收藏</a></li>
                 <li><a href="">感谢</a></li>
-                <li><a href=""></a></li>
+                <c:if test="${sessionScope.curr_user.id == topic.userid }">
+                    <li><a href="/topicEdit?topicId=${topic.id}">编辑</a></li>
+                </c:if>
             </ul>
             <ul class="unstyled inline pull-right muted">
-                <li>${requestScope.topic.clicknum}</li>
-                <li>${requestScope.topic.favnum}</li>
-                <li>${requestScope.topic.thankyounum}</li>
+                <li>点击${requestScope.topic.clicknum}</li>
+                <li>收藏${requestScope.topic.favnum}</li>
+                <li>感谢${requestScope.topic.thankyounum}</li>
             </ul>
         </div>
     </div>
@@ -115,11 +117,21 @@
 <script src="/static/js/zh-cn.js"></script>
 <script>
     $(function(){
-        var editor = new Simditor({
-            textarea: $('#editor'),
-            toolbar:false
-            //optional options
-        });
+        <c:if test="${not empty sessionScope.curr_user}">
+            var editor = new Simditor({
+                textarea: $('#editor'),
+                toolbar:false
+                //optional options
+            });
+
+            $(".replyLink").click(function () {
+                var count = $(this).attr("rel");
+                var html = "<a href='#reply"+count+"'>#"+count+"</a>";
+                editor.setValue(html + editor.getValue());
+                window.location.href = "#reply";
+            });
+        </c:if>
+
         $("#replyBtn").click(function(){
             $("#replyForm").submit();
         });
@@ -177,12 +189,6 @@
             return moment(time).fromNow();
         });
 
-        $(".replyLink").click(function () {
-            var count = $(this).attr("rel");
-            var html = "<a href='#reply"+count+"'>#"+count+"</a>";
-            editor.setValue(html + editor.getValue());
-            window.location.href = "#reply";
-        });
 
     });
 </script>

@@ -34,7 +34,7 @@ public class TopicDao {
      * @param topicid
      * @return
      */
-    public Topic findTopicById(String topicid) {
+    public Topic findTopicById(Integer topicid) {
         String sql = "select * from t_topic where id = ?";
         return DbHelp.query(sql, new BeanHandler<Topic>(Topic.class), topicid);
     }

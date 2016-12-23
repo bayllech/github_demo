@@ -11,12 +11,21 @@ import java.util.List;
 public class NodeService {
     NodeDao nodeDao = new NodeDao();
     /**
-     * 修改版块主题数
+     * 增加版块主题数
      * @param node
      */
-    public void updateNode(Node node) {
+    public void addTopicNum(Node node) {
         node.setTopicnum(node.getTopicnum()+1);
         nodeDao.updateNode(node);
+    }
+
+    /**
+     * 减去版块主题数
+     * @param oldNode
+     */
+    public void subTopicNum(Node oldNode) {
+        oldNode.setTopicnum(oldNode.getTopicnum()-1);
+        nodeDao.updateNode(oldNode);
     }
 
     public Node findNodeById(Integer nodeid) {
@@ -30,4 +39,5 @@ public class NodeService {
     public List<Node> findAllNode() {
         return nodeDao.findAllNode();
     }
+
 }
