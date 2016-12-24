@@ -1,10 +1,13 @@
 package com.kaishengit.servlet.topic;
 
+import com.kaishengit.entity.Fav;
 import com.kaishengit.entity.Reply;
 import com.kaishengit.entity.Topic;
+import com.kaishengit.entity.User;
 import com.kaishengit.exception.ServiceException;
 import com.kaishengit.service.TopicService;
 import com.kaishengit.servlet.BaseServlet;
+import org.apache.commons.lang3.StringUtils;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -22,6 +25,11 @@ public class TopicDetailServlet extends BaseServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String topicid = req.getParameter("topicid");
         TopicService topicService = new TopicService();
+        User user = getCurrentUser(req);
+        if (user != null && StringUtils.isNumeric(topicid)) {
+            Fav fav = topicService.findFav(user.getId(), topicid);
+            req.setAttribute("fav", fav);
+        }
         try {
             Topic topic = topicService.findTopicById(topicid);
             //点击数加1

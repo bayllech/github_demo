@@ -1,13 +1,7 @@
 package com.kaishengit.service;
 
-import com.kaishengit.dao.NodeDao;
-import com.kaishengit.dao.ReplyDao;
-import com.kaishengit.dao.TopicDao;
-import com.kaishengit.dao.UserDao;
-import com.kaishengit.entity.Node;
-import com.kaishengit.entity.Reply;
-import com.kaishengit.entity.Topic;
-import com.kaishengit.entity.User;
+import com.kaishengit.dao.*;
+import com.kaishengit.entity.*;
 import com.kaishengit.exception.ServiceException;
 import com.kaishengit.util.Config;
 import org.apache.commons.lang3.StringUtils;
@@ -26,6 +20,7 @@ public class TopicService {
     UserDao userDao = new UserDao();
     NodeDao nodeDao = new NodeDao();
     ReplyDao replyDao = new ReplyDao();
+    FavDao favDao = new FavDao();
 
     /**
      * 发布新帖
@@ -114,11 +109,45 @@ public class TopicService {
      */
     public Topic updateTopic(String title, String content, Integer nodeid,String topicId) {
         Topic topic = findTopicById(topicId);
-        topic.setTitle(title);
-        topic.setContent(content);
-        topic.setNodeid(nodeid);
+        if (topic.isEdit()) {
+            topic.setTitle(title);
+            topic.setContent(content);
+            topic.setNodeid(nodeid);
 
-        topicDao.update(topic);
+            topicDao.update(topic);
+            return topic;
+        } else {
+            throw new ServiceException("该帖子已不可被编辑");
+        }
+    }
+
+    /**
+     * 添加收藏
+     * @param userid
+     * @param topicid
+     */
+    public Topic fav(Integer userid, String topicid) {
+        favDao.fav(userid, Integer.valueOf(topicid));
+        Topic topic = findTopicById(topicid);
+        topic.setFavnum(topic.getFavnum() + 1);
+        updateTopic(topic);
         return topic;
+    }
+
+    /**
+     * 取消收藏
+     * @param userid
+     * @param topicid
+     */
+    public Topic unfav(Integer userid, String  topicid) {
+        favDao.unfav(userid, Integer.valueOf(topicid));
+        Topic topic = findTopicById(topicid);
+        topic.setFavnum(topic.getFavnum() - 1);
+        updateTopic(topic);
+        return topic;
+    }
+
+    public Fav findFav(Integer userid, String topicid) {
+        return favDao.findFav(userid, Integer.valueOf(topicid));
     }
 }

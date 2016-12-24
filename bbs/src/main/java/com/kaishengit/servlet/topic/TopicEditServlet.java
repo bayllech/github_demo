@@ -2,7 +2,7 @@ package com.kaishengit.servlet.topic;
 
 import com.kaishengit.entity.Node;
 import com.kaishengit.entity.Topic;
-import com.kaishengit.entity.User;
+import com.kaishengit.exception.ServiceException;
 import com.kaishengit.service.NodeService;
 import com.kaishengit.service.TopicService;
 import com.kaishengit.servlet.BaseServlet;
@@ -57,9 +57,12 @@ public class TopicEditServlet extends BaseServlet {
             Node oldNode = nodeService.findNodeById(Integer.valueOf(oldNodeId));
             nodeService.subTopicNum(oldNode);
         }
+        try {
+            Topic topic = topicService.updateTopic(title,content,Integer.valueOf(nodeid),topicId);
+            renderJsonObject(resp,topic);
+        } catch (ServiceException e) {
+            renderJsonError(e.getMessage(),resp);
+        }
 
-        Topic topic = topicService.updateTopic(title,content,Integer.valueOf(nodeid),topicId);
-
-        renderJsonObject(resp,topic);
     }
 }

@@ -36,16 +36,25 @@
         <div class="topic-body">
             ${topic.content} </div>
         <div class="topic-toolbar">
-            <ul class="unstyled inline pull-left">
-                <li><a href="">加入收藏</a></li>
-                <li><a href="">感谢</a></li>
-                <c:if test="${sessionScope.curr_user.id == topic.userid and topic.edit}">
-                    <li><a href="/topicEdit?topicId=${topic.id}">编辑</a></li>
-                </c:if>
-            </ul>
+            <c:if test="${not empty sessionScope.curr_user}">
+                <ul class="unstyled inline pull-left">
+                    <c:choose>
+                        <c:when test="${empty fav}">
+                            <li><a href="javascript:;" id="favTopic">加入收藏</a></li>
+                        </c:when>
+                        <c:otherwise>
+                            <li><a href="javascript:;" id="favTopic">取消收藏</a></li>
+                        </c:otherwise>
+                    </c:choose>
+                    <li><a href="">感谢</a></li>
+                    <c:if test="${sessionScope.curr_user.id == topic.userid and topic.edit}">
+                        <li><a href="/topicEdit?topicId=${topic.id}">编辑</a></li>
+                    </c:if>
+                </ul>
+            </c:if>
             <ul class="unstyled inline pull-right muted">
                 <li>点击${requestScope.topic.clicknum}</li>
-                <li>收藏${requestScope.topic.favnum}</li>
+                <li>收藏<span id="favTopicnum">${topic.favnum}</span></li>
                 <li>感谢${requestScope.topic.thankyounum}</li>
             </ul>
         </div>
@@ -106,6 +115,7 @@
 
 </div>
 <!--container end-->
+<!--<editor-fold desc="script导入折叠">-->
 <script src="/static/js/jquery-1.11.1.js"></script>
 <script src="/static/js/editer/scripts/module.min.js"></script>
 <script src="/static/js/editer/scripts/hotkeys.min.js"></script>
@@ -115,6 +125,7 @@
 <script src="/static/js/highlight.pack.js"></script>
 <script src="/static/js/moment.js"></script>
 <script src="/static/js/zh-cn.js"></script>
+<!--</editor-fold>-->
 <script>
     $(function(){
         <c:if test="${not empty sessionScope.curr_user}">
@@ -189,6 +200,31 @@
             return moment(time).fromNow();
         });
 
+        $("#favTopic").click(function () {
+            var $this = $(this);
+            var action = "";
+            if ($this.text() == "加入收藏") {
+                action = "fav";
+            } else {
+                action = "unfav";
+            }
+            $.post("/favTopic",{"topicid":${topic.id},"action":action}).done(
+                function (data) {
+                    if (data.state == "success") {
+                        if (action == "fav") {
+                            $this.text("取消收藏");
+                        } else {
+                            $this.text("加入收藏");
+                        }
+                        $("#favTopicnum").text(data.topic.favnum);
+                    } else {
+                        alert(data.message);
+                    }
+                }).error(
+                    function () {
+                        alert("服务器开小差了，请稍后再试");
+                });
+        });
 
     });
 </script>

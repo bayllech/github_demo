@@ -19,6 +19,12 @@ $(function () {
         $("#formLogin").submit();
     });
 
+    $("body").keydown(function () {
+        if(event.keyCode == '13'){
+            $("#formLogin").submit();
+        }
+    });
+
     $("#formLogin").validate({
         errorElement:'span',
         errorClass:'text-error',
