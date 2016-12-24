@@ -21,7 +21,7 @@ import java.util.List;
  * Created by bayllech on 2016/12/23.
  */
 @WebServlet("/topicEdit")
-public class TopicEdit extends BaseServlet {
+public class TopicEditServlet extends BaseServlet {
     TopicService topicService = new TopicService();
     NodeService nodeService = new NodeService();
     @Override
@@ -48,9 +48,9 @@ public class TopicEdit extends BaseServlet {
         String content = req.getParameter("content");
         String nodeid = req.getParameter("nodeid");
         String oldNodeId = req.getParameter("topicNodeId");
-        User user = getCurrentUser(req);
+//        User user = getCurrentUser(req);
 
-        //新主题加一，就主题减一
+        //新主题加一，旧主题减一
         if (!oldNodeId.equals(nodeid)) {
             Node newNode = nodeService.findNodeById(Integer.valueOf(nodeid));
             nodeService.addTopicNum(newNode);

@@ -24,6 +24,9 @@ public class TopicDetailServlet extends BaseServlet {
         TopicService topicService = new TopicService();
         try {
             Topic topic = topicService.findTopicById(topicid);
+            //点击数加1
+            topic.setClicknum(topic.getClicknum()+1);
+            topicService.updateTopic(topic);
             //查找回复列表
             List<Reply> replyList = topicService.replyListByTopicId(topic.getId());
             req.setAttribute("replyList",replyList);

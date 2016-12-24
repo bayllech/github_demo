@@ -99,7 +99,7 @@
         </c:when>
         <c:otherwise>
             <div class="box" style="margin:20px 0px;">
-                <div class="talk-item"> 请<a href="/login?redirect=topicDetail?topicid=${topic.id}#reply">登录</a>后再回复</div>
+                <div class="talk-item"> <h4>请<a href="/login?redirect=topicDetail?topicid=${topic.id}#reply"><b style="color: #2626ff">登录</b></a>后再回复</h4></div>
             </div>
         </c:otherwise>
     </c:choose>

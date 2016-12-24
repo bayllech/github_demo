@@ -64,10 +64,6 @@ public class TopicService {
                 topic.setUser(user);
                 topic.setNode(node);
 
-                //点击数加1
-                topic.setClicknum(topic.getClicknum()+1);
-                topicDao.update(topic);
-
                 return topic;
             } else {
                 throw new ServiceException("帖子已删除或不存在");
@@ -97,16 +93,16 @@ public class TopicService {
         }
     }
 
-    private void updateTopic(Topic topic) {
-        topicDao.update(topic);
-    }
-
     /**
      * 根据主题id查找回复列表
      * @return
      */
     public List<Reply> replyListByTopicId(Integer topicid) {
         return topicDao.replyListByTopicId(topicid);
+    }
+
+    public void updateTopic(Topic topic) {
+        topicDao.update(topic);
     }
 
     /**
