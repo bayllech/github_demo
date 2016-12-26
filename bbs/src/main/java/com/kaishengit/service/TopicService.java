@@ -1,14 +1,17 @@
 package com.kaishengit.service;
 
+import com.google.common.collect.Maps;
 import com.kaishengit.dao.*;
 import com.kaishengit.entity.*;
 import com.kaishengit.exception.ServiceException;
 import com.kaishengit.util.Config;
+import com.kaishengit.util.Page;
 import org.apache.commons.lang3.StringUtils;
 import org.joda.time.DateTime;
 
 import java.sql.Timestamp;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -149,5 +152,25 @@ public class TopicService {
 
     public Fav findFav(Integer userid, String topicid) {
         return favDao.findFav(userid, Integer.valueOf(topicid));
+    }
+
+    /**
+     * 按nodeId分页查找数据
+     * @param pageNo
+     * @param nodeId
+     * @return
+     */
+    public Page<Topic> findAllTopics(Integer pageNo, String nodeId) {
+        HashMap<String,Object> map = Maps.newHashMap();
+        int count = nodeDao.findTopicnum(nodeId);
+
+        Page<Topic> topicPage = new Page<>(count,pageNo);
+        map.put("nodeId",nodeId);
+        map.put("start",topicPage.getStart());
+        map.put("pageSize",topicPage.getPageSize());
+
+        List<Topic> topicList = topicDao.findAll(map);
+        topicPage.setItems(topicList);
+        return topicPage;
     }
 }

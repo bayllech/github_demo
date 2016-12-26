@@ -64,7 +64,7 @@
     <div class="box" style="margin-top:20px;">
         <div class="talk-item muted" style="font-size: 12px">
             <%--${topic.replynum}--%>
-            ${fn:length(replyList)}个回复 | 直到<span id="lasetReplyTime">${topic.lastReplyTime}</span>
+            ${fn:length(replyList)}个回复 | 直到<span id="lastReplyTime">${topic.lastReplyTime}</span>
 
         </div>
 
@@ -194,7 +194,7 @@
            });
 
         $("#topicTime").text(moment($("#topicTime").text()).fromNow());
-        $("#lasetReplyTime").text(moment().format("YYYY年MM月DD日 HH:mm:ss"))
+        $("#lastReplyTime").text(moment($("#lastReplyTime").text()).format("YYYY年MM月DD日 HH:mm:ss"))
         $(".reply").text(function () {
             var time = $(this).text();
             return moment(time).fromNow();

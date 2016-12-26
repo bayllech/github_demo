@@ -6,6 +6,8 @@ import com.kaishengit.entity.Topic;
 import com.kaishengit.entity.User;
 import com.kaishengit.util.Config;
 import com.kaishengit.util.DbHelp;
+import com.kaishengit.util.StringUtils;
+import jdk.nashorn.internal.objects.annotations.Where;
 import org.apache.commons.dbutils.BasicRowProcessor;
 import org.apache.commons.dbutils.handlers.AbstractListHandler;
 import org.apache.commons.dbutils.handlers.BeanHandler;
@@ -13,6 +15,8 @@ import org.apache.commons.dbutils.handlers.BeanListHandler;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -66,4 +70,37 @@ public class TopicDao {
     }
 
 
+    /**
+     * 分页查找主题
+     * @param map
+     * @return
+     */
+    public List<Topic> findAll(HashMap<String, Object> map) {
+        String sql = "SELECT tp.*,tu.username,tu.avatar FROM t_topic tp,t_user tu WHERE tp.userid=tu.id";
+        String nodeId = map.get("nodeId") == null ? null : String.valueOf(map.get("nodeId"));
+        String where = "";
+        List<Object> array = new ArrayList<>();
+        if (StringUtils.isNotEmpty(nodeId)) {
+            where += " AND tp.nodeid=?";
+            array.add(nodeId);
+        }
+        where += " ORDER BY tp.lastreplytime DESC LIMIT ?,? ";
+        array.add(map.get("start"));
+        array.add(map.get("pageSize"));
+        sql += where;
+
+        return DbHelp.query(sql, new AbstractListHandler<Topic>() {
+            @Override
+            protected Topic handleRow(ResultSet rs) throws SQLException {
+                Topic topic = new BasicRowProcessor().toBean(rs, Topic.class);
+                User user = new User();
+                user.setId(rs.getInt("userid"));
+                user.setUsername("username");
+                user.setAvatar(Config.get("domain") + rs.getString("avatar"));
+                topic.setUser(user);
+                return topic;
+            }
+        },array.toArray());
+
+    }
 }
