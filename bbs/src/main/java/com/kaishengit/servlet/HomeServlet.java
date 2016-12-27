@@ -23,15 +23,17 @@ public class HomeServlet extends BaseServlet {
         List<Node> nodelist = nodeService.findAllNode();
         req.setAttribute("nodelist",nodelist);
 
-        String nodeId = req.getParameter("nodeid");
-        System.out.println(nodeId);
+        String nodeid = req.getParameter("nodeid");
+        //判断nodeId是否是数字和存在
+        String nodeId = nodeService.existNodeId(nodeid);
+        req.setAttribute("nodeid",nodeId);
+
         String p = req.getParameter("p");
-        System.out.println(p);
         Integer pageNo = StringUtils.isNumeric(p)?Integer.valueOf(p):1;
-        if (StringUtils.isNotEmpty(nodeId) && !StringUtils.isNumeric(nodeId)) {
-            forward("index", req, resp);
-            return;
-        }
+        /*if (StringUtils.isNotEmpty(nodeId) && !StringUtils.isNumeric(nodeId)) {
+            nodeId=null;
+        }*/
+
         Page<Topic> page = topicService.findAllTopics(pageNo,nodeId);
         req.setAttribute("page", page);
 

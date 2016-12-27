@@ -15,9 +15,9 @@
     <div class="box">
         <div class="talk-item">
             <ul class="topic-type unstyled inline" style="margin-bottom:0px;">
-                <li class="${empty param.nodeid?'active':''}"><a href="/home">全部</a></li>
+                <li class="${empty requestScope.nodeid?'active':''}"><a href="/home">全部</a></li>
                 <c:forEach items="${nodelist}" var="node">
-                    <li class="${node.id == param.nodeid?'active':'' }"><a href="/home?nodeid=${node.id}">${node.nodename}</a></li>
+                    <li class="${node.id == requestScope.nodeid?'active':'' }"><a href="/home?nodeid=${node.id}">${node.nodename}</a></li>
                 </c:forEach>
             </ul>
         </div>
@@ -66,7 +66,7 @@
             last:'末页',
             prev:'上一页',
             next:'下一页',
-            href: '?p={{number}}&node=${param.node}'
+            href: '?p={{number}}&nodeid=${param.nodeid}'
         });
 
     });

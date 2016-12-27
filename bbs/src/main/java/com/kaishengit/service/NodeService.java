@@ -2,6 +2,7 @@ package com.kaishengit.service;
 
 import com.kaishengit.dao.NodeDao;
 import com.kaishengit.entity.Node;
+import com.kaishengit.util.StringUtils;
 
 import java.util.List;
 
@@ -39,5 +40,30 @@ public class NodeService {
     public List<Node> findAllNode() {
         return nodeDao.findAllNode();
     }
+
+    /**
+     * 判断nodeId是否存在
+     * @param nodeId
+     * @return
+     */
+    public String existNodeId(String nodeId) {
+        //查找nodeId列表
+        Boolean Flag = true;
+        List<Integer> nodeIdList = nodeDao.nodeIdList();
+         if ((StringUtils.isNotEmpty(nodeId) && !StringUtils.isNumeric(nodeId)) || nodeId==null ||nodeId=="") {
+            nodeId = null;
+        } else {
+             for (int i = 0;i<nodeIdList.size();i++) {
+                 if (nodeIdList.get(i) == Integer.valueOf(nodeId)) {
+                     Flag = false;
+                 }
+             }
+             if (Flag) {
+                 nodeId = null;
+             }
+        }
+        return nodeId;
+    }
+
 
 }

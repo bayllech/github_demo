@@ -6,6 +6,7 @@ import com.google.common.cache.CacheBuilder;
 import com.kaishengit.dao.LoginLogDao;
 import com.kaishengit.dao.UserDao;
 import com.kaishengit.entity.LoginLog;
+import com.kaishengit.entity.Notify;
 import com.kaishengit.entity.Topic;
 import com.kaishengit.entity.User;
 import com.kaishengit.exception.ServiceException;
@@ -259,4 +260,12 @@ public class UserService {
         userDao.update(user);
     }
 
+    /**
+     * 根据user查找通知列表
+     * @param user
+     * @return
+     */
+    public List<Notify> findNotifyByUser(User user) {
+        return userDao.findNotifyByUser(user);
+    }
 }

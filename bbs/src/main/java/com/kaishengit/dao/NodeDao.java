@@ -6,6 +6,7 @@ import com.kaishengit.util.DbHelp;
 import com.kaishengit.util.StringUtils;
 import org.apache.commons.dbutils.handlers.BeanHandler;
 import org.apache.commons.dbutils.handlers.BeanListHandler;
+import org.apache.commons.dbutils.handlers.ColumnListHandler;
 import org.apache.commons.dbutils.handlers.ScalarHandler;
 
 import java.util.List;
@@ -52,5 +53,14 @@ public class NodeDao {
             String sql = "SELECT topicnum FROM t_node where id = ?";
             return DbHelp.query(sql, new ScalarHandler<Integer>(),Integer.valueOf(nodeId));
         }
+    }
+
+    /**
+     * nodeId列表
+     * @return
+     */
+    public List<Integer> nodeIdList() {
+        String sql = "select id from t_node";
+        return DbHelp.query(sql, new ColumnListHandler<Integer>());
     }
 }

@@ -1,8 +1,12 @@
 package com.kaishengit.dao;
 
+import com.kaishengit.entity.Notify;
 import com.kaishengit.entity.User;
 import com.kaishengit.util.DbHelp;
 import org.apache.commons.dbutils.handlers.BeanHandler;
+import org.apache.commons.dbutils.handlers.BeanListHandler;
+
+import java.util.List;
 
 /**
  * Created by bayllech on 2016/12/15.
@@ -37,5 +41,15 @@ public class UserDao {
     public User findUserById(Integer userid) {
         String sql = "select * from t_user where id = ?";
         return DbHelp.query(sql, new BeanHandler<User>(User.class), userid);
+    }
+
+    /**
+     * 根据userid查找notify列表
+     * @param user
+     * @return
+     */
+    public List<Notify> findNotifyByUser(User user) {
+        String sql = "select * from t_notify where userid = ?";
+        return DbHelp.query(sql, new BeanListHandler<Notify>(Notify.class), user.getId());
     }
 }
