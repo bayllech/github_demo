@@ -97,6 +97,7 @@
             <div class="box" style="margin:20px 0px;">
                 <div class="talk-item muted" style="font-size: 12px"><i class="fa fa-plus"></i> 添加一条新回复</div>
                 <form id="replyForm" action="" style="padding: 15px;margin-bottom:0px;">
+                    <input type="hidden" name="userid" value="${topic.userid}">
                     <input name="topicid" type="hidden" value="${topic.id}">
                     <textarea name="contents" id="editor"></textarea>
                 </form>

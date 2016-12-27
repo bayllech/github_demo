@@ -24,6 +24,7 @@ public class TopicService {
     NodeDao nodeDao = new NodeDao();
     ReplyDao replyDao = new ReplyDao();
     FavDao favDao = new FavDao();
+    NotifyDao notifyDao = new NotifyDao();
 
     /**
      * 发布新帖
@@ -88,6 +89,14 @@ public class TopicService {
             replyDao.addReply(content,topicid,user.getId());
         } else {
             throw new ServiceException("帖子不存在或已被删除");
+        }
+        //添加回复通知
+        if (!user.getId().equals(topic.getUserid())){
+            Notify notify = new Notify();
+            notify.setUserid(topic.getUserid());
+            notify.setContent("您的主题 <a href=\"/topicDetail?topicid="+topic.getId()+"\">["+ topic.getTitle()+"] </a> 有了新的回复,请查看.");
+            notify.setState(Notify.NOTIFY_STATE_UNREAD);
+            notifyDao.save(notify);
         }
     }
 
