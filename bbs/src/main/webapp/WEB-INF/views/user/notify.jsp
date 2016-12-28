@@ -34,16 +34,16 @@
                     <c:forEach items="${notifyList}" var="notify">
                         <c:choose>
                             <c:when test="${notify.state == 1}">
-                                <tr class = "" style="text-decoration: line-through">
+                                <tr class = "" style="text-decoration: lightgray">
                                     <td></td>
-                                    <td>${notify.createtime}</td>
+                                    <td class="createtime">${notify.createtime}</td>
                                     <td>${notify.content}</td>
                                 </tr>
                             </c:when>
                             <c:otherwise>
                                 <tr>
                                     <td><input value="${notify.id}" type="checkbox" class="ckSon"></td>
-                                    <td>${notify.createtime}</td>
+                                    <td class="createtime">${notify.createtime}</td>
                                     <td>${notify.content}</td>
                                 </tr>
                             </c:otherwise>
@@ -67,9 +67,17 @@
 </div>
 <!--container end-->
 <script src="/static/js/jquery-1.11.3.min.js"></script>
+<script src="/static/js/moment.js"></script>
 
 <script>
     $(function () {
+
+//        $(".createtime").text(moment($(".createtime").text()).format("YYYY年MM月DD日 HH:mm:ss"));
+        $(".createtime").text(function () {
+            var time = $(this).text();
+            return moment(time).format("YYYY年MM月DD日 HH:mm:ss");
+        });
+
         $("#ckFather").click(function(){
             var sons = $(".ckSon");
             for(var i = 0;i<sons.length;i++){
@@ -113,7 +121,7 @@
                     ids.push(sons[i].value);
                 }
             }
-            alert(ids.join(","));
+            ids.join(",");
             $.post("/notifyRead",{"ids":ids.join(",")},function(json){
                 if (json == "success"){
                     window.history.go(0);

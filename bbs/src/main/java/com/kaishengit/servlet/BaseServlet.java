@@ -39,6 +39,12 @@ public class BaseServlet extends HttpServlet {
         map.put("state", "success");
         renderJSON(map,response);
     }
+    public void renderJsonSuccess(HttpServletResponse response,Object message) throws IOException {
+        Map<String, Object> map = new HashMap<>();
+        map.put("state", "success");
+        map.put("message",message);
+        renderJSON(map,response);
+    }
     public void renderJsonError(String message,HttpServletResponse response) throws IOException {
         Map<String, Object> map = new HashMap<>();
         map.put("state", "error");
@@ -51,6 +57,7 @@ public class BaseServlet extends HttpServlet {
         map.put("topic", object);
         renderJSON(map,response);
     }
+
 
     public User getCurrentUser(HttpServletRequest request) {
         HttpSession session = request.getSession();

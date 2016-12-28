@@ -43,13 +43,5 @@ public class UserDao {
         return DbHelp.query(sql, new BeanHandler<User>(User.class), userid);
     }
 
-    /**
-     * 根据userid查找notify列表
-     * @param user
-     * @return
-     */
-    public List<Notify> findNotifyByUser(User user) {
-        String sql = "select * from t_notify where userid = ?";
-        return DbHelp.query(sql, new BeanListHandler<Notify>(Notify.class), user.getId());
-    }
+
 }

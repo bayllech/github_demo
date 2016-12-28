@@ -10,6 +10,7 @@
     <link href="/static/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="/static/css/style.css">
     <link rel="stylesheet" href="/static/js/editer/styles/simditor.css">
+    <link rel="stylesheet" href="/static/css/sweetalert.css">
     <style>
         body{
             background-image: url(/static/img/bg.jpg);
@@ -126,6 +127,7 @@
 <script src="/static/js/highlight.pack.js"></script>
 <script src="/static/js/moment.js"></script>
 <script src="/static/js/zh-cn.js"></script>
+<script src="/static/js/sweetalert.min.js"></script>
 <!--</editor-fold>-->
 <script>
     $(function(){
@@ -178,14 +180,42 @@
                        },
                        success: function (data) {
                             if (data.state == "success") {
-                                alert("回复成功！");
-                                window.location.href="/topicDetail?topicid="+${topic.id};
+//                                alert("回复成功！");
+                                swal({
+                                        title: "回复成功",
+                                        text: "",
+                                        type: "success",
+                                        // showCancelButton: true,
+                                        confirmButtonColor: "#4352dd",
+                                        confirmButtonText: "确定"
+                                        // cancelButtonText: "取消",
+                                    },
+                                    function(){
+                                        window.location.href="/topicDetail?topicid="+${topic.id};
+                                    });
+                                <%--window.location.href="/topicDetail?topicid="+${topic.id};--%>
                             } else {
-                                alert(data.message)
+//                                alert(data.message);
+                                /*swal({
+                                 title: data.message,
+                                 text: "",
+                                 type:"error",
+                                 //                                    timer: 1200,
+                                 showConfirmButton: true
+                                 });*/
+                                swal(data.message,"","error");
                             }
                        },
                        error: function () {
-                           alert("服务器异常")
+//                           alert("服务器异常");
+                          /* swal({
+                               title: "服务器异常",
+                               text: "",
+                               type:"error",
+//                               timer: 1200,
+                               showConfirmButton: true
+                           });*/
+                           swal("服务器异常","", "error");
                        },
                        complete: function () {
                            $("#replyBtn").text("发布").removeAttr("disabled");
@@ -195,7 +225,7 @@
            });
 
         $("#topicTime").text(moment($("#topicTime").text()).fromNow());
-        $("#lastReplyTime").text(moment($("#lastReplyTime").text()).format("YYYY年MM月DD日 HH:mm:ss"))
+        $("#lastReplyTime").text(moment($("#lastReplyTime").text()).format("YYYY年MM月DD日 HH:mm:ss"));
         $(".reply").text(function () {
             var time = $(this).text();
             return moment(time).fromNow();
@@ -219,11 +249,27 @@
                         }
                         $("#favTopicnum").text(data.topic.favnum);
                     } else {
-                        alert(data.message);
+//                        alert(data.message);
+                        /*swal({
+                            title: data.message,
+                            text: "",
+                            type:"error",
+//                            timer: 1200,
+                            showConfirmButton: true
+                        });*/
+                        swal(data.message, "", "error");
                     }
                 }).error(
                     function () {
-                        alert("服务器开小差了，请稍后再试");
+//                        alert("服务器开小差了，请稍后再试");
+                        /*swal({
+                            title: "服务器异常",
+                            text: "",
+                            type:"error",
+//                            timer: 1200,
+                            showConfirmButton: true
+                        });*/
+                        swal("服务器异常", "", "error");
                 });
         });
 

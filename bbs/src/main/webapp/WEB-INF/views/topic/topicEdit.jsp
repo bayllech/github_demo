@@ -106,11 +106,13 @@
                         if(json.state == "success"){
                             window.location.href="/topicDetail?topicid="+json.topic.id;
                         }else {
-                            alert(json.message);
+//                            alert(json.message);
+                            swal(json.message, "", "error");
                         }
                     },
                     error:function(){
-                        alert("服务器异常");
+//                        alert("服务器异常");
+                        swal(data.message, "", "error");
                     },
                     complete:function () {
                         $("#sendBtn").text("发布主题").removeAttr("disabled");

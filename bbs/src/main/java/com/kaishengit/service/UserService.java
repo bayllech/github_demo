@@ -4,6 +4,7 @@ import com.google.common.cache.Cache;
 import com.google.common.cache.CacheBuilder;
 
 import com.kaishengit.dao.LoginLogDao;
+import com.kaishengit.dao.NotifyDao;
 import com.kaishengit.dao.UserDao;
 import com.kaishengit.entity.LoginLog;
 import com.kaishengit.entity.Notify;
@@ -14,9 +15,12 @@ import com.kaishengit.util.Config;
 
 import com.kaishengit.util.EmailUtil;
 import org.apache.commons.codec.digest.DigestUtils;
+import org.joda.time.DateTime;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.sql.Date;
+import java.sql.Timestamp;
 import java.util.Arrays;
 import java.util.List;
 import java.util.UUID;
@@ -28,6 +32,7 @@ import java.util.concurrent.TimeUnit;
 public class UserService {
 
     UserDao userDao = new UserDao();
+    NotifyDao notifyDao = new NotifyDao();
     private Logger logger = LoggerFactory.getLogger(UserService.class);
 
     /**
@@ -266,6 +271,20 @@ public class UserService {
      * @return
      */
     public List<Notify> findNotifyByUser(User user) {
-        return userDao.findNotifyByUser(user);
+        return notifyDao.findNotifyByUser(user);
+    }
+
+    /**
+     * 根据notify的id更新state
+     * @param ids id字符串
+     */
+    public void updateNotifyStateByIds(String ids) {
+        String id[] = ids.split(",");
+        for (int i = 0; i<id.length; i++) {
+            Notify notify = notifyDao.findNotifyById(id[i]);
+            notify.setState(Notify.NOTIFY_STATE_READ);
+            notify.setReadtime(new Timestamp(DateTime.now().getMillis()));
+            notifyDao.update(notify);
+        }
     }
 }

@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="/static/css/style.css">
     <link rel="stylesheet" href="/static/js/editer/styles/simditor.css">
     <link rel="stylesheet" href="/static/css/simditor-emoji.css">
+    <link rel="stylesheet" href="/static/css/sweetalert.css">
 </head>
 <body>
 <%@include file="../include/navbar.jsp"%>
@@ -50,6 +51,7 @@
 <script src="/static/js/editer/scripts/simditor.min.js"></script>
 <script src="/static/js/jquery.validate.min.js"></script>
 <script src="/static/js/simditor-emoji.js"></script>
+<script src="/static/js/sweetalert.min.js"></script>
 
 <script>
     $(function(){
@@ -104,11 +106,13 @@
                         if(json.state == "success"){
                             window.location.href="/topicDetail?topicid="+json.topic.id;
                         }else {
-                            alert("新增主题异常");
+//                            alert("新增主题异常");
+                            swal("新增主题异常", "", "error");
                         }
                     },
                     error:function(){
-                        alert("服务器异常");
+//                        alert("服务器异常");
+                        swal(data.message, "", "error");
                     },
                     complete:function () {
                         $("#sendBtn").text("发布主题").removeAttr("disabled");
