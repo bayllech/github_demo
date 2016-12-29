@@ -1,11 +1,24 @@
 package com.kaishengit.servlet.admin;
 
+import com.kaishengit.servlet.BaseServlet;
+
+import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 
 /**
  * Created by bayllech on 2016/12/29.
  */
 @WebServlet("/admin/home")
-public class HomeServlet {
-    
+public class HomeServlet extends BaseServlet{
+    @Override
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+
+        
+
+
+        forward("admin/home",req,resp);
+    }
 }
