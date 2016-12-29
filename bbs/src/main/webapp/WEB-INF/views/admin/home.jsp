@@ -1,4 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -23,28 +24,39 @@
         </tr>
         </thead>
         <tbody>
-        <tr>
-            <td>
-                2016-12-28
-            </td>
-            <td>123</td>
-            <td>2546</td>
-        </tr>
-
+        <c:forEach items="${page.items}" var="homeView">
+            <tr>
+                <td>
+                    ${homeView.data}
+                </td>
+                <td>${homeView.topicnum}</td>
+                <td>${homeView.replynum}</td>
+            </tr>
+        </c:forEach>
         </tbody>
     </table>
-    <div class="pagination pull-right">
-        <ul>
-            <li><a href="#">Prev</a></li>
-            <li><a href="#">1</a></li>
-            <li><a href="#">2</a></li>
-            <li><a href="#">3</a></li>
-            <li><a href="#">4</a></li>
-            <li><a href="#">5</a></li>
-            <li><a href="#">Next</a></li>
-        </ul>
+
+    <div class="pagination pagination-right">
+        <ul id="pagination" style="margin-bottom:20px;"></ul>
     </div>
+
 </div>
 <!--container end-->
 </body>
+<script src="/static/js/jquery-1.11.3.min.js"></script>
+<script src="/static/js/jquery.twbsPagination.min.js"></script>
+<script>
+    $(function(){
+        $("#pagination").twbsPagination({
+            totalPages:${page.totalPage},
+            visiblePages:5,
+            first:'首页',
+            last:'末页',
+            prev:'上一页',
+            next:'下一页',
+            href: '?p={{number}}'
+        });
+
+    });
+</script>
 </html>

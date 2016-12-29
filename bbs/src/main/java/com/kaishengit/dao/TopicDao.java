@@ -95,7 +95,7 @@ public class TopicDao {
                 Topic topic = new BasicRowProcessor().toBean(rs, Topic.class);
                 User user = new User();
                 user.setId(rs.getInt("userid"));
-                user.setUsername("username");
+                user.setUsername(rs.getString("username"));
                 user.setAvatar(Config.get("domain") + rs.getString("avatar"));
                 topic.setUser(user);
                 return topic;
