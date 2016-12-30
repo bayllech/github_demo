@@ -1,6 +1,7 @@
 package com.kaishengit.dao;
 
 import com.kaishengit.entity.Fav;
+import com.kaishengit.entity.Topic;
 import com.kaishengit.util.DbHelp;
 import org.apache.commons.dbutils.handlers.BeanHandler;
 
@@ -37,5 +38,14 @@ public class FavDao {
     public Fav findFav(Integer userid, Integer topicid) {
         String sql = "select * from t_fav where userid=? and topicid=?";
         return DbHelp.query(sql, new BeanHandler<Fav>(Fav.class), userid, topicid);
+    }
+
+    /**
+     * 删除主题时删除回复数
+     * @param topic
+     */
+    public void delFav(Topic topic) {
+        String sql = "delete from t_fav where topicid=?";
+        DbHelp.update(sql,topic.getId());
     }
 }

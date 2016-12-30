@@ -2,7 +2,7 @@ package com.kaishengit.servlet.admin;
 
 import com.kaishengit.entity.Node;
 import com.kaishengit.entity.Topic;
-import com.kaishengit.service.AdminService;
+import com.kaishengit.exception.ServiceException;
 import com.kaishengit.service.NodeService;
 import com.kaishengit.service.TopicService;
 import com.kaishengit.servlet.BaseServlet;
@@ -35,5 +35,17 @@ public class TopicServlet extends BaseServlet {
         Page<Topic> page = topicService.findAllTopics(pageNo,"");
         req.setAttribute("page", page);
         forward("admin/topic",req,resp);
+    }
+
+    @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        String topicid = req.getParameter("topicid");
+        try {
+            topicService.delTopic(topicid);
+            renderJsonSuccess(resp);
+        } catch (ServiceException e) {
+            renderJsonError(e.getMessage(),resp);
+        }
+
     }
 }

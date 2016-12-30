@@ -103,4 +103,13 @@ public class TopicDao {
         },array.toArray());
 
     }
+
+    /**
+     * 删除主题
+     * @param topic
+     */
+    public void delTopic(Topic topic) {
+        String sql = "delete from t_topic where id =?";
+        DbHelp.update(sql,topic.getId());
+    }
 }

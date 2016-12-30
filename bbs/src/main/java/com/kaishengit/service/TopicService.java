@@ -182,4 +182,22 @@ public class TopicService {
         topicPage.setItems(topicList);
         return topicPage;
     }
+
+    /**
+     * 删除帖子
+     * @param topicid
+     */
+    public void delTopic(String topicid) {
+        Topic topic = findTopicById(topicid);
+        //修改节点下主题数
+        Node node = nodeDao.findNodeById(topic.getNodeid());
+        node.setTopicnum(node.getTopicnum()-1);
+        nodeDao.updateNode(node);
+        //删除回复数
+        replyDao.delReply(topic);
+        //删除收藏
+        favDao.delFav(topic);
+        //删除主题
+        topicDao.delTopic(topic);
+    }
 }

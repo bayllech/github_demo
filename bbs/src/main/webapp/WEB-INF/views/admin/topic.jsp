@@ -94,7 +94,7 @@
         $(".del").click(function () {
             var topicid = $(this).attr("rel");
             swal({
-                title: "确定要删除该主题?",
+                title: "确定要删除该主题及其所有回复吗?",
                 type: "warning",
                 showCancelButton: true,
                 confirmButtonColor: "#DD6B55",
