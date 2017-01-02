@@ -200,4 +200,32 @@ public class TopicService {
         //删除主题
         topicDao.delTopic(topic);
     }
+
+    /**
+     * 修改主题节点
+     * @param nodeid
+     * @param topicid
+     */
+    public void updateTopicNode(String nodeid, String topicid) {
+        if(StringUtils.isNumeric(topicid) && StringUtils.isNumeric(nodeid)){
+            Topic topic = topicDao.findTopicById(Integer.valueOf(topicid));
+            NodeService nodeService = new NodeService();
+            //topic.nodeid->nodeid
+            Node node = nodeService.findNodeById(topic.getNodeid());
+            //topicid topic node->topicnum-1
+            nodeService.subTopicNum(node);
+
+            //nodeid node->topicnum+1
+            Node newnode = nodeService.findNodeById(Integer.valueOf(nodeid));
+            nodeService.addTopicNum(newnode);
+
+            //更新topic的nodeid
+            topic.setNodeid(Integer.valueOf(nodeid));
+            topicDao.update(topic);
+            /*//更新node表中的topicnum字段
+            updatNode(topic.getNodeid(),nodeid);*/
+        }else{
+            throw new ServiceException("参数异常");
+        }
+    }
 }

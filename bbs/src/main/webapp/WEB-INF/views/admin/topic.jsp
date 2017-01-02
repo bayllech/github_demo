@@ -22,7 +22,7 @@
             <th>回复数量</th>
             <th>最后回复时间</th>
             <th>所属节点</th>
-            <th>操作</th>
+            <th colspan="2" style="text-align: center">操作</th>
         </tr>
         </thead>
         <tbody>
@@ -39,11 +39,12 @@
                     <select name="nodeid" id="nodeid">
                         <option value="">请选择节点</option>
                         <c:forEach items="${nodeList}" var="node">
-                            <option ${topic.nodeid == node.id ? 'selected' : ''} value="${node.id}">${node.nodename}</option>
+                            <option ${topic.nodeid == node.id?'selected':''} value="${node.id}">${node.nodename}</option>
                         </c:forEach>
                     </select>
+
                 </td>
-                <td><a href="javascript:;" rel="${topic.id}" class="update">修改节点</a></td>
+                <td><a href="javascript:;" rel="${topic.id}" class="update">节点修改提交</a></td>
                 <td><a href="javascript:;" rel="${topic.id}" class="del">删除</a></td>
             </tr>
         </c:forEach>
@@ -75,19 +76,20 @@
             var topicid = $(this).attr("rel");
             var nodeid = $("#nodeid").val();
             $.ajax({
-                url:"/admin/topicUpdate",
+                url:"/admin/home",
                 type:"post",
                 data:{"topicid":topicid,"nodeid":nodeid},
                 success:function(data){
                     if(data.state == 'success') {
-                        alert("修改成功!");
-                        window.history.go(0);
+                        swal({title:"修改成功!"},function () {
+                            window.history.go(0);
+                        });
                     } else {
                         swal(data.message,"","error");
                     }
                 },
                 error:function(){
-                    swal("服务器异常,删除失败!","","error");
+                    swal("服务器异常,修改失败!","","error");
                 }
             });
         });
