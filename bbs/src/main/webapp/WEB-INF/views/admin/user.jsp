@@ -28,8 +28,8 @@
         <c:forEach items="${page.items}" var="userVo">
             <tr>
                 <td>${userVo.username}</td>
-                <td>${userVo.createtime}</td>
-                <td>${userVo.lastLoginTime}</td>
+                <td class="creatime">${userVo.createtime}</td>
+                <td class="lastetime">${userVo.lastLoginTime}</td>
                 <td>${userVo.loginIP}</td>
                 <td>
                     <a href="javascript:;" class="update" onClick="update(${userVo.userId},${userVo.userState})">${userVo.userState == '1'?'禁用':'恢复'}</a>
@@ -46,7 +46,16 @@
 <script src="/static/js/jquery-1.11.3.min.js"></script>
 <script src="/static/js/jquery.twbsPagination.min.js"></script>
 <script src="/static/js/sweetalert.min.js"></script>
+<script src="/static/js/moment.js"></script>
 <script>
+    $(".creatime").text(function () {
+        var time = $(this).text();
+        return moment(time).format("YYYY年MM月DD日 HH:mm:ss");
+    });
+    $(".lastetime").text(function () {
+        var time = $(this).text();
+        return moment(time).format("YYYY年MM月DD日 HH:mm:ss");
+    });
     $(function(){
         $("#pagination").twbsPagination({
             totalPages:${page.totalPage},

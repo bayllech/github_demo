@@ -75,7 +75,7 @@ public class NodeDao {
     }
 
     public void addNode(String nodeName) {
-        String sql = "insert into t_node(nodename) value(?)";
+        String sql = "insert into t_node(nodename) values(?)";
         DbHelp.update(sql,nodeName);
     }
 }

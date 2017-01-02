@@ -26,17 +26,17 @@
         </tr>
         </thead>
         <tbody>
-        <c:forEach items="${page.items}" var="topic">
+        <c:forEach items="${page.items}" var="topic" varStatus="vs">
             <tr>
                 <td>
                     <a href="/topicDetail?topicid=${topic.id}" target="_blank">${topic.title}</a>
                 </td>
                 <td>${topic.user.username}</td>
-                <td>${topic.createTime}</td>
+                <td class="creatime">${topic.createTime}</td>
                 <td>${topic.replynum}</td>
-                <td>${topic.lastReplyTime}</td>
+                <td class="lastetime">${topic.lastReplyTime}</td>
                 <td>
-                    <select name="nodeid" id="nodeid">
+                    <select name="nodeid" class="${vs.count}">
                         <option value="">请选择节点</option>
                         <c:forEach items="${nodeList}" var="node">
                             <option ${topic.nodeid == node.id?'selected':''} value="${node.id}">${node.nodename}</option>
@@ -44,7 +44,7 @@
                     </select>
 
                 </td>
-                <td><a href="javascript:;" rel="${topic.id}" class="update">节点修改提交</a></td>
+                <td><a href="javascript:;" rel="${topic.id}" xyz="${vs.count}" class="update">节点修改提交</a></td>
                 <td><a href="javascript:;" rel="${topic.id}" class="del">删除</a></td>
             </tr>
         </c:forEach>
@@ -60,8 +60,17 @@
 <script src="/static/js/jquery-1.11.3.min.js"></script>
 <script src="/static/js/jquery.twbsPagination.min.js"></script>
 <script src="/static/js/sweetalert.min.js"></script>
+<script src="/static/js/moment.js"></script>
 <script>
     $(function(){
+        $(".creatime").text(function () {
+            var time = $(this).text();
+            return moment(time).format("YYYY年MM月DD日 HH:mm:ss");
+        });
+        $(".lastetime").text(function () {
+            var time = $(this).text();
+            return moment(time).format("YYYY年MM月DD日 HH:mm:ss");
+        });
         $("#pagination").twbsPagination({
             totalPages:${page.totalPage},
             visiblePages:5,
@@ -74,7 +83,7 @@
 
         $(".update").click(function(){
             var topicid = $(this).attr("rel");
-            var nodeid = $("#nodeid").val();
+            var nodeid = $("."+$(this).attr("xyz")).val();
             $.ajax({
                 url:"/admin/home",
                 type:"post",

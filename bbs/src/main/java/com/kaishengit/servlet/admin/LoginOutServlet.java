@@ -1,4 +1,4 @@
-package com.kaishengit.servlet.user;
+package com.kaishengit.servlet.admin;
 
 import com.kaishengit.servlet.BaseServlet;
 
@@ -10,16 +10,14 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
 /**
- * Created by bayllech on 2016/12/19.
+ * Created by bayllech on 2017/1/2.
  */
-@WebServlet("/logout")
-public class LogoutServlet extends BaseServlet{
+@WebServlet("/admin/loginOut")
+public class LoginOutServlet extends BaseServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         HttpSession session = req.getSession();
-        session.removeAttribute("curr_user");
-
-        req.setAttribute("message","你已安全退出");
-        forward("user/login",req,resp);
+        session.removeAttribute("curr_admin");
+        forward("/admin/login",req,resp);
     }
 }

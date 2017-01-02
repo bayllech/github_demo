@@ -52,9 +52,7 @@
                     data:$("#updateForm").serialize(),
                     success:function (json) {
                         if (json.state == "success"){
-                            swal({title:"添加成功"},function () {
-                                window.location.href = "/admin/node?_=2";
-                            });
+                            window.location.href = "/admin/node?_=2";
                         }
                     },error:function () {
                         swal("添加失败,服务器异常");

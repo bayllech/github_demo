@@ -8,6 +8,7 @@
     <link href="http://cdn.bootcss.com/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet">
     <link href="/static/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="/static/css/style.css">
+    <link rel="stylesheet" href="/static/css/fotterStyle.css">
 </head>
 <body>
 <%@ include file="include/navbar.jsp" %>
@@ -49,14 +50,16 @@
     </div>
 </div>
 <!--container end-->
-<div class="footer">
+<%--<div class="footer">
     <div class="container">
         Copyright © 2016 bayllech
     </div>
-</div>
+</div>--%>
+
+<%@include file="include/fotterbar.jsp"%>
+
 <script src="/static/js/jquery-1.11.3.min.js"></script>
 <script src="/static/js/jquery.twbsPagination.min.js"></script>
-<%--<script src="/static/js/user/notify.js"></script>--%>
 <script>
     $(function(){
         $("#pagination").twbsPagination({
