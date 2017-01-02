@@ -12,10 +12,9 @@
 <%@include file="../include/adminNavbar.jsp"%>
 <div class="container-fluid" style="margin-top:20px">
     <form id="updateForm" action="">
-        <legend>编辑节点</legend>
+        <legend>增加节点</legend>
         <label>节点名称</label>
-        <input type="hidden" name="nodeid" value="${node.id}">
-        <input type="text" name="nodename" value="${node.nodename}">
+        <input type="text" name="nodename" id="nodename" value="">
         <div class="form-actions">
             <button id="saveBtn" class="btn btn-primary">保存</button>
         </div>
@@ -37,7 +36,7 @@
             rules:{
                 nodename:{
                     required:true,
-                    remote:"/admin/validateNode?nodeid=${node.id}"
+                    remote:"/admin/validateNode"
                 }
             },
             messages:{
@@ -48,20 +47,17 @@
             },
             submitHandler:function () {
                 $.ajax({
-                   url:"/admin/node?action=update",
+                    url:"/admin/addNode",
                     type:'post',
                     data:$("#updateForm").serialize(),
                     success:function (json) {
                         if (json.state == "success"){
-                            swal({title:"修改成功"},function () {
-                                window.location.href = "/admin/node";
+                            swal({title:"添加成功"},function () {
+                                window.location.href = "/admin/node?_=2";
                             });
-                        }else{
-                            swal(json.message);
                         }
-
                     },error:function () {
-                        swal("修改失败,服务器异常");
+                        swal("添加失败,服务器异常");
                     }
                 });
             }

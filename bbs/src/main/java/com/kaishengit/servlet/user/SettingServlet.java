@@ -28,17 +28,17 @@ public class SettingServlet extends BaseServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String active = req.getParameter("active");
+        String action = req.getParameter("action");
         //修改邮箱
-        if ("profile".equals(active)) {
+        if ("profile".equals(action)) {
             updateProfile(req,resp);
         }
         //修改密码
-        if ("password".equals(active)) {
+        if ("password".equals(action)) {
             updatePassword(req, resp);
         }
         //修改头像
-        if ("avatar".equals(active)) {
+        if ("avatar".equals(action)) {
             updateAvatar(req, resp);
         }
     }

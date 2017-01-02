@@ -4,9 +4,9 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>管理节点</title>
     <link href="http://cdn.bootcss.com/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet">
-    <link href="http://cdn.bootcss.com/bootstrap/2.3.1/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/static/css/bootstrap.css" rel="stylesheet">
     <link href="/static/css/sweetalert.css" rel="stylesheet">
     <style>
         .mt20 {
@@ -18,7 +18,7 @@
 <%@include file="../include/adminNavbar.jsp"%>
 <!--header-bar end-->
 <div class="container-fluid mt20">
-    <a href="newnode.html" class="btn btn-success">添加新节点</a>
+    <a href="/admin/addNode?_=2" class="btn btn-success">添加新节点</a>
     <table class="table">
         <thead>
         <tr>
@@ -31,7 +31,7 @@
             <tr>
                 <td>${node.nodename}</td>
                 <td>
-                    <a href="/admin/nodeUpdate?nodeId=${node.id}">修改</a>
+                    <a href="/admin/nodeUpdate?_=2&nodeid=${node.id}">修改</a>
                     <a href="javascript:;" rel="${node.id}" class="delNode">删除</a>
                 </td>
             </tr>
@@ -48,7 +48,6 @@
 
         $(".delNode").click(function () {
             var id = $(this).attr("rel");
-
             swal({
                     title: "确定要删除该节点?",
                     type: "warning",
@@ -57,18 +56,17 @@
                     confirmButtonText: "确定",
                     closeOnConfirm: false },
                 function(){
-
                    $.ajax({
-                        url:"/admin/nodeDel",
+                        url:"/admin/node?action=del",
                         type:"post",
-                        data:{"id":id},
+                        data:{"nodeid":id},
                         success:function(data){
                             if(data.state == 'success') {
                                 swal({title:"删除成功!"},function () {
                                     window.history.go(0);
                                 });
                             } else {
-                                swal(data);
+                                swal(data.message,"","error");
                             }
                         },
                         error:function(){

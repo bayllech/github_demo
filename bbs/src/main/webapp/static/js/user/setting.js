@@ -88,7 +88,7 @@ $(function () {
            },
            submitHandler:function (form) {
                $.ajax({
-                   url: "/setting?active=password",
+                   url: "/setting?action=password",
                    type: "post",
                    data: $(form).serialize(),
                    beforeSend: function () {

@@ -228,4 +228,17 @@ public class TopicService {
             throw new ServiceException("参数异常");
         }
     }
+
+    public Node findNodeById(String nodeId) {
+        if (StringUtils.isNumeric(nodeId)) {
+            Node node = nodeDao.findNodeById(Integer.valueOf(nodeId));
+            if (node == null) {
+                throw new ServiceException("节点不存在");
+            } else {
+                return node;
+            }
+        } else {
+            throw new ServiceException("参数错误");
+        }
+    }
 }

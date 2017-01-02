@@ -28,9 +28,8 @@ public class DbHelp {
     public static Integer insert(String sql,Object... params) throws DataAccessException {
         try {
             QueryRunner queryRunner = new QueryRunner(ConnectionManager.getDataSource());
+            logger.debug("SQL: {}",sql);
             return queryRunner.insert(sql,new ScalarHandler<Long>(),params).intValue();
-
-//            logger.debug("SQL: {}",sql);
         } catch (SQLException ex) {
             logger.error("执行{}异常",sql);
             throw new DataAccessException("执行"+ sql + "异常",ex);
