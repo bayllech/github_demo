@@ -20,12 +20,15 @@
         }
     </style>
 </head>
-<body>
+<body id="backtop">
+
 <%@include file="../include/navbar.jsp"%>
 <!--header-bar end-->
 <div class="container">
     <div class="box">
         <ul class="breadcrumb" style="background-color: #fff;margin-bottom: 0px;">
+            <%--<a name="backtop"></a>--%>
+            <a href="#backtop"><i class="fa fa-angle-double-up fa-5x" style="z-index: 888;position: fixed;top:524px;left:1195px"></i></a>
             <li><a href="/home">首页</a> <span class="divider">/</span></li>
             <li class="active">${topic.node.nodename}</li>
         </ul>
@@ -180,7 +183,6 @@
                        },
                        success: function (data) {
                             if (data.state == "success") {
-//                                alert("回复成功！");
                                 swal({
                                         title: "回复成功",
                                         text: "",
@@ -193,28 +195,11 @@
                                     function(){
                                         window.location.href="/topicDetail?topicid="+${topic.id};
                                     });
-                                <%--window.location.href="/topicDetail?topicid="+${topic.id};--%>
                             } else {
-//                                alert(data.message);
-                                /*swal({
-                                 title: data.message,
-                                 text: "",
-                                 type:"error",
-                                 //                                    timer: 1200,
-                                 showConfirmButton: true
-                                 });*/
                                 swal(data.message,"","error");
                             }
                        },
                        error: function () {
-//                           alert("服务器异常");
-                          /* swal({
-                               title: "服务器异常",
-                               text: "",
-                               type:"error",
-//                               timer: 1200,
-                               showConfirmButton: true
-                           });*/
                            swal("服务器异常","", "error");
                        },
                        complete: function () {
