@@ -25,7 +25,7 @@
                         <a href="/newTopic"><i class="fa fa-plus"></i></a>
                     </li>
                     <li>
-                        <a href="/notify"><i class="fa fa-bell"></i><span id="unReadCount" style="z-index: 999;position: absolute;height: 15px;width: 15px;line-height: 15px;border-radius: 15px;top: 5px;left: 1070px;background-color: #bf1031;padding: 2px 0px 2px 6px;font-size: 8px"></span></a>
+                        <a href="/notify"><i class="fa fa-bell"></i><span class="header-bar" id="unReadCount" style="/*z-index: 999;*/position: absolute;height: 15px;width: 15px;line-height: 15px;border-radius: 15px;top: 0.5%;left: 79%;background-color: #bf1031;padding: 2px 0px 2px 6px;font-size: 8px"></span></a>
                     </li>
                     <li>
                         <a href="/setting"><i class="fa fa-cog"></i></a>
