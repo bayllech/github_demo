@@ -29,8 +29,8 @@ public class TopicDao {
      * @return 新发帖的id
      */
     public Integer addTopic(Topic topic) {
-        String sql = "insert into t_topic (title,content,nodeid,userid) values(?,?,?,?)";
-        return DbHelp.insert(sql,topic.getTitle(),topic.getContent(),topic.getNodeid(),topic.getUserid());
+        String sql = "insert into t_topic (title,content,nodeid,userid,lastreplytime) values(?,?,?,?,?)";
+        return DbHelp.insert(sql,topic.getTitle(),topic.getContent(),topic.getNodeid(),topic.getUserid(),topic.getLastReplyTime());
     }
 
     /**

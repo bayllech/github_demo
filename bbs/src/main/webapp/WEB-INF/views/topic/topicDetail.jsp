@@ -28,7 +28,7 @@
     <div class="box">
         <ul class="breadcrumb" style="background-color: #fff;margin-bottom: 0px;">
             <%--<a name="backtop"></a>--%>
-            <a href="#backtop"><i class="fa fa-angle-double-up fa-5x" style="z-index: 888;position: fixed;top:524px;left:1195px"></i></a>
+            <a href="#backtop"><i class="fa fa-angle-double-up fa-5x" style="z-index: 888;position: fixed;top:524px;left:1195px" title="回到顶部"></i></a>
             <li><a href="/home">首页</a> <span class="divider">/</span></li>
             <li class="active">${topic.node.nodename}</li>
         </ul>

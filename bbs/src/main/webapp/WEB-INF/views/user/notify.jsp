@@ -34,7 +34,7 @@
                     <c:forEach items="${notifyList}" var="notify">
                         <c:choose>
                             <c:when test="${notify.state == 1}">
-                                <tr class = "" style="text-decoration: lightgray">
+                                <tr class = "" style="text-decoration: lightgray;text-decoration: line-through">
                                     <td></td>
                                     <td class="createtime">${notify.createtime}</td>
                                     <td>${notify.content}</td>

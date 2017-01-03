@@ -125,7 +125,7 @@
 
         uploder.on('uploadSuccess',function(file,data){
             var fileKey = data.key;
-            $.post("/setting?active=avatar",{'fileKey':fileKey})
+            $.post("/setting?action=avatar",{'fileKey':fileKey})
                 .done(function (data) {
                     if(data.state == 'success') {
                         var url = "http://ohyf2mhv9.bkt.clouddn.com/"+fileKey;

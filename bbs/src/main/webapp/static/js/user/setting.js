@@ -34,13 +34,16 @@ $(function () {
                    },
                    success: function (data) {
                        if (data.state == "success") {
-                           alert("邮箱修改成功，请及时去邮箱验证");
+                           // alert("邮箱修改成功，请及时去邮箱验证");
+                           swal("邮箱修改成功，请及时去邮箱验证");
                        } else {
-                           alert(data.message);
+                           // alert(data.message);
+                           swal(data.message);
                        }
                    },
                    error: function () {
-                       alert("服务器异常");
+                       // alert("服务器异常");
+                       swal("服务器异常", "", "error");
                    },
                    complete: function () {
                        $("#basicBtn").text("保存").removeAttr("disabled");
@@ -124,7 +127,8 @@ $(function () {
                        }
                    },
                    error: function () {
-                       alert("服务器异常")
+                       // alert("服务器异常");
+                       swal("服务器异常","","error");
                    },
                    complete: function () {
                        $("#passwordBtn").text("保存").removeAttr("disabled");

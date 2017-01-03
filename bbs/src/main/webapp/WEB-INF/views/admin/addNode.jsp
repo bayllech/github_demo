@@ -16,7 +16,7 @@
         <label>节点名称</label>
         <input type="text" name="nodename" id="nodename" value="">
         <div class="form-actions">
-            <button id="saveBtn" class="btn btn-primary">保存</button>
+            <button id="saveBtn" type="button" class="btn btn-primary">保存</button>
         </div>
     </form>
 </div>
