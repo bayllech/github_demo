@@ -1,6 +1,7 @@
 package com.kaishengit;
 
 import com.kaishengit.pojo.User;
+import com.kaishengit.util.SqlSessionFactoryUtil;
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
@@ -31,4 +32,30 @@ public class MyBatisTestCase {
             e.printStackTrace();
         }
     }
+
+    @Test
+    public void findById() {
+        SqlSession sqlSession = SqlSessionFactoryUtil.getSqlSession();
+
+        User user = sqlSession.selectOne("com.kaishengit.mapper.UserMapper.findUserById", 1004);
+        System.out.println(user);
+
+        sqlSession.close();
+    }
+
+    @Test
+    public void save() {
+        SqlSession sqlSession = SqlSessionFactoryUtil.getSqlSession();
+
+        User user = new User();
+        user.setUsername("lusi");
+        user.setPassword("123123");
+        sqlSession.insert("com.kaishengit.mapper.UserMapper.saveUser",user);
+
+        sqlSession.commit();
+        sqlSession.close();
+    }
+
+
+
 }

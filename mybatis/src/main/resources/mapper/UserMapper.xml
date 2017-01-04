@@ -5,4 +5,6 @@
     <select id="findUserById" parameterType="int" resultType="User">
         SELECT  * from user where id = #{id}
     </select>
+
+
 </mapper>
