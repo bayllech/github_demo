@@ -1,5 +1,6 @@
 package com.kaishengit;
 
+import com.kaishengit.mapper.UserMapper;
 import com.kaishengit.pojo.User;
 import com.kaishengit.util.SqlSessionFactoryUtil;
 import org.apache.ibatis.io.Resources;
@@ -10,6 +11,7 @@ import org.junit.Test;
 
 import java.io.IOException;
 import java.io.Reader;
+import java.util.List;
 
 /**
  * Created by bayllech on 2017/1/4.
@@ -48,11 +50,25 @@ public class MyBatisTestCase {
         SqlSession sqlSession = SqlSessionFactoryUtil.getSqlSession();
 
         User user = new User();
-        user.setUsername("lusi");
+        user.setUsername("liu");
         user.setPassword("123123");
-        sqlSession.insert("com.kaishengit.mapper.UserMapper.saveUser",user);
-
+        Integer id= sqlSession.insert("com.kaishengit.mapper.UserMapper.saveUser",user);
+        System.out.println(id);
         sqlSession.commit();
+        sqlSession.close();
+        user.setId(id);
+        System.out.println(user);
+    }
+
+    @Test
+    public void findAll() {
+        SqlSession sqlSession = SqlSessionFactoryUtil.getSqlSession();
+        UserMapper userMapper = sqlSession.getMapper(UserMapper.class);
+
+        List<User> userList = userMapper.findAll();
+        for (User user :userList) {
+            System.out.println(user);
+        }
         sqlSession.close();
     }
 

@@ -6,5 +6,12 @@
         SELECT  * from user where id = #{id}
     </select>
 
+    <insert id="saveUser" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO user (username,password) VALUES (#{username},#{password})
+    </insert>
+
+    <select id="findAll" resultType="User">
+        SELECT * FROM user
+    </select>
 
 </mapper>
