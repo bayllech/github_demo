@@ -11,6 +11,13 @@ public class Student {
 
     private School school;
 
+    public Student () {}
+
+    public Student (String name,String address) {
+        this.name = name;
+        this.address = address;
+    }
+
     public School getSchool() {
         return school;
     }

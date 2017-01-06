@@ -5,6 +5,20 @@
     <cache/>
 
     <insert id="save"></insert>
+    <insert id="batchSave">
+        INSERT INTO student (name,address) VALUES
+        <foreach collection="list" item="student" separator=",">
+            (#{student.name},#{student.address})
+        </foreach>
+    </insert>
+    <update id="update">
+        UPDATE student
+        <set>
+            <if test="name != null">name=#{name},</if>
+            <if test="address != null">address=#{address}</if>
+        </set>
+        where id = #{id}
+    </update>
 
     <select id="findById" resultType="com.kaishengit.pojo.Student" >
         SELECT
@@ -18,10 +32,28 @@
     </select>
 
     <select id="findByParam" resultType="com.kaishengit.pojo.Student">
-        SELECT * from student where name = #{name}
-        <if test="address != null and address !=''">
-            and address = #{address}
-        </if>
+        SELECT * from student
+        <!--<choose>
+            <when test="address != null and address !=''">
+                and address = #{address}
+            </when>
+        </choose>-->
+        <trim prefix="where" prefixOverrides="and">
+            <if test="name != null and name != ''">
+                name = #{name}
+            </if>
+            <choose>
+                <when test="address != null and address != ''">
+                    and address = #{address}
+                </when>
+            </choose>
+        </trim>
+    </select>
+    <select id="findByIds" resultType="com.kaishengit.pojo.Student">
+        select * from student where id IN
+        <foreach collection="list" item="id" separator="," open="(" close=")">
+            #{id}
+        </foreach>
     </select>
 
 
