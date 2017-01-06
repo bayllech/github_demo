@@ -11,7 +11,9 @@ import org.junit.Test;
 
 import java.io.IOException;
 import java.io.Reader;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by bayllech on 2017/1/4.
@@ -58,6 +60,7 @@ public class MyBatisTestCase {
         sqlSession.close();
         user.setId(id);
         System.out.println(user);
+
     }
 
     @Test
@@ -70,6 +73,17 @@ public class MyBatisTestCase {
             System.out.println(user);
         }
         sqlSession.close();
+    }
+
+    @Test
+    public void findByNameAndPassword() {
+        SqlSession sqlSession = SqlSessionFactoryUtil.getSqlSession();
+        UserMapper userMapper = sqlSession.getMapper(UserMapper.class);
+//        User user = userMapper.findByNameAndPassword("rose","123");
+        Map<String, Object> map = new HashMap<>();
+        map.put("username","rose");
+        map.put("password", "123");
+        User user = userMapper.findByNameAndPassword(map);
     }
 
 
