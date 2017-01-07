@@ -1,8 +1,14 @@
 package com.kaishengit.dao.Impl;
 
-/**
- * Created by bayllech on 2017/1/7.
- */
-public class UserDaoImpl {
+import com.kaishengit.dao.UserDao;
 
+public class UserDaoImpl implements UserDao {
+
+    public void save() {
+        System.out.println("spring save...");
+    }
+
+    public void update() {
+        System.out.println("spring update...");
+    }
 }
