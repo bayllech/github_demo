@@ -1,7 +1,7 @@
-package com.kaishengit.dao.Impl;
+package com.kaishengit.service.Impl;
 
 import com.kaishengit.dao.UserDao;
-import com.kaishengit.dao.UserService;
+import com.kaishengit.service.UserService;
 
 /**
  * Created by bayllech on 2017/1/8.
@@ -19,7 +19,9 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void update() {
-        userDao.update();
+    public int getNum() throws RuntimeException {
+        System.out.println("get num...");
+//        throw new RuntimeException("故意异常");
+        return 100;
     }
 }
