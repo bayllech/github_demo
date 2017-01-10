@@ -1,11 +1,14 @@
 package com.kaishengit.service.Impl;
 
 import com.kaishengit.dao.UserDao;
+import com.kaishengit.pojo.User;
 import com.kaishengit.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
+@Transactional
 public class UserServiceImpl implements UserService {
 
     @Autowired
@@ -17,8 +20,8 @@ public class UserServiceImpl implements UserService {
     }*/
 
     @Override
-    public void save() {
-        userDao.save();
+    public void save(User user) {
+        userDao.save(user);
     }
 
     @Override

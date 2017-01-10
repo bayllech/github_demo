@@ -19,8 +19,11 @@ public class SpringTestCase {
                 new ClassPathXmlApplicationContext("applicationContext.xml");
 
         UserMapper userMapper = (UserMapper) applicationContext.getBean("userMapper");
-        /*User user = new User("lili","123123");
-        userMapper.save(user);*/
+        /*
+        User user = new User("wang","123123");
+        userMapper.save(user);
+        */
+
         User user = userMapper.findById(1009);
         System.out.println(user);
 

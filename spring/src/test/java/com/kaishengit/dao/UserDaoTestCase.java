@@ -11,7 +11,7 @@ public class UserDaoTestCase {
         ApplicationContext applicationContext =
                 new ClassPathXmlApplicationContext("applicationContext.xml");
         UserDao userDao = (UserDaoImpl) applicationContext.getBean("UserDaoImpl");
-        userDao.save();
+//        userDao.save();
         userDao.update();
 
     }
