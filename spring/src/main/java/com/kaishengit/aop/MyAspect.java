@@ -24,10 +24,10 @@ public class MyAspect {
         try {
             System.out.println("~~前置~~");
             Object result = joinPoint.proceed(); //目标对象方法的执行
-            System.out.println("~~后置~~");
+            System.out.println("~~后置~~"+result);
         } catch (Throwable throwable) {
             throwable.printStackTrace();
-            System.out.println("~~异常~~");
+            System.out.println("~~异常~~"+throwable.getMessage());
         } finally {
             System.out.println("~~最终~~");
         }
