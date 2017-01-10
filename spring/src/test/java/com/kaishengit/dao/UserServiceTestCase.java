@@ -14,8 +14,9 @@ public class UserServiceTestCase {
     public void readSet() {
         ApplicationContext applicationContext =
                 new ClassPathXmlApplicationContext("applicationContext.xml");
-        UserService userService = (UserService) applicationContext.getBean("userService");
+        UserService userService = (UserService) applicationContext.getBean("userServiceImpl");
         userService.save();
+        userService.getNum();
 
     }
 }
