@@ -11,6 +11,8 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import java.util.List;
+
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = "classpath:applicationContext.xml")
 public class UserServiceTestCase {
@@ -23,9 +25,13 @@ public class UserServiceTestCase {
                 new ClassPathXmlApplicationContext("applicationContext.xml");
         UserService userService = (UserService) applicationContext.getBean("userServiceImpl");
         */
-        User user = new User("meng","123123");
+       /* User user = new User("meng","123123");
         userService.save(user);
-//        userService.getNum();
-
+        userService.getNum();
+        */
+       List<User> userList = userService.findAll();
+        for (User user : userList) {
+            System.out.println(user);
+        }
     }
 }
