@@ -72,13 +72,13 @@ $(function(){
                         // alert("注册成功，请登录并及时去邮箱验证！");
                         // window.location.href = "/login";
                         swal({
-                                title: "注册成功，是否去登录？",
-                                text: "",
+                                title: "注册成功!",
+                                text: "请及时去邮箱验证,邮箱是您找回账号的唯一凭证,同时未验证账号无法登录.",
                                 type: "success",
                                 showCancelButton: true,
                                 confirmButtonColor: "#4352dd",
                                 confirmButtonText: "确定",
-                                cancelButtonText: "取消",
+                                // cancelButtonText: "取消",
                                 closeOnConfirm: false,
                                 closeOnCancel: false
                             },

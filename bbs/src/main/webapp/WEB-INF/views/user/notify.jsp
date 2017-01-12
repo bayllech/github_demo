@@ -22,7 +22,14 @@
             <thead>
             <tr>
 
-                <th width="30"><c:if test="${not empty notifyList}"><input type="checkbox" id="ckFather"></c:if></th>
+                <th width="30">
+                    <c:if test="${not empty notifyList}">
+                    <c:forEach items="${notifyList}" var="notify">
+                        <span class="exitunread" hidden><c:if test="${notify.state == 0}">exitunread</c:if></span>
+                    </c:forEach>
+                    </c:if>
+                    <input type="checkbox" id="ckFather">
+                </th>
 
                 <th width="200">发布日期</th>
                 <th>内容</th>
@@ -48,10 +55,7 @@
                                 </tr>
                             </c:otherwise>
                         </c:choose>
-
                     </c:forEach>
-
-
                 </c:when>
                 <c:otherwise>
                     <tr><td colspan="3"><p>暂时没有任何消息</p></td></tr>
@@ -72,7 +76,11 @@
 <script>
     $(function () {
 
-//        $(".createtime").text(moment($(".createtime").text()).format("YYYY年MM月DD日 HH:mm:ss"));
+        var exitunread = $(".exitunread").text();
+        if(exitunread == "") {
+            $("#ckFather").attr("hidden","hidden");
+        }
+
         $(".createtime").text(function () {
             var time = $(this).text();
             return moment(time).format("YYYY年MM月DD日 HH:mm:ss");
@@ -98,19 +106,17 @@
                 if (sons[i].checked){
                     num++;
                 }
-            }
+            };
             if (num == sons.length){
                 $("#ckFather")[0].checked = true;
             }else{
                 $("#ckFather")[0].checked = false;
-            }
-
+            };
             if (num > 0){
                 $("#markBtn").removeAttr("disabled");
             }else{
                 $("#markBtn").attr("disabled","disabled");
             }
-
         });
 
         $("#markBtn").click(function(){

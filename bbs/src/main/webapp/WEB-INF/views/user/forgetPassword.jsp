@@ -18,7 +18,7 @@
         </div>
 
         <form action="" class="form-horizontal" id="form">
-            <div class="control-group">
+           <%-- <div class="control-group">
                 <label class="control-label">选择找回方式</label>
                 <div class="controls">
                     <select name="type" id="type">
@@ -26,9 +26,10 @@
                         <option value="phone">根据手机号码找回</option>
                     </select>
                 </div>
-            </div>
+            </div>--%>
             <div class="control-group">
                 <label class="control-label" id="typename">电子邮件</label>
+                <input type="hidden" value="email" name="type" id="type">
                 <div class="controls">
                     <input type="text" name="value">
                 </div>
@@ -47,7 +48,7 @@
 <!--container end-->
 <script src="/static/js/jquery-1.11.1.js"></script>
 <script src="/static/js/jquery.validate.min.js"></script>
-<script src="/static/js/user/forgetPassword.js"></script>
 <script src="/static/js/sweetalert.min.js"></script>
+<script src="/static/js/user/forgetPassword.js"></script>
 </body>
 </html>

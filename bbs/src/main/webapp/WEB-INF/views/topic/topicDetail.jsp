@@ -13,7 +13,7 @@
     <link rel="stylesheet" href="/static/css/sweetalert.css">
     <style>
         body{
-            background-image: url(/static/img/bg.jpg);
+            background: url(/static/img/bg.jpg);
         }
         .simditor .simditor-body {
             min-height: 100px;
@@ -44,13 +44,13 @@
                 <ul class="unstyled inline pull-left">
                     <c:choose>
                         <c:when test="${empty fav}">
-                            <li><a href="javascript:;" id="favTopic">加入收藏</a></li>
+                            <li><a href="javascript:;" id="favTopic">点赞</a></li>
                         </c:when>
                         <c:otherwise>
-                            <li><a href="javascript:;" id="favTopic">取消收藏</a></li>
+                            <li><a href="javascript:;" id="favTopic">取消赞</a></li>
                         </c:otherwise>
                     </c:choose>
-                    <li><a href="">感谢</a></li>
+
                     <c:if test="${sessionScope.curr_user.id == topic.userid and topic.edit}">
                         <li><a href="/topicEdit?topicId=${topic.id}">编辑</a></li>
                     </c:if>
@@ -58,8 +58,8 @@
             </c:if>
             <ul class="unstyled inline pull-right muted">
                 <li>点击${requestScope.topic.clicknum}</li>
-                <li>收藏<span id="favTopicnum">${topic.favnum}</span></li>
-                <li>感谢${requestScope.topic.thankyounum}</li>
+                <li>赞<span id="favTopicnum">${topic.favnum}</span></li>
+
             </ul>
         </div>
     </div>
@@ -219,7 +219,7 @@
         $("#favTopic").click(function () {
             var $this = $(this);
             var action = "";
-            if ($this.text() == "加入收藏") {
+            if ($this.text() == "点赞") {
                 action = "fav";
             } else {
                 action = "unfav";
@@ -228,9 +228,9 @@
                 function (data) {
                     if (data.state == "success") {
                         if (action == "fav") {
-                            $this.text("取消收藏");
+                            $this.text("取消赞");
                         } else {
-                            $this.text("加入收藏");
+                            $this.text("点赞");
                         }
                         $("#favTopicnum").text(data.topic.favnum);
                     } else {

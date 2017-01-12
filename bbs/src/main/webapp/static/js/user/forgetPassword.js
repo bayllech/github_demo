@@ -2,14 +2,14 @@
  * Created by bayllech on 2016/12/17.
  */
 $(function () {
-    $("#type").change(function () {
+   /* $("#type").change(function () {
         var value = $(this).val();
         if (value == "email") {
             $("#typename").text("电子邮件");
         } else if (value == "phone") {
             $("#typename").text("手机号码");
         };
-    });
+    });*/
 
    $("#btn").click(function () {
        $("#form").submit();

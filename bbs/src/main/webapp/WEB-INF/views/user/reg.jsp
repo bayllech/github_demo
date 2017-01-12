@@ -43,12 +43,12 @@
                     <input type="text" name="email">
                 </div>
             </div>
-            <div class="control-group">
+            <%--<div class="control-group">
                 <label class="control-label">手机号码</label>
                 <div class="controls">
                     <input type="text" name="phone">
                 </div>
-            </div>
+            </div>--%>
             <div class="form-actions">
                 <button type="button" id="regBtn" class="btn btn-primary">注册</button>
                 <a class="pull-right" href="/login">登录</a>
