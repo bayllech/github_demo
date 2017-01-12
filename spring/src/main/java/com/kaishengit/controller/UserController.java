@@ -15,14 +15,10 @@ import java.util.List;
 @Controller
 @RequestMapping("/user")
 public class UserController {
-/*
-    private final UserService userService;
 
     @Autowired
-    public UserController(UserService userService) {
-        this.userService = userService;
-    }
- */
+    private UserService userService;
+
     @RequestMapping(value = "/add",method = RequestMethod.GET)
     public String add() {
         return "user/add";
@@ -54,10 +50,10 @@ public class UserController {
 
     @GetMapping("/list")
     public String userList(Model model) {
-        User user = new User("aa", "123123");
+        /*User user = new User("aa", "123123");
         User user1 = new User("bb", "111111");
-        List<User> userList = Arrays.asList(user, user1);
-        model.addAttribute("userList", userList);
+        List<User> userList = Arrays.asList(user, user1);*/
+        model.addAttribute("userList", userService.findAll());
         return "user/list";
     }
 
