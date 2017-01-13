@@ -1,5 +1,6 @@
 package com.kaishengit.service;
 
+import com.kaishengit.pojo.Role;
 import com.kaishengit.pojo.User;
 
 import java.util.List;
@@ -8,8 +9,7 @@ import java.util.List;
  * Created by bayllech on 2017/1/8.
  */
 public interface UserService {
-    void save(User user);
-    int getNum() throws RuntimeException;
+    void save(User user,Integer[] roleIds);
 
     List<User> findAll();
 
@@ -18,4 +18,6 @@ public interface UserService {
     User findById(Integer id);
 
     void editUser(User user);
+
+    List<Role> findAllRole();
 }
