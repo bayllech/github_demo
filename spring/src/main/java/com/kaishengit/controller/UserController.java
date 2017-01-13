@@ -26,6 +26,7 @@ public class UserController {
 
     @RequestMapping(value = "/add",method = RequestMethod.POST)
     public String save (User user, RedirectAttributes redirectAttributes) {
+        userService.save(user);
         redirectAttributes.addFlashAttribute("message", "添加成功");
         return "redirect:/user/list";
     }
@@ -88,6 +89,27 @@ public class UserController {
         System.out.println(multipartFile.getOriginalFilename());
         System.out.println(multipartFile.getContentType());*/
         return "redirect:/home";
+    }
+
+    @GetMapping("/{id:\\d+}/del")
+    public String delUser(@PathVariable Integer id,RedirectAttributes redirectAttributes) {
+        userService.delById(id);
+        redirectAttributes.addFlashAttribute("message", "删除成功");
+        return "redirect:/user/list";
+    }
+
+    @GetMapping("/{id:\\d+}/edit")
+    public String editUser(@PathVariable Integer id,Model model) {
+        User user = userService.findById(id);
+        model.addAttribute("user", user);
+        return "user/edit";
+    }
+
+    @PostMapping("/{id:\\d+}/edit")
+    public String editUser(User user,RedirectAttributes redirectAttributes) {
+        userService.editUser(user);
+        redirectAttributes.addFlashAttribute("message", "修改成功");
+        return "redirect:/user/list";
     }
 
 

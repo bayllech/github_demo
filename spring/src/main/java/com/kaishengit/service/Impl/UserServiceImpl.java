@@ -29,11 +29,27 @@ public class UserServiceImpl implements UserService {
     @Override
     public void save(User user) {
 //        userDao.save(user);
+        userMapper.save(user);
     }
 
     @Override
     public List<User> findAll() {
         return userMapper.findAll() ;
+    }
+
+    @Override
+    public void delById(Integer id) {
+        userMapper.delUser(id);
+    }
+
+    @Override
+    public User findById(Integer id) {
+        return userMapper.findById(id);
+    }
+
+    @Override
+    public void editUser(User user) {
+        userMapper.editUser(user);
     }
 
     @Override

@@ -9,4 +9,9 @@ public interface UserMapper {
     User findById(Integer id);
 
     List<User> findAll();
+
+    void delUser(Integer id);
+
+    void editUser(User user);
+
 }

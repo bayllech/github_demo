@@ -12,4 +12,10 @@ public interface UserService {
     int getNum() throws RuntimeException;
 
     List<User> findAll();
+
+    void delById(Integer id);
+
+    User findById(Integer id);
+
+    void editUser(User user);
 }
