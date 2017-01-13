@@ -6,6 +6,9 @@
     <insert id="saveRole">
         INSERT INTO user_role (userid,roleid) VALUES (#{userId},#{roleId})
     </insert>
+    <delete id="delRoleById">
+        DELETE FROM user_role where userid = #{id}
+    </delete>
     <select id="findAll" resultType="com.kaishengit.pojo.Role">
         SELECT * FROM role
     </select>

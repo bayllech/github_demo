@@ -29,14 +29,7 @@ public class UserServiceImpl implements UserService {
     @Transactional
     public void save(User user,Integer[] roleIds) {
         userMapper.save(user);
-        if (roleIds != null) {
-            for (Integer roleId : roleIds) {
-                Role role = roleMapper.findById(roleId);
-                if (role != null) {
-                    roleMapper.saveRole(user.getId(), roleId);
-                }
-            }
-        }
+        addRole(user, roleIds);
     }
 
     @Override
@@ -55,8 +48,22 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void editUser(User user) {
+    public void editUser(User user,Integer[] roleIds) {
+        roleMapper.delRoleById(user.getId());
+        addRole(user, roleIds);
+
         userMapper.editUser(user);
+    }
+
+    private void addRole(User user, Integer[] roleIds) {
+        if (roleIds != null) {
+            for (Integer roleId : roleIds) {
+                Role role = roleMapper.findById(roleId);
+                if (role != null) {
+                    roleMapper.saveRole(user.getId(), roleId);
+                }
+            }
+        }
     }
 
     @Override

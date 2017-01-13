@@ -90,13 +90,14 @@ public class UserController {
     @GetMapping("/{id:\\d+}/edit")
     public String editUser(@PathVariable Integer id,Model model) {
         User user = userService.findById(id);
+        model.addAttribute("roleList", userService.findAllRole());
         model.addAttribute("user", user);
         return "user/edit";
     }
 
     @PostMapping("/{id:\\d+}/edit")
-    public String editUser(User user,RedirectAttributes redirectAttributes) {
-        userService.editUser(user);
+    public String editUser(User user,Integer[] roleIds,RedirectAttributes redirectAttributes) {
+        userService.editUser(user,roleIds);
         redirectAttributes.addFlashAttribute("message", "修改成功");
         return "redirect:/user";
     }
