@@ -102,5 +102,10 @@ public class UserController {
         return "redirect:/user";
     }
 
+    @GetMapping("/setting")
+    public String setting() {
+        return "";
+    }
+
 
 }
