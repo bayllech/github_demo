@@ -7,6 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>AdminLTE 2 | Blank Page</title>
     <%@include file="../include/css.jsp"%>
+    <link rel="stylesheet" href="/static/dataTable/css/jquery.dataTables.min.css">
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
 <!-- Site wrapper -->
@@ -35,7 +36,7 @@
                             <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
                         </div>
                     </c:if>
-                    <table class="table">
+                    <table class="table" id="table">
                         <thead>
                         <tr>
                             <th>姓名</th>
@@ -66,5 +67,11 @@
 </div>
 
 <%@include file="../include/js.jsp"%>
+<script src="/static/dataTable/js/jquery.dataTables.min.js"></script>
+<script>
+    $(document).ready(function(){
+        $("#table").DataTable();
+    });
+</script>
 </body>
 </html>
