@@ -3,6 +3,7 @@ package com.kaishengit.controller;
 /*import com.kaishengit.dto.AjaxResult;
 import com.kaishengit.pojo.Device;
 import com.kaishengit.service.DeviceService;*/
+import com.kaishengit.dto.AjaxResult;
 import com.kaishengit.pojo.Device;
 import com.kaishengit.service.DeviceService;
 import org.springframework.beans.factory.annotation.Autowired;

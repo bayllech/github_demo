@@ -6,4 +6,7 @@
     <select id="findAllDevice" resultType="com.kaishengit.pojo.Device">
         SELECT * FROM t_device
     </select>
+    <select id="findDeviceById" resultType="com.kaishengit.pojo.Device">
+        SELECT * FROM t_device where id = #{id}
+    </select>
 </mapper>
