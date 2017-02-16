@@ -67,10 +67,10 @@ public class UserController {
         return "user/list";
     }
 
-    @RequestMapping(value = "/login",method = RequestMethod.GET)
+   /* @RequestMapping(value = "/login",method = RequestMethod.GET)
     public String userLogin() {
-        return "";
-    }
+        return "shiro/login";
+    }*/
 
     @RequestMapping(value = "/add",method = RequestMethod.GET)
     public String add(Model model) {
@@ -109,7 +109,7 @@ public class UserController {
 
     @GetMapping("/setting")
     public String setting() {
-        return "";
+        return "device/list";
     }
 
 
