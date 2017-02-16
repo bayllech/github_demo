@@ -1,9 +1,11 @@
 package com.kaishengit.pojo;
 
+import java.io.Serializable;
+
 /**
  * Created by bayllech on 2017/1/5.
  */
-public class Student {
+public class Student implements Serializable {
     private Integer id;
     private String name;
     private String address;

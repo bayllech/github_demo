@@ -60,6 +60,7 @@ public class StudentTestCase {
         for (Student s : studentList) {
             System.out.println(s);
         }
+        sqlSession.close();
     }
 
     @Test
