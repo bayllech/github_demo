@@ -67,6 +67,11 @@ public class UserController {
         return "user/list";
     }
 
+    @RequestMapping(value = "/login",method = RequestMethod.GET)
+    public String userLogin() {
+        return "";
+    }
+
     @RequestMapping(value = "/add",method = RequestMethod.GET)
     public String add(Model model) {
         model.addAttribute("roleList", userService.findAllRole());

@@ -21,10 +21,9 @@
                     <i class="fa fa-cogs"></i> <span>系统设置</span> <i class="fa fa-angle-left pull-right"></i>
                 </a>
                 <ul class="treeview-menu">
-                    <li class="${param.menu == 'sys_accounts' ? 'active' : ''}">
-                        <a href="/user"><i class="fa fa-circle-o"></i> 账户管理</a>
-                    </li>
-                    <li><a href="/user/setting"><i class="fa fa-circle-o"></i> 设备管理</a></li>
+                    <li class="${param.menu == 'sys_accounts' ? 'active' : ''}"><a href="/user"><i class="fa fa-circle-o"></i> 账户管理</a></li>
+                    <li class="${param.menu == 'sys_accounts' ? 'active' : ''}"><a href="/user/login"><i class="fa fa-circle-o"></i> 用户登录</a></li>
+                    <li class="${param.menu == 'sys_accounts' ? 'active' : ''}"><a href="/user/setting"><i class="fa fa-circle-o"></i> 设备管理</a></li>
                 </ul>
             </li>
 
