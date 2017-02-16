@@ -24,7 +24,7 @@
             <!-- Default box -->
             <div class="box">
                 <div class="box-header with-border">
-                    <h3 class="box-title">欢迎您！<shiro:principal property="userName"/></h3>
+                    <h3 class="box-title">欢迎您！<shiro:principal property="username"/></h3>
 
                     <div class="box-tools pull-right">
                         <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="Collapse">

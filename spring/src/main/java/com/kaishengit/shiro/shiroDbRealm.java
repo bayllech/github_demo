@@ -19,7 +19,7 @@ import java.util.List;
  * Created by bayllech on 2017/2/16.
  */
 @Component
-public class shiroDbRealm extends AuthorizingRealm {
+public class ShiroDbRealm extends AuthorizingRealm {
 
     @Autowired
     private UserMapper userMapper;
