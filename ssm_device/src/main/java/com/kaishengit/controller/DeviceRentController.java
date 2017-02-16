@@ -42,7 +42,7 @@ public class DeviceRentController {
      * @param id
      * @return
      */
-   /* @GetMapping("/device.json")
+    @GetMapping("/device.json")
     @ResponseBody
     public AjaxResult deviceJson(Integer id) {
         Device device = deviceService.findDeviceById(id);
@@ -51,6 +51,6 @@ public class DeviceRentController {
         } else {
             return new AjaxResult(device);
         }
-    }*/
+    }
 
 }
