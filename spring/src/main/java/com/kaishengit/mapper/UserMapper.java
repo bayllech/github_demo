@@ -15,4 +15,5 @@ public interface UserMapper {
 
     void editUser(User user);
 
+    User findByUserName(String userName);
 }

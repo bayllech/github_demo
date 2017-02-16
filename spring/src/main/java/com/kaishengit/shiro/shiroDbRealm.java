@@ -4,9 +4,7 @@ import com.kaishengit.mapper.RoleMapper;
 import com.kaishengit.mapper.UserMapper;
 import com.kaishengit.pojo.Role;
 import com.kaishengit.pojo.User;
-import org.apache.shiro.authc.AuthenticationException;
-import org.apache.shiro.authc.AuthenticationInfo;
-import org.apache.shiro.authc.AuthenticationToken;
+import org.apache.shiro.authc.*;
 import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.authz.SimpleAuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
@@ -45,6 +43,14 @@ public class shiroDbRealm extends AuthorizingRealm {
 
     @Override
     protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken authenticationToken) throws AuthenticationException {
+        UsernamePasswordToken usernamePasswordToken = (UsernamePasswordToken) authenticationToken;
+        String userName = usernamePasswordToken.getUsername();
+        User user = userMapper.findByUserName(userName);
+
+        if (user != null) {
+            return new SimpleAuthenticationInfo(user, user.getPassword(), getName());
+        }
+
         return null;
     }
 }

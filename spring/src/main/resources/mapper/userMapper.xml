@@ -31,6 +31,10 @@
         LEFT JOIN role ON role.id = user_role.roleid
     </select>
 
+    <select id="findByUserName" resultType="com.kaishengit.pojo.User">
+        SELECT * from user where username = #{userName}
+    </select>
+
     <resultMap id="UserMap" type="User">
         <id column="id" property="id"/>
         <result column="username" property="username"/>
