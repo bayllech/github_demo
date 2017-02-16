@@ -3,6 +3,8 @@ package com.kaishengit.controller;
 /*import com.kaishengit.dto.AjaxResult;
 import com.kaishengit.pojo.Device;
 import com.kaishengit.service.DeviceService;*/
+import com.kaishengit.pojo.Device;
+import com.kaishengit.service.DeviceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,7 +19,7 @@ import java.util.List;
 public class DeviceRentController {
 
     @Autowired
-//    private DeviceService deviceService;
+    private DeviceService deviceService;
 
     @GetMapping
     public String list() {
@@ -30,8 +32,8 @@ public class DeviceRentController {
      */
     @GetMapping("/new")
     public String newRent(Model model) {
-//        List<Device> deviceList = deviceService.findAllDevice();
-//        model.addAttribute("deviceList",deviceList);
+        List<Device> deviceList = deviceService.findAllDevice();
+        model.addAttribute("deviceList",deviceList);
         return "/device/rent/new";
     }
 
