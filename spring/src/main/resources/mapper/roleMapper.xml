@@ -16,4 +16,10 @@
         SELECT * from role where id = #{id}
     </select>
 
+    <select id="findByUserId" resultType="com.kaishengit.pojo.Role">
+        select * from role
+        left join user_role on role.id = user_role.roleid
+        where user_role.userid = #{userId}
+    </select>
+
 </mapper>

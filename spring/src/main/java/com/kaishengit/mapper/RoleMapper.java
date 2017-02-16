@@ -17,4 +17,6 @@ public interface RoleMapper {
     void saveRole(@Param("userId") Integer userId, @Param("roleId") Integer roleId);
 
     void delRoleById(Integer id);
+
+    List<Role> findByUserId(Integer id);
 }
