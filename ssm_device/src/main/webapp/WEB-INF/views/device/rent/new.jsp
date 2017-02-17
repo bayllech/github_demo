@@ -129,8 +129,9 @@
                 </div>
                 <div class="box-body">
                     <div id="picker">选择文件</div>
-                    注意：上传合同扫描件要求清晰可见 合同必须公司法人签字盖章
-                    <button class="btn btn-primary pull-right">保存合同</button>
+                    <span>注意：上传合同扫描件要求清晰可见 合同必须公司法人签字盖章</span>
+                    <ul id="fileList"></ul>
+                    <button class="btn btn-primary pull-right" id="saveRent">保存合同</button>
                 </div>
             </div>
 
@@ -195,6 +196,9 @@
 <script src="/static/plugins/vue.js"></script>
 <script src="/static/layer.js"></script>
 <script>
+
+    var fileArray = [];
+
     $(function () {
         $("#deviceId").select2();
         $("#deviceId").change(function () {
@@ -230,16 +234,19 @@
         });
 
         var uploder = WebUploader.create({
-                swf : "/static/js/webuploader/Uploader.swf",
-                server: "http://up-z1.qiniu.com/",
+                swf : "js/uploader/Uploader.swf",
+                server: "/file/upload",
                 pick: '#picker',
                 auto : true,
                 fileVal:'file'
             });
 
             uploder.on('uploadSuccess',function(file,data){
+                layer.msg("上传成功");
+                var html = "<li>"+data.data.sourceFileName+"</li>";
+                $("#fileList").append(html);
 
-
+                fileArray.push(data.data.newFileName);
             });
             uploder.on('uploadError',function(){
                 layer.msg("服务器正在路上")
@@ -248,12 +255,14 @@
 
 
 
+    //Vue的简单使用
     var app = new Vue({
         el: "#app",
         data: {
             deviceArray: []
         },
         methods: {
+            //添加租赁列表
             addDevice:function(){
                 //判断租赁数量是否为空或不是数字
                 if($("#rentNum").val() > 0) {
@@ -284,6 +293,7 @@
                     }
                 }
             },
+            //删除已添加租赁列表
             remove : function (device) {
                 layer.confirm("确定删除吗?",function (esc) {
                     app.$data.deviceArray.splice(app.$data.deviceArray.indexOf(device, 1));
@@ -291,6 +301,7 @@
                 })
             }
         },
+        //计算金额
         computed: {
             total: function () {
                 var result = 0;
