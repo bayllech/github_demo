@@ -39,11 +39,11 @@
                         <div class="col-md-4">
                             <div class="form-group">
                                 <label>公司名称</label>
-                                <input type="text" class="form-control">
+                                <input type="text" id="companyName" class="form-control">
                             </div>
                             <div class="form-group">
                                 <label>联系电话</label>
-                                <input type="text" class="form-control">
+                                <input type="text" id="tel" class="form-control">
                             </div>
                             <div class="form-group">
                                 <label>租赁日期</label>
@@ -53,11 +53,11 @@
                         <div class="col-md-4">
                             <div class="form-group">
                                 <label>法人代表</label>
-                                <input type="text" class="form-control">
+                                <input type="text" id="linkMan" class="form-control">
                             </div>
                             <div class="form-group">
                                 <label>地址</label>
-                                <input type="text" class="form-control">
+                                <input type="text" id="address" class="form-control">
                             </div>
                             <div class="form-group">
                                 <label>归还日期</label>
@@ -67,11 +67,11 @@
                         <div class="col-md-4">
                             <div class="form-group">
                                 <label>身份证号</label>
-                                <input type="text" class="form-control">
+                                <input type="text" id="cardNum" class="form-control">
                             </div>
                             <div class="form-group">
                                 <label>传真</label>
-                                <input type="text" class="form-control">
+                                <input type="text" id="fax" class="form-control">
                             </div>
                             <div class="form-group">
                                 <label>总天数</label>
@@ -129,9 +129,9 @@
                 </div>
                 <div class="box-body">
                     <div id="picker">选择文件</div>
-                    <span>注意：上传合同扫描件要求清晰可见 合同必须公司法人签字盖章</span>
+                    <p>注意：上传合同扫描件要求清晰可见 合同必须公司法人签字盖章</p>
                     <ul id="fileList"></ul>
-                    <button class="btn btn-primary pull-right" id="saveRent">保存合同</button>
+                    <button class="btn btn-primary pull-right" @click="saveRent">保存合同</button>
                 </div>
             </div>
 
@@ -253,8 +253,6 @@
             });
     });
 
-
-
     //Vue的简单使用
     var app = new Vue({
         el: "#app",
@@ -299,6 +297,34 @@
                     app.$data.deviceArray.splice(app.$data.deviceArray.indexOf(device, 1));
                     layer.close(esc)
                 })
+            },
+            //保存合同
+            saveRent : function () {
+                var json = {
+                    deviceArray: app.$data.deviceArray,
+                    fileArray: fileArray,
+                    companyName: $("#companyName").val(),
+                    linkMan : $("#linkMan").val(),
+                    tel : $("#tel").val(),
+                    cardNum : $("#cardNum").val(),
+                    address : $("#address").val(),
+                    fax : $("#fax").val(),
+                    rentDate : $("#rentDate").val(),
+                    backDate : $("#backDate").val(),
+                    totalDate : $("#totalDays").val()
+                };
+                $.ajax({
+                    url: "/device/rent/new",
+                    type: "post",
+                    data: JSON.stringify(json),
+                    contentType: "application/json;charset=UTF-8",
+                    success: function (data) {
+
+                    },
+                    error: function () {
+                        layer.msg("服务器正在路上");
+                    }
+                });
             }
         },
         //计算金额
