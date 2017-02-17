@@ -109,6 +109,7 @@
                             <td>{{device.price}}</td>
                             <td>{{device.num}}</td>
                             <td>{{device.total}}</td>
+                            <td><a href="javascript:;" @click="remove(device)"><i class="fa fa-trash text-danger"></i></a></td>
                         </tr>
                         </tbody>
                     </table>
@@ -188,6 +189,7 @@
 <script src="/static/plugins/datepicker/locales/bootstrap-datepicker.zh-CN.js"></script>
 <script src="/static/plugins/select2/select2.full.min.js"></script>
 <script src="/static/plugins/vue.js"></script>
+<script src="/static/layer.js"></script>
 <script>
     $(function () {
         $("#deviceId").select2();
@@ -202,10 +204,10 @@
                         $("#unit").val(device.unit);
                         $("#rentPrice").val(device.price);
                     } else {
-                        alert(resp.message);
+                        layer.alert(resp.message);
                     }
                 }).error(function () {
-                    alert("服务器异常，请稍后再试");
+                    layer.msg("服务器异常，请稍后再试");
                 });
             }
         })
@@ -224,12 +226,20 @@
         });
 
         var uploder = WebUploader.create({
-            swf : "js/uploader/Uploader.swf",
-            server: "#",
-            pick: '#picker',
-            auto : true,
-            fileVal:'file'
-        });
+                swf : "/static/js/webuploader/Uploader.swf",
+                server: "http://up-z1.qiniu.com/",
+                pick: '#picker',
+                auto : true,
+                fileVal:'file'
+            });
+
+            uploder.on('uploadSuccess',function(file,data){
+
+
+            });
+            uploder.on('uploadError',function(){
+                layer.msg("服务器正在路上")
+            });
     });
 
 
@@ -269,6 +279,12 @@
                         this.$data.deviceArray.push(json);
                     }
                 }
+            },
+            remove : function (device) {
+                layer.confirm("确定删除吗?",function (esc) {
+                    app.$data.deviceArray.splice(app.$data.deviceArray.indexOf(device, 1));
+                    layer.close(esc)
+                })
             }
         },
         computed: {
