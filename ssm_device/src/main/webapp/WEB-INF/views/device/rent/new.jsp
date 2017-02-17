@@ -75,7 +75,7 @@
                             </div>
                             <div class="form-group">
                                 <label>总天数</label>
-                                <input type="text" class="form-control">
+                                <input type="text" id="totalDays" readonly class="form-control">
                             </div>
                         </div>
                     </div>
@@ -212,14 +212,16 @@
 
         //租赁日期，默认今天
         $("#rentDate").val(moment().format("YYYY-MM-DD"));
-        //归还日期
+        //归还日期,并计算总天数
         $("#backDate").datepicker({
             format: "yyyy-mm-dd",
             language: "zh-CN",
             autoclose: true,
             startDate:moment().add(1,'days').format("YYYY-MM-DD")
+        }).on('changeDate',function (e) {
+            var days =moment(e.format(0, "yyyy-mm-dd")).diff(moment(), 'days')+1;
+            $("#totalDays").val(days);
         });
-
 
         var uploder = WebUploader.create({
             swf : "js/uploader/Uploader.swf",
@@ -230,43 +232,49 @@
         });
     });
 
+
+
     var app = new Vue({
-        el:"#app",
+        el: "#app",
         data: {
-            deviceArray:[]
+            deviceArray: []
         },
         methods: {
             addDevice:function(){
-                var id = $("#deviceId").val();
-                //判断数组中是否存在当前的设备，如果有则数量累加，更新总价
-                var flag = false;
-                for(var i = 0;i < this.$data.deviceArray.length;i++) {
-                    var item = this.$data.deviceArray[i];
-                    if(item.id == id) {
-                        this.$data.deviceArray[i].num = parseFloat(this.$data.deviceArray[i].num) + parseFloat($("#rentNum").val());
-                        this.$data.deviceArray[i].total = parseFloat(this.$data.deviceArray[i].num) * parseFloat($("#rentPrice").val());
-                        flag = true;
-                        break;
-                    }
-                }
-                //如果没有则添加新JSON对象
-                if(!flag) {
-                    var json = {};
-                    json.id = id;
-                    json.name = $("#deviceName").val();
-                    json.unit = $("#unit").val();
-                    json.price = $("#rentPrice").val();
-                    json.num = $("#rentNum").val();
-                    json.total = parseFloat(json.price) * parseFloat(json.num);
+                //判断租赁数量是否为空或不是数字
+                if($("#rentNum").val() > 0) {
 
-                    this.$data.deviceArray.push(json);
+                    var id = $("#deviceId").val();
+                    //判断数组中是否存在当前的设备，如果有则数量累加，更新总价
+                    var flag = false;
+                    for(var i = 0;i < this.$data.deviceArray.length;i++) {
+                        var item = this.$data.deviceArray[i];
+                        if(item.id == id) {
+                            this.$data.deviceArray[i].num = parseFloat(this.$data.deviceArray[i].num) + parseFloat($("#rentNum").val());
+                            this.$data.deviceArray[i].total = parseFloat(this.$data.deviceArray[i].num) * parseFloat($("#rentPrice").val());
+                            flag = true;
+                            break;
+                        }
+                    }
+                    //如果没有则添加新JSON对象
+                    if(!flag) {
+                        var json = {};
+                        json.id = id;
+                        json.name = $("#deviceName").val();
+                        json.unit = $("#unit").val();
+                        json.price = $("#rentPrice").val();
+                        json.num = $("#rentNum").val();
+                        json.total = parseFloat(json.price) * parseFloat(json.num);
+
+                        this.$data.deviceArray.push(json);
+                    }
                 }
             }
         },
-        computed:{
-            total : function(){
+        computed: {
+            total: function () {
                 var result = 0;
-                for(var i = 0;i < this.$data.deviceArray.length;i++) {
+                for (var i = 0; i < this.$data.deviceArray.length; i++) {
                     var item = this.$data.deviceArray[i];
                     result += item.total;
                 }

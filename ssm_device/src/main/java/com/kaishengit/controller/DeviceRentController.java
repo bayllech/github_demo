@@ -1,8 +1,5 @@
 package com.kaishengit.controller;
 
-/*import com.kaishengit.dto.AjaxResult;
-import com.kaishengit.pojo.Device;
-import com.kaishengit.service.DeviceService;*/
 import com.kaishengit.dto.AjaxResult;
 import com.kaishengit.pojo.Device;
 import com.kaishengit.service.DeviceService;
@@ -28,8 +25,8 @@ public class DeviceRentController {
     }
 
     /**
-     * 新建租赁合同
-     * @return
+     * 新增租赁信息
+     * @return 新增租赁页面
      */
     @GetMapping("/new")
     public String newRent(Model model) {
@@ -41,7 +38,7 @@ public class DeviceRentController {
     /**
      * 根据设备ID查找设备信息
      * @param id
-     * @return
+     * @return 设备信息
      */
     @GetMapping("/device.json")
     @ResponseBody
