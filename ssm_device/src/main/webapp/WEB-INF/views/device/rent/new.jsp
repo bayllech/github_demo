@@ -100,9 +100,13 @@
                             <th>租赁单价</th>
                             <th>数量</th>
                             <th>总价</th>
+                            <th>#</th>
                         </tr>
                         </thead>
                         <tbody>
+                        <tr v-if="deviceArray.length == 0">
+                            <td colspan="6">暂无数据</td>
+                        </tr>
                         <tr v-for="device in deviceArray">
                             <td>{{device.name}}</td>
                             <td>{{device.unit}}</td>
