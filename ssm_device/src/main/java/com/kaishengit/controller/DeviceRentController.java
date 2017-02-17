@@ -43,6 +43,9 @@ public class DeviceRentController {
     @ResponseBody
     public String saveRent(@RequestBody DeviceRentDto deviceRentDto) {
         deviceService.saveRent(deviceRentDto);
+
+
+
         return "success";
     }
 

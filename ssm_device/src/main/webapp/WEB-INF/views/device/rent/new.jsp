@@ -262,8 +262,8 @@
         methods: {
             //添加租赁列表
             addDevice:function(){
-                //判断租赁数量是否为空或不是数字
-                if($("#rentNum").val() > 0) {
+                //判断租赁数量是否为空或不是数字并且租赁天数大于零
+                if($("#rentNum").val() > 0 && $("#totalDays").val() > 0) {
 
                     var id = $("#deviceId").val();
                     //判断数组中是否存在当前的设备，如果有则数量累加，更新总价
@@ -272,7 +272,7 @@
                         var item = this.$data.deviceArray[i];
                         if(item.id == id) {
                             this.$data.deviceArray[i].num = parseFloat(this.$data.deviceArray[i].num) + parseFloat($("#rentNum").val());
-                            this.$data.deviceArray[i].total = parseFloat(this.$data.deviceArray[i].num) * parseFloat($("#rentPrice").val());
+                            this.$data.deviceArray[i].total = parseFloat(this.$data.deviceArray[i].num) * parseFloat($("#rentPrice").val() * parseFloat($("#totalDays").val()));
                             flag = true;
                             break;
                         }
@@ -285,10 +285,12 @@
                         json.unit = $("#unit").val();
                         json.price = $("#rentPrice").val();
                         json.num = $("#rentNum").val();
-                        json.total = parseFloat(json.price) * parseFloat(json.num);
+                        json.total = parseFloat(json.price) * parseFloat(json.num) * parseFloat($("#totalDays").val());
 
                         this.$data.deviceArray.push(json);
                     }
+                } else {
+                    layer.alert("请检查租赁数量或租赁天数是否填写");
                 }
             },
             //删除已添加租赁列表
