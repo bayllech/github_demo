@@ -25,6 +25,13 @@ public class WorkOutController {
 
     @GetMapping
     public String list(Model model) {
+        List<DeviceRent> rentList = deviceService.findAllRent();
+        model.addAttribute("rentList", rentList);
+        return "/workout/list";
+    }
+
+    @GetMapping("/add")
+    public String add(Model model) {
         List<WorkType> workTypeList = workTypeService.findAllWorkType();
         model.addAttribute("deviceList", workTypeList);
         return "/workout/add";

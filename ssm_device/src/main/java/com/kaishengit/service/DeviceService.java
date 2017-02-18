@@ -24,4 +24,6 @@ public interface DeviceService {
     List<DeviceRentDetail> findRentDetailByRentId(Integer id);
 
     List<DeviceRentDoc> findDocByRentId(Integer id);
+
+    List<DeviceRent> findAllRent();
 }

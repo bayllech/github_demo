@@ -123,4 +123,9 @@ public class DeviceServiceImpl implements DeviceService {
         return docMapper.findDocByRentId(id);
     }
 
+    @Override
+    public List<DeviceRent> findAllRent() {
+        return deviceMapper.findAllRent();
+    }
+
 }

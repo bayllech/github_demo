@@ -23,7 +23,9 @@ public class DeviceRentController {
     private DeviceService deviceService;
 
     @GetMapping
-    public String list() {
+    public String list(Model model) {
+        List<DeviceRent> rentList = deviceService.findAllRent();
+        model.addAttribute("rentList", rentList);
         return "/device/rent/list";
     }
 

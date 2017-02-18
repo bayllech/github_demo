@@ -13,4 +13,6 @@ public interface DeviceMapper {
     Device findDeviceById(Integer id);
 
     DeviceRent findRentBySerialNum(String serialNumber);
+
+    List<DeviceRent> findAllRent();
 }
