@@ -6,7 +6,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>设备租赁查询</title>
-    <%@include file="../../include/css.jsp"%>
+    <%@include file="../include/css.jsp"%>
     <link rel="stylesheet" href="/static/plugins/uploader/webuploader.css">
     <link rel="stylesheet" href="/static/plugins/datepicker/datepicker3.css">
     <link rel="stylesheet" href="/static/plugins/select2/select2.min.css">
@@ -15,8 +15,8 @@
 <!-- Site wrapper -->
 <div class="wrapper">
 
-    <%@include file="../../include/header.jsp"%>
-    <jsp:include page="../../include/sider.jsp">
+    <%@include file="../include/header.jsp"%>
+    <jsp:include page="../include/sider.jsp">
         <jsp:param name="menu" value="business_device_rent"/>
     </jsp:include>
 
@@ -28,10 +28,10 @@
         <section class="content">
 
             <!-- Default box -->
-            <h3 style="text-align: center" class="visible-print-block">备有公司租赁合同清单</h3>
+            <h3 style="text-align: center" class="visible-print-block">备有公司劳务派遣清单</h3>
             <div class="box">
                 <div class="box-header with-border">
-                    <h3 class="box-title">租赁合同详情</h3>
+                    <h3 class="box-title">劳务派遣详情</h3>
 
                     <div class="box-tools pull-right hidden-print">
                         <button id="print" class="btn btn-default btn-sm"><i class="fa fa-print"></i>打印</button>
@@ -101,14 +101,13 @@
 
             <div class="box">
                 <div class="box-header">
-                    <h3 class="box-title">设备列表</h3>
+                    <h3 class="box-title">工种列表</h3>
                 </div>
                 <div class="box-body">
                     <table class="table">
                         <thead>
                         <tr>
-                            <th>设备名称</th>
-                            <th>单位</th>
+                            <th>工种名称</th>
                             <th>租赁单价</th>
                             <th>数量</th>
                             <th>总价</th>
@@ -118,10 +117,10 @@
 
                         <tr>
                             <c:forEach items="${detailList}" var="d">
+                                <%--此层<tr>是为了每次遍历后换行显示--%>
                                 <tr>
-                                    <td>${d.deviceName}</td>
-                                    <td>${d.deviceUnit}</td>
-                                    <td>${d.devicePrice}</td>
+                                    <td>${d.workTypeName}</td>
+                                    <td>${d.workTypePrice}</td>
                                     <td>${d.num}</td>
                                     <td>${d.totalPrice}</td>
                                 </tr>
@@ -153,7 +152,7 @@
 
 </div>
 
-<%@include file="../../include/js.jsp"%>
+<%@include file="../include/js.jsp"%>
 <script>
     $(function () {
         $("#print").click(function () {

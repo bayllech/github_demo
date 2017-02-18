@@ -96,4 +96,9 @@ public class WorkTypeServiceImpl implements WorkTypeService {
         //返回财务流水
         return rent.getSerialNum();
     }
+
+    @Override
+    public List<WorkTypeDetail> findRentDetailByRentId(Integer id) {
+        return workOutMapper.findDetailByRentId(id);
+    }
 }

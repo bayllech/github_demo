@@ -11,4 +11,6 @@ public interface WorkOutMapper {
     WorkType findWorkTypeById(Integer id);
 
     void saveDetail(List<WorkTypeDetail> detailList);
+
+    List<WorkTypeDetail> findDetailByRentId(Integer rentId);
 }
