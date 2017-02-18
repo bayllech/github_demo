@@ -249,7 +249,12 @@
                 var html = "<li>"+data.data.sourceFileName+"</li>";
                 $("#fileList").append(html);
 
-                fileArray.push(data.data.newFileName);
+                var json = {
+                    newFileName : data.data.newFileName,
+                    sourceFileName : data.data.sourceFileName
+                };
+
+                fileArray.push(json);
             });
             uploder.on('uploadError',function(){
                 layer.msg("服务器正在路上")

@@ -4,15 +4,18 @@ import com.google.common.collect.Lists;
 import com.kaishengit.dto.DeviceRentDto;
 import com.kaishengit.mapper.DeviceMapper;
 import com.kaishengit.mapper.DeviceRentDetailMapper;
+import com.kaishengit.mapper.DeviceRentDocMapper;
 import com.kaishengit.mapper.RentMapper;
 import com.kaishengit.pojo.Device;
 import com.kaishengit.pojo.DeviceRent;
 import com.kaishengit.pojo.DeviceRentDetail;
+import com.kaishengit.pojo.DeviceRentDoc;
 import com.kaishengit.service.DeviceService;
 import com.kaishengit.util.SerialNumberUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -29,6 +32,9 @@ public class DeviceServiceImpl implements DeviceService {
 
     @Autowired
     private DeviceRentDetailMapper detailMapper;
+
+    @Autowired
+    private DeviceRentDocMapper docMapper;
 
     @Override
     public List<Device> findAllDevice() {
@@ -82,8 +88,22 @@ public class DeviceServiceImpl implements DeviceService {
             detailMapper.saveDetail(detailList);
         }
 
-
         //保存文档
+        List<DeviceRentDto.DocBean> fileArray = deviceRentDto.getFileArray();
+
+        List<DeviceRentDoc> docList = Lists.newArrayList();
+        for (DeviceRentDto.DocBean bean: fileArray){
+            DeviceRentDoc doc = new DeviceRentDoc();
+            doc.setSourceName(bean.getSourceFileName());
+            doc.setNewName(bean.getNewFileName());
+            doc.setRentId(rent.getId());
+
+            docList.add(doc);
+        }
+        if (!docList.isEmpty()) {
+            docMapper.saveDoc(docList);
+        }
+
         //返回财务流水
 
         return null;

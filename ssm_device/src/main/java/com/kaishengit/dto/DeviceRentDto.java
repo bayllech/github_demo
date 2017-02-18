@@ -34,9 +34,16 @@ public class DeviceRentDto  {
 
     private List<DeviceArrayBean> deviceArray;
 
-    private List<String> fileArray;
+    private List<DocBean> fileArray;
 
 
+    public List<DocBean> getFileArray() {
+        return fileArray;
+    }
+
+    public void setFileArray(List<DocBean> fileArray) {
+        this.fileArray = fileArray;
+    }
 
     public Float getTotalPrice() {
         return totalPrice;
@@ -142,13 +149,6 @@ public class DeviceRentDto  {
         this.deviceArray = deviceArray;
     }
 
-    public List<String> getFileArray() {
-        return fileArray;
-    }
-
-    public void setFileArray(List<String> fileArray) {
-        this.fileArray = fileArray;
-    }
 
     public static class DeviceArrayBean {
         /**
@@ -213,6 +213,27 @@ public class DeviceRentDto  {
 
         public void setTotal(Integer total) {
             this.total = total;
+        }
+    }
+
+    public static class DocBean {
+        private String sourceFileName;
+        private String newFileName;
+
+        public String getSourceFileName() {
+            return sourceFileName;
+        }
+
+        public void setSourceFileName(String sourceFileName) {
+            this.sourceFileName = sourceFileName;
+        }
+
+        public String getNewFileName() {
+            return newFileName;
+        }
+
+        public void setNewFileName(String newFileName) {
+            this.newFileName = newFileName;
         }
     }
 }
