@@ -1,15 +1,14 @@
 package com.kaishengit.controller;
 
 import com.kaishengit.dto.AjaxResult;
+import com.kaishengit.dto.DeviceRentDto;
 import com.kaishengit.pojo.Device;
 import com.kaishengit.pojo.WorkType;
 import com.kaishengit.service.WorkTypeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -41,6 +40,19 @@ public class WorkOutController {
         } else {
             return new AjaxResult(workType);
         }
+    }
+
+    /**
+     * 保存合同
+     * @param deviceRentDto 设备与合同信息
+     * @return
+     */
+    @PostMapping("/new")
+    @ResponseBody
+    public AjaxResult saveRent(@RequestBody DeviceRentDto deviceRentDto) {
+        String serialNumber = workTypeService.saveRent(deviceRentDto);
+        return new AjaxResult(AjaxResult.SUCCESS, serialNumber);
+
     }
 
 }
