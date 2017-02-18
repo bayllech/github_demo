@@ -17,6 +17,7 @@ public class AjaxResult {
         this.message = message;
     }
 
+
     public AjaxResult(Object data) {
         this.status = SUCCESS;
         this.data = data;

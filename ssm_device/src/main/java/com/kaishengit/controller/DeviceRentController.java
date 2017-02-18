@@ -2,9 +2,14 @@ package com.kaishengit.controller;
 
 import com.kaishengit.dto.AjaxResult;
 import com.kaishengit.dto.DeviceRentDto;
+import com.kaishengit.exception.NotFoundException;
 import com.kaishengit.pojo.Device;
+import com.kaishengit.pojo.DeviceRent;
+import com.kaishengit.pojo.DeviceRentDetail;
+import com.kaishengit.pojo.DeviceRentDoc;
 import com.kaishengit.service.DeviceService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -41,12 +46,10 @@ public class DeviceRentController {
      */
     @PostMapping("/new")
     @ResponseBody
-    public String saveRent(@RequestBody DeviceRentDto deviceRentDto) {
+    public AjaxResult saveRent(@RequestBody DeviceRentDto deviceRentDto) {
         String serialNumber = deviceService.saveRent(deviceRentDto);
+        return new AjaxResult(AjaxResult.SUCCESS, serialNumber);
 
-
-
-        return "success";
     }
 
     /**
@@ -63,6 +66,24 @@ public class DeviceRentController {
         } else {
             return new AjaxResult(device);
         }
+    }
+
+    @GetMapping("/{serialNumber:\\d+}")
+    public String showRent(@PathVariable String serialNumber,Model model) {
+        DeviceRent deviceRent = deviceService.findRentBySerialNum(serialNumber);
+        if (deviceRent == null) {
+            throw new NotFoundException();
+        } else {
+            List<DeviceRentDetail> rentDetailList = deviceService.findRentDetailByRentId(deviceRent.getId());
+            List<DeviceRentDoc> docList = deviceService.findDocByRentId(deviceRent.getId());
+
+            model.addAttribute("rent", deviceRent);
+            model.addAttribute("detailList", rentDetailList);
+            model.addAttribute("docList", docList);
+
+            return "/device/rent/show";
+        }
+
     }
 
 }

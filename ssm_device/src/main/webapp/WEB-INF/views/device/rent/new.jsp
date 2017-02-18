@@ -332,7 +332,13 @@
                     data: JSON.stringify(json),
                     contentType: "application/json;charset=UTF-8",
                     success: function (data) {
-
+                        if(data.status == 'success') {
+                            layer.confirm("保存成功",{btn:['继续添加','打印合同']},function(){
+                                window.history.go(0);
+                            },function(){
+                                window.location.href = "/device/rent/"+data.message;
+                            });
+                        }
                     },
                     error: function () {
                         layer.msg("服务器正在路上");

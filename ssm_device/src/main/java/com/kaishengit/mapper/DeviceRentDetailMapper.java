@@ -6,4 +6,6 @@ import java.util.List;
 
 public interface DeviceRentDetailMapper {
     void saveDetail(List<DeviceRentDetail> detailList);
+
+    List<DeviceRentDetail> findRentDetailByRentId(Integer id);
 }

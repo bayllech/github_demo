@@ -105,8 +105,22 @@ public class DeviceServiceImpl implements DeviceService {
         }
 
         //返回财务流水
+        return rent.getSerialNum();
+    }
 
-        return null;
+    @Override
+    public DeviceRent findRentBySerialNum(String serialNumber) {
+        return deviceMapper.findRentBySerialNum(serialNumber);
+    }
+
+    @Override
+    public List<DeviceRentDetail> findRentDetailByRentId(Integer id) {
+        return detailMapper.findRentDetailByRentId(id);
+    }
+
+    @Override
+    public List<DeviceRentDoc> findDocByRentId(Integer id) {
+        return docMapper.findDocByRentId(id);
     }
 
 }
