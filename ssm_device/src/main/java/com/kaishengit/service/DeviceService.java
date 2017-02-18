@@ -14,5 +14,5 @@ public interface DeviceService {
 
     Device findDeviceById(Integer id);
 
-    void saveRent(DeviceRentDto deviceRentDto);
+    String saveRent(DeviceRentDto deviceRentDto);
 }

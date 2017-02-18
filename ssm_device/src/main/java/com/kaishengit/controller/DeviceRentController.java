@@ -42,7 +42,7 @@ public class DeviceRentController {
     @PostMapping("/new")
     @ResponseBody
     public String saveRent(@RequestBody DeviceRentDto deviceRentDto) {
-        deviceService.saveRent(deviceRentDto);
+        String serialNumber = deviceService.saveRent(deviceRentDto);
 
 
 

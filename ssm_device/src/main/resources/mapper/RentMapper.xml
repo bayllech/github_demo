@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.kaishengit.mapper.RentMapper">
+
+    <insert id="saveRent" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO t_device_rent(serial_num, company_name, link_man, card_num, tel, address, fax, back_date, total_day, total_price, pre_cost, last_cost, create_user)
+        VALUES
+        (#{serialNum},#{companyName},#{linkMan},#{cardNum},#{tel},#{address},#{fax},#{backDate},#{totalDay},#{totalPrice},#{preCost},#{lastCost},#{createUser})
+    </insert>
+</mapper>

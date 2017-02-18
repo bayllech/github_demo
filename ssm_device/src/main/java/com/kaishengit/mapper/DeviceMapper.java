@@ -11,5 +11,4 @@ public interface DeviceMapper {
 
     Device findDeviceById(Integer id);
 
-    void saveRent(DeviceRentDto deviceRentDto);
 }

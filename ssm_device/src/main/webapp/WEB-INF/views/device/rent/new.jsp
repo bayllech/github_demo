@@ -198,6 +198,9 @@
 <script>
 
     var fileArray = [];
+    var totalPrice = "";
+    var preCost = "";
+    var lastCost = "";
 
     $(function () {
         $("#deviceId").select2();
@@ -313,7 +316,10 @@
                     fax : $("#fax").val(),
                     rentDate : $("#rentDate").val(),
                     backDate : $("#backDate").val(),
-                    totalDate : $("#totalDays").val()
+                    totalDate : $("#totalDays").val(),
+                    totalPrice : totalPrice,
+                    preCost : preCost,
+                    lastCost : lastCost
                 };
                 $.ajax({
                     url: "/device/rent/new",
@@ -337,13 +343,14 @@
                     var item = this.$data.deviceArray[i];
                     result += item.total;
                 }
+                totalPrice = result;
                 return result;
             },
             preCost: function () {
-                return this.total * 0.3
+                return preCost = this.total * 0.3
             },
             lastCost: function () {
-                return this.total - this.preCost
+                return lastCost = this.total - this.preCost
             }
         }
     });

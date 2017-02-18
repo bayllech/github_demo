@@ -27,8 +27,40 @@ public class DeviceRentDto  {
     private String rentDate;
     private String backDate;
     private Integer totalDate;
+
+    private Float totalPrice;
+    private Float preCost;
+    private Float lastCost;
+
     private List<DeviceArrayBean> deviceArray;
+
     private List<String> fileArray;
+
+
+
+    public Float getTotalPrice() {
+        return totalPrice;
+    }
+
+    public void setTotalPrice(Float totalPrice) {
+        this.totalPrice = totalPrice;
+    }
+
+    public Float getPreCost() {
+        return preCost;
+    }
+
+    public void setPreCost(Float preCost) {
+        this.preCost = preCost;
+    }
+
+    public Float getLastCost() {
+        return lastCost;
+    }
+
+    public void setLastCost(Float lastCost) {
+        this.lastCost = lastCost;
+    }
 
     public String getCompanyName() {
         return companyName;
