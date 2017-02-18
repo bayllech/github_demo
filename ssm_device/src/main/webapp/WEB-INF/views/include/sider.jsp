@@ -14,7 +14,7 @@
                     <i class="fa fa-angle-left pull-right"></i>
                 </a>
                 <ul class="treeview-menu">
-                    <li><a href="/device/setting/new"><i class="fa fa-circle-o"></i> 新增设备</a></li>
+                    <li><a href="/device/add/new"><i class="fa fa-circle-o"></i> 新增设备</a></li>
                     <li><a href="/device/rent/new"><i class="fa fa-circle-o"></i> 新增设备租赁合同</a></li>
                 </ul>
             </li>
