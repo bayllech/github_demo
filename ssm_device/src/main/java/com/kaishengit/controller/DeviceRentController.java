@@ -9,7 +9,6 @@ import com.kaishengit.pojo.DeviceRentDetail;
 import com.kaishengit.pojo.DeviceRentDoc;
 import com.kaishengit.service.DeviceService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -68,6 +67,12 @@ public class DeviceRentController {
         }
     }
 
+    /**
+     * 根据流水号查找合同
+     * @param serialNumber
+     * @param model
+     * @return 合同详情页
+     */
     @GetMapping("/{serialNumber:\\d+}")
     public String showRent(@PathVariable String serialNumber,Model model) {
         DeviceRent deviceRent = deviceService.findRentBySerialNum(serialNumber);

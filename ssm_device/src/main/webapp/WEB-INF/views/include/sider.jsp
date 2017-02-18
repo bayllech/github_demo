@@ -13,8 +13,8 @@
                     <i class="fa fa-circle-o"></i> <span>设备租赁</span>
                 </a>
             </li>
-            <li class="treeview">
-                <a href="#">
+            <li class="treeview ${param.menu == 'work_out_rent' ? 'active' : ''}">
+                <a href="/workOut/rent">
                     <i class="fa fa-circle-o"></i> <span>劳务派遣</span>
                 </a>
             </li>
