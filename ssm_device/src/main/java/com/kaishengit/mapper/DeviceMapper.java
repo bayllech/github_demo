@@ -15,4 +15,6 @@ public interface DeviceMapper {
     DeviceRent findRentBySerialNum(String serialNumber);
 
     List<DeviceRent> findAllRent();
+
+    void saveDevice(Device device);
 }

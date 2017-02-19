@@ -128,4 +128,9 @@ public class DeviceServiceImpl implements DeviceService {
         return deviceMapper.findAllRent();
     }
 
+    @Override
+    public void saveDevice(Device device) {
+        deviceMapper.saveDevice(device);
+    }
+
 }

@@ -26,4 +26,6 @@ public interface DeviceService {
     List<DeviceRentDoc> findDocByRentId(Integer id);
 
     List<DeviceRent> findAllRent();
+
+    void saveDevice(Device device);
 }

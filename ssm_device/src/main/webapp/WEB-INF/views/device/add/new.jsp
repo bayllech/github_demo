@@ -19,6 +19,11 @@
 
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
+        <c:if test="${not empty message}">
+            <div class="alert alert-success">
+                    ${message}
+            </div>
+        </c:if>
         <!-- Main content -->
         <section class="content">
             <div class="box box-solid box-primary">
