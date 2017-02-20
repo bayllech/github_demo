@@ -6,6 +6,9 @@
         INSERT  INTO t_device(name,unit,total_num,current_num,price)
         values(#{name},#{unit},#{totalNum},#{currentNum},#{price})
     </insert>
+    <update id="updateCurrentNum">
+        UPDATE t_device SET current_num = #{currentNum} where id = #{id}
+    </update>
 
     <select id="findAllDevice" resultType="com.kaishengit.pojo.Device">
         SELECT * FROM t_device

@@ -2,6 +2,7 @@ package com.kaishengit.service.Impl;
 
 import com.google.common.collect.Lists;
 import com.kaishengit.dto.DeviceRentDto;
+import com.kaishengit.exception.ServiceException.ServiceException;
 import com.kaishengit.mapper.DeviceMapper;
 import com.kaishengit.mapper.DeviceRentDetailMapper;
 import com.kaishengit.mapper.DeviceRentDocMapper;
@@ -17,9 +18,10 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import java.beans.Transient;
 import java.io.*;
 import java.util.List;
 import java.util.zip.ZipEntry;
@@ -55,6 +57,7 @@ public class DeviceServiceImpl implements DeviceService {
     }
 
     @Override
+    @Transactional
     public String saveRent(DeviceRentDto deviceRentDto) {
         //保存公司合同
         DeviceRent rent = new DeviceRent();
@@ -81,16 +84,24 @@ public class DeviceServiceImpl implements DeviceService {
         List<DeviceRentDetail> detailList = Lists.newArrayList();
 
         for (DeviceRentDto.DeviceArrayBean bean : deviceArray) {
-            DeviceRentDetail deviceRentDetail = new DeviceRentDetail();
-            deviceRentDetail.setDeviceName(bean.getName());
-            deviceRentDetail.setDevicePrice(bean.getPrice());
-            deviceRentDetail.setDeviceUnit(bean.getUnit());
-            deviceRentDetail.setNum(bean.getNum());
-            deviceRentDetail.setTotalPrice(bean.getPrice());
-            deviceRentDetail.setRentId(rent.getId());
+            //查询库存
+            Device device = findDeviceById(bean.getId());
+            if (device.getCurrentNum() < bean.getNum()) {
+                throw new ServiceException(bean.getName()+" 库存不足");
+            } else {
+                device.setCurrentNum((int) (device.getCurrentNum() - bean.getNum()));
+                deviceMapper.updateCurrentNum(device);
+            }
 
-            detailList.add(deviceRentDetail);
+                DeviceRentDetail deviceRentDetail = new DeviceRentDetail();
+                deviceRentDetail.setDeviceName(bean.getName());
+                deviceRentDetail.setDevicePrice(bean.getPrice());
+                deviceRentDetail.setDeviceUnit(bean.getUnit());
+                deviceRentDetail.setNum(bean.getNum());
+                deviceRentDetail.setTotalPrice(bean.getPrice());
+                deviceRentDetail.setRentId(rent.getId());
 
+                detailList.add(deviceRentDetail);
         }
         if (!detailList.isEmpty()) {
             detailMapper.saveDetail(detailList);

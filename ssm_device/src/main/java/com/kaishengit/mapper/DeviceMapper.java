@@ -19,4 +19,6 @@ public interface DeviceMapper {
     void saveDevice(Device device);
 
     DeviceRent findRentById(Integer id);
+
+    void updateCurrentNum(Device device);
 }
