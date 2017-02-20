@@ -23,6 +23,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.*;
 import java.nio.charset.Charset;
 import java.util.List;
+import java.util.zip.ZipOutputStream;
 
 @Controller
 @RequestMapping("/device/rent")
@@ -129,8 +130,21 @@ public class DeviceRentController {
      * @param id
      */
     @GetMapping("/doc/zip")
-    public void zipLoadDoc(Integer id) {
-        
+    public void zipLoadDoc(Integer id,HttpServletResponse response) throws IOException {
+        DeviceRent rent = deviceService.findRentById(id);
+        if (rent == null) {
+            throw new NotFoundException();
+        } else {
+            response.setContentType(MediaType.APPLICATION_OCTET_STREAM.toString());
+            String fileName = rent.getCompanyName()+".zip";
+            fileName = new String(fileName.getBytes("UTF-8"), "iso8859-1");
+            response.setHeader("Content-Disposition","attachment;filename=\""+fileName+"\"");
+
+            OutputStream outputStream = response.getOutputStream();
+            ZipOutputStream zipOutputStream = new ZipOutputStream(outputStream);
+            deviceService.loadZipDocs(rent,zipOutputStream);
+
+        }
     }
 
     /**

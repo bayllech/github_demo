@@ -7,8 +7,10 @@ import com.kaishengit.pojo.DeviceRentDetail;
 import com.kaishengit.pojo.DeviceRentDoc;
 
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;
+import java.util.zip.ZipOutputStream;
 
 /**
  * Created by bayllech on 2017/2/16.
@@ -34,4 +36,8 @@ public interface DeviceService {
     InputStream loadDocById(Integer id) throws FileNotFoundException;
 
     DeviceRentDoc findDocById(Integer id);
+
+    DeviceRent findRentById(Integer id);
+
+    void loadZipDocs(DeviceRent rent,ZipOutputStream zipOutputStream) throws IOException;
 }

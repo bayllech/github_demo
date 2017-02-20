@@ -22,4 +22,7 @@
     <select id="findAllRent" resultType="com.kaishengit.pojo.DeviceRent">
         SELECT * FROM t_device_rent
     </select>
+    <select id="findRentById" resultType="com.kaishengit.pojo.DeviceRent">
+        SELECT * FROM t_device_rent where id = #{id}
+    </select>
 </mapper>

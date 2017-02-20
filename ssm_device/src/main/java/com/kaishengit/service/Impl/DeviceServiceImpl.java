@@ -12,6 +12,7 @@ import com.kaishengit.pojo.DeviceRentDetail;
 import com.kaishengit.pojo.DeviceRentDoc;
 import com.kaishengit.service.DeviceService;
 import com.kaishengit.util.SerialNumberUtil;
+import org.apache.commons.io.IOUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,11 +20,10 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Service;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.InputStream;
+import java.io.*;
 import java.util.List;
+import java.util.zip.ZipEntry;
+import java.util.zip.ZipOutputStream;
 
 @Service
 public class DeviceServiceImpl implements DeviceService {
@@ -160,6 +160,27 @@ public class DeviceServiceImpl implements DeviceService {
     @Override
     public DeviceRentDoc findDocById(Integer id) {
         return docMapper.findDocById(id);
+    }
+
+    @Override
+    public DeviceRent findRentById(Integer id) {
+        return deviceMapper.findRentById(id);
+    }
+
+    @Override
+    public void loadZipDocs(DeviceRent rent,ZipOutputStream zipOutputStream) throws IOException {
+        List<DeviceRentDoc> docList = docMapper.findDocByRentId(rent.getId());
+        for (DeviceRentDoc doc : docList) {
+            ZipEntry entry = new ZipEntry(doc.getSourceName());
+            zipOutputStream.putNextEntry(entry);
+
+            InputStream inputStream = loadDocById(doc.getId());
+            IOUtils.copy(inputStream, zipOutputStream);
+            inputStream.close();
+        }
+        zipOutputStream.closeEntry();
+        zipOutputStream.flush();
+        zipOutputStream.close();
     }
 
 }
