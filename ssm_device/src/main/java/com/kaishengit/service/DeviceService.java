@@ -6,6 +6,8 @@ import com.kaishengit.pojo.DeviceRent;
 import com.kaishengit.pojo.DeviceRentDetail;
 import com.kaishengit.pojo.DeviceRentDoc;
 
+import java.io.FileNotFoundException;
+import java.io.InputStream;
 import java.util.List;
 
 /**
@@ -28,4 +30,8 @@ public interface DeviceService {
     List<DeviceRent> findAllRent();
 
     void saveDevice(Device device);
+
+    InputStream loadDocById(Integer id) throws FileNotFoundException;
+
+    DeviceRentDoc findDocById(Integer id);
 }

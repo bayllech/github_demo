@@ -12,4 +12,7 @@
     <select id="findDocByRentId" resultType="com.kaishengit.pojo.DeviceRentDoc">
         SELECT * FROM t_device_rent_docs where rent_id = #{rentId}
     </select>
+    <select id="findDocById" resultType="com.kaishengit.pojo.DeviceRentDoc">
+        SELECT * FROM t_device_rent_docs where id = #{id}
+    </select>
 </mapper>

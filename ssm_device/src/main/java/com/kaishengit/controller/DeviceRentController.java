@@ -8,11 +8,15 @@ import com.kaishengit.pojo.DeviceRent;
 import com.kaishengit.pojo.DeviceRentDetail;
 import com.kaishengit.pojo.DeviceRentDoc;
 import com.kaishengit.service.DeviceService;
+import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletResponse;
+import java.io.*;
 import java.util.List;
 
 @Controller
@@ -92,5 +96,32 @@ public class DeviceRentController {
         }
 
     }
+
+    /**
+     * 根据文档id查找文档并下载
+     * @param id
+     * @param response
+     */
+    @GetMapping("/doc")
+    public void loadDoc(Integer id, HttpServletResponse response) throws IOException {
+        InputStream inputStream = deviceService.loadDocById(id);
+        if (inputStream == null) {
+            throw new NotFoundException();
+        } else {
+            DeviceRentDoc doc = deviceService.findDocById(id);
+            response.setContentType(MediaType.APPLICATION_OCTET_STREAM.toString());
+            String fileName = doc.getSourceName();
+            fileName = new String(fileName.getBytes("UTF-8"), "iso8859-1");
+            response.setHeader("Content-Disposition","attachment;filename=\""+fileName+"\"");
+
+            OutputStream outputStream = response.getOutputStream();
+            IOUtils.copy(inputStream, outputStream);
+            outputStream.flush();
+            outputStream.close();
+            inputStream.close();
+
+        }
+    }
+
 
 }

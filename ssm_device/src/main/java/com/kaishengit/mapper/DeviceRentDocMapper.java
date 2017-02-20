@@ -8,4 +8,6 @@ public interface DeviceRentDocMapper {
     void saveDoc(List<DeviceRentDoc> docList);
 
     List<DeviceRentDoc> findDocByRentId(Integer rentId);
+
+    DeviceRentDoc findDocById(Integer id);
 }

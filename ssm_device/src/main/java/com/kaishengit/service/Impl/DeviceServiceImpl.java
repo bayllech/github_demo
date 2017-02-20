@@ -15,9 +15,14 @@ import com.kaishengit.util.SerialNumberUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Service;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.InputStream;
 import java.util.List;
 
 @Service
@@ -35,6 +40,9 @@ public class DeviceServiceImpl implements DeviceService {
 
     @Autowired
     private DeviceRentDocMapper docMapper;
+
+    @Value("${uploadPath}")
+    private String filePath;
 
     @Override
     public List<Device> findAllDevice() {
@@ -131,6 +139,27 @@ public class DeviceServiceImpl implements DeviceService {
     @Override
     public void saveDevice(Device device) {
         deviceMapper.saveDevice(device);
+    }
+
+    @Override
+    public InputStream loadDocById(Integer id){
+        DeviceRentDoc doc = docMapper.findDocById(id);
+        if (doc == null) {
+            return null;
+        } else {
+            File file = new File(filePath + "/" + doc.getNewName());
+            try {
+                return new FileInputStream(file);
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+                return null;
+            }
+        }
+    }
+
+    @Override
+    public DeviceRentDoc findDocById(Integer id) {
+        return docMapper.findDocById(id);
     }
 
 }
