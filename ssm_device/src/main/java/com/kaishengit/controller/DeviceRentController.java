@@ -10,13 +10,18 @@ import com.kaishengit.pojo.DeviceRentDoc;
 import com.kaishengit.service.DeviceService;
 import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.InputStreamResource;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.*;
+import java.nio.charset.Charset;
 import java.util.List;
 
 @Controller
@@ -98,11 +103,42 @@ public class DeviceRentController {
     }
 
     /**
+     * 下载文档
+     * @param id
+     * @return
+     * @throws IOException
+     */
+    @GetMapping("/doc")
+    public ResponseEntity<InputStreamResource> loadDoc(Integer id) throws IOException {
+        InputStream inputStream = deviceService.loadDocById(id);
+        if (inputStream == null) {
+            throw new NotFoundException();
+        } else {
+            DeviceRentDoc doc = deviceService.findDocById(id);
+            String fileName = doc.getSourceName();
+            HttpHeaders httpHeaders = new HttpHeaders();
+            httpHeaders.setContentType(MediaType.APPLICATION_OCTET_STREAM);
+            httpHeaders.setContentDispositionFormData("attachment", fileName, Charset.forName("UTF-8"));
+
+            return new ResponseEntity<>(new InputStreamResource(inputStream), httpHeaders, HttpStatus.OK);
+        }
+    }
+
+    /**
+     * 打包下载
+     * @param id
+     */
+    @GetMapping("/doc/zip")
+    public void zipLoadDoc(Integer id) {
+        
+    }
+
+    /**
      * 根据文档id查找文档并下载
      * @param id
      * @param response
      */
-    @GetMapping("/doc")
+   /* @GetMapping("/doc")
     public void loadDoc(Integer id, HttpServletResponse response) throws IOException {
         InputStream inputStream = deviceService.loadDocById(id);
         if (inputStream == null) {
@@ -122,6 +158,6 @@ public class DeviceRentController {
 
         }
     }
-
+*/
 
 }
