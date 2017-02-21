@@ -5,6 +5,7 @@ import com.kaishengit.pojo.Device;
 import com.kaishengit.pojo.DeviceRent;
 
 import java.util.List;
+import java.util.Map;
 
 public interface DeviceMapper {
 
@@ -21,4 +22,10 @@ public interface DeviceMapper {
     DeviceRent findRentById(Integer id);
 
     void updateCurrentNum(Device device);
+
+    List<DeviceRent> findRentByQueryParam(Map<String, Object> queryParam);
+
+    Long countDeviceRent();
+
+    Long filterCountRent(Map<String, Object> queryParam);
 }

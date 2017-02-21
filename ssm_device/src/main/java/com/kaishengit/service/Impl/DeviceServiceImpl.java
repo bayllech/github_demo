@@ -24,6 +24,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.beans.Transient;
 import java.io.*;
 import java.util.List;
+import java.util.Map;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
 
@@ -192,6 +193,21 @@ public class DeviceServiceImpl implements DeviceService {
         zipOutputStream.closeEntry();
         zipOutputStream.flush();
         zipOutputStream.close();
+    }
+
+    @Override
+    public List<DeviceRent> findRentByQueryParam(Map<String, Object> queryParam) {
+        return deviceMapper.findRentByQueryParam(queryParam);
+    }
+
+    @Override
+    public Long countDeviceRent() {
+        return deviceMapper.countDeviceRent();
+    }
+
+    @Override
+    public Long filterCountRent(Map<String, Object> queryParam) {
+        return deviceMapper.filterCountRent(queryParam);
     }
 
 }

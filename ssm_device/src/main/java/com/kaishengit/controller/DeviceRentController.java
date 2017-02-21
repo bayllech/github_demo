@@ -1,6 +1,8 @@
 package com.kaishengit.controller;
 
+import com.google.common.collect.Maps;
 import com.kaishengit.dto.AjaxResult;
+import com.kaishengit.dto.DataTableResult;
 import com.kaishengit.dto.DeviceRentDto;
 import com.kaishengit.exception.NotFoundException;
 import com.kaishengit.exception.ServiceException.ServiceException;
@@ -9,7 +11,6 @@ import com.kaishengit.pojo.DeviceRent;
 import com.kaishengit.pojo.DeviceRentDetail;
 import com.kaishengit.pojo.DeviceRentDoc;
 import com.kaishengit.service.DeviceService;
-import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.InputStreamResource;
 import org.springframework.http.HttpHeaders;
@@ -20,10 +21,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.*;
 import java.nio.charset.Charset;
 import java.util.List;
+import java.util.Map;
 import java.util.zip.ZipOutputStream;
 
 @Controller
@@ -38,6 +41,34 @@ public class DeviceRentController {
         List<DeviceRent> rentList = deviceService.findAllRent();
         model.addAttribute("rentList", rentList);
         return "/device/rent/list";
+    }
+
+    /**
+     * 租赁合同详情页
+     * @param request
+     * @return
+     */
+    @GetMapping("/list")
+    @ResponseBody
+    public DataTableResult list(HttpServletRequest request) {
+        String draw = request.getParameter("draw");
+        String start = request.getParameter("start");
+        String length = request.getParameter("length");
+        String q_serialNum = request.getParameter("serialNum");
+
+        Map<String,Object> queryParam = Maps.newHashMap();
+        queryParam.put("start", start);
+        queryParam.put("length", length);
+        queryParam.put("q_serialNum", q_serialNum);
+        System.out.println("q_serialNum:" + q_serialNum);
+        System.out.println("start:"+ start);
+        System.out.println("length:"+length);
+
+        List<DeviceRent> rentList = deviceService.findRentByQueryParam(queryParam);
+        Long count = deviceService.countDeviceRent();
+        Long filterCount = deviceService.filterCountRent(queryParam);
+
+        return new DataTableResult(draw,count,filterCount,rentList);
     }
 
     /**

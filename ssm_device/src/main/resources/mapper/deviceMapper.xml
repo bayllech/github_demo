@@ -28,4 +28,25 @@
     <select id="findRentById" resultType="com.kaishengit.pojo.DeviceRent">
         SELECT * FROM t_device_rent where id = #{id}
     </select>
+    <select id="findRentByQueryParam" resultType="com.kaishengit.pojo.DeviceRent">
+        SELECT * FROM t_device_rent
+        <where>
+            <if test="q_serialNum != null and q_serialNum != ''">
+                serial_num LIKE concat('%',#{q_serialNum},'%')
+            </if>
+        </where>
+        ORDER BY id desc
+        limit ${start},${length}
+    </select>
+    <select id="countDeviceRent" resultType="java.lang.Long">
+        SELECT COUNT(*) FROM t_device_rent
+    </select>
+    <select id="filterCountRent" resultType="java.lang.Long">
+        SELECT COUNT(*) FROM t_device_rent
+        <where>
+            <if test="q_serialNum != null and q_serialNum != ''">
+                serial_num LIKE concat('%',#{q_serialNum},'%')
+            </if>
+        </where>
+    </select>
 </mapper>

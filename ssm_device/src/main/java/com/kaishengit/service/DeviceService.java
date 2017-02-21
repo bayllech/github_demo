@@ -10,6 +10,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;
+import java.util.Map;
 import java.util.zip.ZipOutputStream;
 
 /**
@@ -40,4 +41,10 @@ public interface DeviceService {
     DeviceRent findRentById(Integer id);
 
     void loadZipDocs(DeviceRent rent,ZipOutputStream zipOutputStream) throws IOException;
+
+    List<DeviceRent> findRentByQueryParam(Map<String, Object> queryParam);
+
+    Long countDeviceRent();
+
+    Long filterCountRent(Map<String, Object> queryParam);
 }
