@@ -211,4 +211,13 @@ public class DeviceRentController {
     }
 */
 
+   @PostMapping("/state/change")
+   @ResponseBody
+   public String changeState(Integer id) {
+       DeviceRent rent = deviceService.findRentById(id);
+       rent.setState("已完成");
+       deviceService.updateRentState(rent);
+       return "success";
+   }
+
 }

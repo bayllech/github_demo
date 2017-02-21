@@ -47,4 +47,6 @@ public interface DeviceService {
     Long countDeviceRent();
 
     Long filterCountRent(Map<String, Object> queryParam);
+
+    void updateRentState(DeviceRent rent);
 }

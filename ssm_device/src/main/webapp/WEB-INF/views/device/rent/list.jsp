@@ -123,17 +123,20 @@
                 {"data":"tel"},
                 {"data":"rentDate"},
                 {"data":"backDate"},
-                {"data":function () {
-                    return "未完成"
-                }},
+                {"data":"state"},
                 {"data":"totalPrice"},
                 {"data":function () {
                     return "暂无"
                 }},
                 {"data":function(obj){
-                    return "<a href='javascript:;' rel='"+obj.id+"' class='btn btn-xs btn-default check'><i class='fa fa-check'></i>入库</a>" +
-                           "<a href='javascript:;' rel='"+obj.id+"' class='btn btn-xs btn-default continue'><i class='fa fa-check'></i>续费</a>";
-                }}
+                    if(obj.state == "已完成"){
+                        return ""
+                    } else {
+                        return "<a href='javascript:;' rel='" + obj.id + "' class='btn btn-xs btn-default check'><i class='fa fa-check'></i>入库</a>" +
+                               "<a href='javascript:;' aaa='" + obj.id + "' class='btn btn-xs btn-default continue'><i class='fa fa-check'></i>续费</a>";
+                    }
+                }
+                }
 
             ],
             "columnDefs":[
@@ -160,9 +163,9 @@
 
 
         $(document).delegate(".check","click",function(){
+            var id = $(this).attr("rel");
             layer.confirm("确定要将合同入库吗?",function (index) {
-                var id = $(this).attr("rel");
-                $.get("/device/rent/state/change"+{"id":id}).done(function(data){
+                $.post("/device/rent/state/change",{"id":id}).done(function(data){
                     if(data == "success") {
                         layer.msg("入库成功");
                         //dataTables重新加载

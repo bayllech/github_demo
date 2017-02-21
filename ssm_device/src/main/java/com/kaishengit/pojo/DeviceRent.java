@@ -23,4 +23,5 @@ public class DeviceRent {
     private Timestamp createTime;
     private String createUser;
     private String serialNum;
+    private String state;
 }

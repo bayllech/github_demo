@@ -9,6 +9,9 @@
     <update id="updateCurrentNum">
         UPDATE t_device SET current_num = #{currentNum} where id = #{id}
     </update>
+    <update id="updateRentState">
+        update t_device_rent set state = #{state} where id=#{id};
+    </update>
 
     <select id="findAllDevice" resultType="com.kaishengit.pojo.Device">
         SELECT * FROM t_device

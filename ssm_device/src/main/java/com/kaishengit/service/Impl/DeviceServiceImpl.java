@@ -210,4 +210,9 @@ public class DeviceServiceImpl implements DeviceService {
         return deviceMapper.filterCountRent(queryParam);
     }
 
+    @Override
+    public void updateRentState(DeviceRent rent) {
+        deviceMapper.updateRentState(rent);
+    }
+
 }
