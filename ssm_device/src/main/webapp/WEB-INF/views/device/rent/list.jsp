@@ -15,7 +15,7 @@
 
     <%@include file="../../include/header.jsp"%>
     <jsp:include page="../../include/sider.jsp">
-        <jsp:param name="menu" value="business_device_rent"/>
+        <jsp:param name="menu" value="device_rent"/>
     </jsp:include>
 
     <!-- Content Wrapper. Contains page content -->

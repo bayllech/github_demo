@@ -8,6 +8,11 @@
         <ul class="sidebar-menu">
 
             <li class="header">业务模块</li>
+            <li class="treeview ${param.menu == 'device_rent' ? 'active' : ''}">
+                <a href="/device/rent">
+                    <i class="fa fa-list"></i> <span>合同列表</span>
+                </a>
+            </li>
             <li class="treeview ${param.menu == 'business_device_rent' ? 'active' : ''}">
                 <a href="/device/rent">
                     <i class="fa fa-edit"></i> <span>设备租赁</span>

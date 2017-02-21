@@ -1,7 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <header class="main-header">
     <!-- Logo -->
-    <a href="javascript:;" class="logo">
+    <a href="/device/rent" class="logo">
         <!-- mini logo for sidebar mini 50x50 pixels -->
         <span class="logo-mini">BY</span>
         <!-- logo for regular state and mobile devices -->
