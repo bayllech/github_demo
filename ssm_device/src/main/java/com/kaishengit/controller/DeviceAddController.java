@@ -26,6 +26,6 @@ public class DeviceAddController {
         device.setCurrentNum(device.getTotalNum());
         deviceService.saveDevice(device);
         redirectAttributes.addFlashAttribute("message", "添加成功");
-        return "/device/add/new";
+        return "redirect:/device/add/new";
     }
 }

@@ -15,4 +15,6 @@ public interface WorkTypeService {
     String saveRent(DeviceRentDto deviceRentDto);
 
     List<WorkTypeDetail> findRentDetailByRentId(Integer id);
+
+    void addWorkType(WorkType workType);
 }

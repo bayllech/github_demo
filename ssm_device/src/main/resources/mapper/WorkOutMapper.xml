@@ -8,6 +8,10 @@
             (#{detail.workTypeName},#{detail.workTypePrice},#{detail.num},#{detail.totalPrice},#{detail.rentId})
         </foreach>
     </insert>
+    <insert id="addWorkType">
+        INSERT INTO t_worktype (name, total_num, current_num, price)
+        VALUES (#{name},#{totalNum},#{currentNum},#{price})
+    </insert>
 
     <select id="findAllWorkType" resultType="com.kaishengit.pojo.WorkType">
         SELECT * FROM t_workType

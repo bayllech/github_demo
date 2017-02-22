@@ -24,12 +24,12 @@
                 </ul>
             </li>
             <li class="treeview ${param.menu == 'work_out_rent' ? 'active' : ''}">
-                <a href="/workOut/rent">
+                <a href="#">
                     <i class="fa fa-blind"></i> <span>劳务派遣</span>
                     <i class="fa fa-angle-left pull-right"></i>
                 </a>
                 <ul class="treeview-menu">
-                    <li><a href="/workOut/workType"><i class="fa fa-circle-o"></i> 新增工种</a></li>
+                    <li><a href="/workOut/rent/workType"><i class="fa fa-circle-o"></i> 新增工种</a></li>
                     <li><a href="/workOut/rent/add"><i class="fa fa-circle-o"></i> 新增劳务派遣合同</a></li>
                 </ul>
             </li>

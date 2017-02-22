@@ -114,8 +114,6 @@
                         </tr>
                         </thead>
                         <tbody>
-
-                        <tr>
                             <c:forEach items="${detailList}" var="d">
                                 <%--此层<tr>是为了每次遍历后换行显示--%>
                                 <tr>
@@ -125,7 +123,6 @@
                                     <td>${d.totalPrice}</td>
                                 </tr>
                             </c:forEach>
-                        </tr>
                         </tbody>
                     </table>
                 </div>

@@ -6,11 +6,9 @@ import com.kaishengit.dto.DataTableResult;
 import com.kaishengit.dto.DeviceRentDto;
 import com.kaishengit.exception.NotFoundException;
 import com.kaishengit.exception.ServiceException.ServiceException;
-import com.kaishengit.pojo.Device;
-import com.kaishengit.pojo.DeviceRent;
-import com.kaishengit.pojo.DeviceRentDetail;
-import com.kaishengit.pojo.DeviceRentDoc;
+import com.kaishengit.pojo.*;
 import com.kaishengit.service.DeviceService;
+import com.kaishengit.service.WorkTypeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.InputStreamResource;
 import org.springframework.http.HttpHeaders;
@@ -35,6 +33,9 @@ public class DeviceRentController {
 
     @Autowired
     private DeviceService deviceService;
+
+    @Autowired
+    private WorkTypeService workTypeService;
 
     @GetMapping
     public String list(Model model) {
@@ -129,10 +130,12 @@ public class DeviceRentController {
             throw new NotFoundException();
         } else {
             List<DeviceRentDetail> rentDetailList = deviceService.findRentDetailByRentId(deviceRent.getId());
+            List<WorkTypeDetail> workTypeDetailList = workTypeService.findRentDetailByRentId(deviceRent.getId());
             List<DeviceRentDoc> docList = deviceService.findDocByRentId(deviceRent.getId());
 
             model.addAttribute("rent", deviceRent);
             model.addAttribute("detailList", rentDetailList);
+            model.addAttribute("workTypeList", workTypeDetailList);
             model.addAttribute("docList", docList);
 
             return "/device/rent/show";

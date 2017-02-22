@@ -104,28 +104,55 @@
                     <h3 class="box-title">设备列表</h3>
                 </div>
                 <div class="box-body">
-                    <table class="table">
-                        <thead>
-                        <tr>
-                            <th>设备名称</th>
-                            <th>单位</th>
-                            <th>租赁单价</th>
-                            <th>数量</th>
-                            <th>总价</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                            <c:forEach items="${detailList}" var="d">
+                    <c:choose>
+                        <c:when test="${not empty detailList}">
+                            <table class="table">
+                                <thead>
                                 <tr>
-                                    <td>${d.deviceName}</td>
-                                    <td>${d.deviceUnit}</td>
-                                    <td>${d.devicePrice}</td>
-                                    <td>${d.num}</td>
-                                    <td>${d.totalPrice}</td>
+                                    <th>设备名称</th>
+                                    <th>单位</th>
+                                    <th>租赁单价</th>
+                                    <th>数量</th>
+                                    <th>总价</th>
                                 </tr>
-                            </c:forEach>
-                        </tbody>
-                    </table>
+                                </thead>
+                                <tbody>
+                                <c:forEach items="${detailList}" var="d">
+                                    <tr>
+                                        <td>${d.deviceName}</td>
+                                        <td>${d.deviceUnit}</td>
+                                        <td>${d.devicePrice}</td>
+                                        <td>${d.num}</td>
+                                        <td>${d.totalPrice}</td>
+                                    </tr>
+                                </c:forEach>
+                                </tbody>
+                            </table>
+                        </c:when>
+                        <c:otherwise>
+                            <table class="table">
+                                <thead>
+                                <tr>
+                                    <th>工种名称</th>
+                                    <th>租赁单价</th>
+                                    <th>数量</th>
+                                    <th>总价</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <c:forEach items="${workTypeList}" var="d">
+                                    <%--此层<tr>是为了每次遍历后换行显示--%>
+                                    <tr>
+                                        <td>${d.workTypeName}</td>
+                                        <td>${d.workTypePrice}</td>
+                                        <td>${d.num}</td>
+                                        <td>${d.totalPrice}</td>
+                                    </tr>
+                                </c:forEach>
+                                </tbody>
+                            </table>
+                        </c:otherwise>
+                    </c:choose>
                 </div>
             </div>
 

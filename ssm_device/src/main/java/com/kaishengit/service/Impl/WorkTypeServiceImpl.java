@@ -101,4 +101,10 @@ public class WorkTypeServiceImpl implements WorkTypeService {
     public List<WorkTypeDetail> findRentDetailByRentId(Integer id) {
         return workOutMapper.findDetailByRentId(id);
     }
+
+    @Override
+    public void addWorkType(WorkType workType) {
+        workType.setCurrentNum(workType.getTotalNum());
+        workOutMapper.addWorkType(workType);
+    }
 }
