@@ -33,8 +33,8 @@
                     <li><a href="/workOut/rent/add"><i class="fa fa-circle-o"></i> 新增劳务派遣合同</a></li>
                 </ul>
             </li>
-            <li class="treeview">
-                <a href="#">
+            <li class="treeview ${param.menu == 'pan' ? 'active' : ''}">
+                <a href="/pan">
                     <i class="fa fa-jsfiddle"></i> <span>网盘系统</span>
                 </a>
             </li>
