@@ -12,6 +12,9 @@
     <bean id="cacheManager" class="org.apache.shiro.cache.MemoryConstrainedCacheManager"/>
     <bean id="lifecycleBeanPostProcessor" class="org.apache.shiro.spring.LifecycleBeanPostProcessor"/>
 
+    <!--自定义的Roles Filter-->
+    <bean id="customRolesFilter" class="com.kaishengit.shiro.CustomRolesFilter" />
+
     <bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
         <property name="securityManager" ref="securityManager"/>
         <property name="loginUrl" value="/login"/>
@@ -21,8 +24,8 @@
             <value>
                 /static/** == anon
                 /user/** = roles[role_admin]
-                /device/** = roles[role_admin]
-                /workOut/** = roles[role_admin]
+                /device/** = anon
+                /workOut/** = customRolesFilter[role_admin,role_sale]
                 /** == authc
             </value>
         </property>
