@@ -1,5 +1,7 @@
 package com.kaishengit.service.Impl;
 
+import com.google.common.collect.Lists;
+import com.kaishengit.exception.NotFoundException;
 import com.kaishengit.exception.ServiceException.ServiceException;
 import com.kaishengit.mapper.DiskMapper;
 import com.kaishengit.pojo.Disk;
@@ -11,6 +13,7 @@ import org.joda.time.DateTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.print.attribute.standard.Fidelity;
@@ -83,7 +86,8 @@ public class DiskServiceImpl implements DiskService{
             return null;
         } else {
             File file = new File(savePath + "/" + disk.getName());
-           // File file = new File(new File(savePath), disk.getName());
+            // File file = new File(new File(savePath), disk.getName());
+            // file = new File(savePath, disk.getName());
             try {
                 return new FileInputStream(file);
             } catch (FileNotFoundException e) {
@@ -97,4 +101,46 @@ public class DiskServiceImpl implements DiskService{
     public Disk findDiskById(Integer id) {
         return diskMapper.findDiskById(id);
     }
+
+    @Override
+    @Transactional
+    public void delById(Integer id) {
+        Disk disk = findDiskById(id);
+        if (disk == null) {
+            throw new NotFoundException();
+        } else {
+            if (disk.getType().equals(Disk.FILE_TYPE)) {
+                //删除文件
+                File file = new File(savePath, disk.getName());
+                file.delete();
+                //删除数据库记录
+                diskMapper.delFileById(id);
+            } else {
+                //删除文件夹
+                List<Disk> diskList = diskMapper.findAll();
+                List<Integer> delIdList = Lists.newArrayList();
+                findDelId(diskList, delIdList, id);
+                delIdList.add(id);
+
+                //批量删除数据库记录
+                diskMapper.batchDel(delIdList);
+            }
+        }
+    }
+
+    private void findDelId(List<Disk> diskList, List<Integer> delIdList, Integer id) {
+        for (Disk disk:diskList) {
+            if (disk.getFid().equals(id)) {
+                delIdList.add(disk.getId());
+                if (disk.getType().equals(Disk.DIRECTRY_TYPE)) {
+                    findDelId(diskList,delIdList,disk.getId());
+                } else {
+                    File file = new File(savePath, disk.getName());
+                    file.delete();
+                }
+            }
+        }
+    }
+
+
 }

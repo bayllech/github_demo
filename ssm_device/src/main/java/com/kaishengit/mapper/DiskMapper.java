@@ -16,4 +16,10 @@ public interface DiskMapper {
     InputStream findById(Integer id);
 
     Disk findDiskById(Integer id);
+
+    void delFileById(Integer id);
+
+    List<Disk> findAll();
+
+    void batchDel(List<Integer> delIdList);
 }

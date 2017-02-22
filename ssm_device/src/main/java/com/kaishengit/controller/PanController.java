@@ -63,6 +63,12 @@ public class PanController {
 
     }
 
+    /**
+     * 下载文件
+     * @param id
+     * @param response
+     * @throws IOException
+     */
     @GetMapping("/download")
     public void dowloand(Integer id, HttpServletResponse response) throws IOException {
         InputStream inputStream = diskService.findById(id);
@@ -82,6 +88,13 @@ public class PanController {
             inputStream.close();
 
         }
+    }
+
+    @PostMapping("/remove")
+    @ResponseBody
+    public String remove(Integer id) {
+        diskService.delById(id);
+        return "success";
     }
 
 

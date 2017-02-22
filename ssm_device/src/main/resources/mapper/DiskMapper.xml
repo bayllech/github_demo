@@ -9,6 +9,16 @@
         INSERT INTO t_disk (name, source_name, fid, size, create_user, type)
         VALUES (#{name},#{sourceName},#{fid},#{size},#{createUser},#{type})
     </insert>
+    <delete id="delFileById">
+        DELETE FROM t_disk where id = #{id}
+    </delete>
+    <delete id="batchDel">
+        DELETE FROM t_disk where id IN (
+        <foreach collection="list" item="id" separator=",">
+            #{id}
+        </foreach>
+        )
+    </delete>
 
     <select id="findByFid" resultType="com.kaishengit.pojo.Disk">
         SELECT * FROM t_disk where fid = #{fid}
@@ -18,6 +28,9 @@
     </select>
     <select id="findDiskById" resultType="com.kaishengit.pojo.Disk">
          SELECT * FROM t_disk where id = #{id}
+    </select>
+    <select id="findAll" resultType="com.kaishengit.pojo.Disk">
+        SELECT * FROM t_disk
     </select>
 
 </mapper>

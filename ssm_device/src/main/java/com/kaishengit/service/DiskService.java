@@ -18,4 +18,6 @@ public interface DiskService {
     InputStream findById(Integer id);
 
     Disk findDiskById(Integer id);
+
+    void delById(Integer id);
 }
