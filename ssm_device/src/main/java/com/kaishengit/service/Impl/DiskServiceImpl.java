@@ -6,6 +6,7 @@ import com.kaishengit.exception.ServiceException.ServiceException;
 import com.kaishengit.mapper.DiskMapper;
 import com.kaishengit.pojo.Disk;
 import com.kaishengit.service.DiskService;
+import com.kaishengit.shiro.ShiroUtil;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.RandomStringUtils;
@@ -37,8 +38,7 @@ public class DiskServiceImpl implements DiskService{
 
     @Override
     public void saveFolder(Disk disk) {
-        //todo完善用户模块
-        disk.setCreateUser("admin");
+        disk.setCreateUser(ShiroUtil.getCurrentUserName());
         disk.setType(Disk.DIRECTRY_TYPE);
         diskMapper.saveFolder(disk);
     }

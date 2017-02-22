@@ -12,6 +12,7 @@ import com.kaishengit.pojo.DeviceRent;
 import com.kaishengit.pojo.DeviceRentDetail;
 import com.kaishengit.pojo.DeviceRentDoc;
 import com.kaishengit.service.DeviceService;
+import com.kaishengit.shiro.ShiroUtil;
 import com.kaishengit.util.SerialNumberUtil;
 import org.apache.commons.io.IOUtils;
 import org.slf4j.Logger;
@@ -66,8 +67,7 @@ public class DeviceServiceImpl implements DeviceService {
         rent.setBackDate(deviceRentDto.getBackDate());
         rent.setCardNum(deviceRentDto.getCardNum());
         rent.setCompanyName(deviceRentDto.getCompanyName());
-        //todo 完善系统登录功能
-        rent.setCreateUser("admin");
+        rent.setCreateUser(ShiroUtil.getCurrentUserName());
         rent.setFax(deviceRentDto.getFax());
         rent.setLastCost(deviceRentDto.getLastCost());
         rent.setTel(deviceRentDto.getTel());

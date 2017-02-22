@@ -7,6 +7,7 @@ import com.kaishengit.mapper.RentMapper;
 import com.kaishengit.mapper.WorkOutMapper;
 import com.kaishengit.pojo.*;
 import com.kaishengit.service.WorkTypeService;
+import com.kaishengit.shiro.ShiroUtil;
 import com.kaishengit.util.SerialNumberUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -43,8 +44,7 @@ public class WorkTypeServiceImpl implements WorkTypeService {
         rent.setBackDate(deviceRentDto.getBackDate());
         rent.setCardNum(deviceRentDto.getCardNum());
         rent.setCompanyName(deviceRentDto.getCompanyName());
-        //todo 完善系统登录功能
-        rent.setCreateUser("admin");
+        rent.setCreateUser(ShiroUtil.getCurrentUserName());
         rent.setFax(deviceRentDto.getFax());
         rent.setLastCost(deviceRentDto.getLastCost());
         rent.setTel(deviceRentDto.getTel());
