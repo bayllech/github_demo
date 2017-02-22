@@ -13,4 +13,11 @@
     <select id="findByFid" resultType="com.kaishengit.pojo.Disk">
         SELECT * FROM t_disk where fid = #{fid}
     </select>
+    <select id="findById" resultType="java.io.InputStream">
+         SELECT * FROM t_disk where id = #{id}
+    </select>
+    <select id="findDiskById" resultType="com.kaishengit.pojo.Disk">
+         SELECT * FROM t_disk where id = #{id}
+    </select>
+
 </mapper>

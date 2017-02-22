@@ -75,4 +75,26 @@ public class DiskServiceImpl implements DiskService{
         diskMapper.saveFile(disk);
 
     }
+
+    @Override
+    public InputStream findById(Integer id) {
+        Disk disk = findDiskById(id);
+        if (disk == null) {
+            return null;
+        } else {
+            File file = new File(savePath + "/" + disk.getName());
+           // File file = new File(new File(savePath), disk.getName());
+            try {
+                return new FileInputStream(file);
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+                return null;
+            }
+        }
+    }
+
+    @Override
+    public Disk findDiskById(Integer id) {
+        return diskMapper.findDiskById(id);
+    }
 }
