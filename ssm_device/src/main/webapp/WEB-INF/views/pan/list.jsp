@@ -112,7 +112,7 @@
 
         var uploder = WebUploader.create({
                 swf : "/static/plugins/uploader/Uploader.swf",
-                server: "/",
+                server: "/pan/upload",
                 pick: '#picker',
                 auto : true,
                 fileVal:'file',
@@ -120,18 +120,15 @@
             });
 
             uploder.on('uploadSuccess',function(file,data){
-                var fileKey = data.key;
-                $.post("/",{})
-                    .done(function (data) {
-                        if(data.state == 'success') {
-
+                        if(data.status == 'success') {
+                            layer.msg("上传成功");
+                            window.history.go(0);
+                        } else {
+                            layer.msg(data.massage);
                         }
-                    }).error(function(){
-
-                });
-            });
+                    });
             uploder.on('uploadError',function(){
-
+                layer.msg("服务器异常");
             });
 
 

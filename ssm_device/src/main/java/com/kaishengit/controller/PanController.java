@@ -1,6 +1,7 @@
 package com.kaishengit.controller;
 
 import com.kaishengit.dto.AjaxResult;
+import com.kaishengit.exception.ServiceException.ServiceException;
 import com.kaishengit.pojo.Disk;
 import com.kaishengit.service.DiskService;
 import org.joda.time.DateTime;
@@ -8,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -36,6 +38,18 @@ public class PanController {
     public String list(Disk disk) {
         diskService.saveFolder(disk);
         return "success";
+    }
+
+    @PostMapping("/upload")
+    @ResponseBody
+    public AjaxResult upload(Integer fid, MultipartFile file) {
+        try {
+            diskService.saveFile(fid, file);
+            return new AjaxResult(AjaxResult.SUCCESS);
+        } catch (ServiceException ex) {
+            return new AjaxResult(AjaxResult.ERROR,ex.getMessage());
+        }
+
     }
 
 

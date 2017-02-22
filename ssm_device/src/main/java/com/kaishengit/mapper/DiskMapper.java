@@ -9,4 +9,6 @@ public interface DiskMapper {
     List<Disk> findByFid(Integer fid);
 
     void saveFolder(Disk disk);
+
+    void saveFile(Disk disk);
 }

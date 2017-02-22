@@ -5,6 +5,10 @@
         insert into t_disk (source_name,fid,create_user,type)
         values (#{sourceName},#{fid},#{createUser},#{type});
     </insert>
+    <insert id="saveFile">
+        INSERT INTO t_disk (name, source_name, fid, size, create_user, type)
+        VALUES (#{name},#{sourceName},#{fid},#{size},#{createUser},#{type})
+    </insert>
 
     <select id="findByFid" resultType="com.kaishengit.pojo.Disk">
         SELECT * FROM t_disk where fid = #{fid}
