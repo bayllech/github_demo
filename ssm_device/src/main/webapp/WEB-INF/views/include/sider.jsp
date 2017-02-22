@@ -14,7 +14,7 @@
                 </a>
             </li>
             <li class="treeview ${param.menu == 'business_device_rent' ? 'active' : ''}">
-                <a href="/device/rent">
+                <a href="#">
                     <i class="fa fa-edit"></i> <span>设备租赁</span>
                     <i class="fa fa-angle-left pull-right"></i>
                 </a>
@@ -61,10 +61,17 @@
                 </li>
             </shiro:hasRole>--%>
             <li class="header">用户模块</li>
-            <li class="treeview">
-                <a href="/logout">
-                    <i class="fa fa-sign-out"></i> <span>安全退出</span></i>
+            <li class="treeview ${param.menu == 'user' ? 'active' : ''}">
+                <a href="#">
+                    <i class="fa fa-user-circle"></i> <span>用户管理</span>
+                    <i class="fa fa-angle-left pull-right"></i>
                 </a>
+                <ul class="treeview-menu">
+                    <li><a href="/user"><i class="fa fa-users"></i> 用户列表</a></li>
+                    <li><a href="/logout"><i class="fa fa-sign-out"></i> 安全退出</a></li>
+                </ul>
+
+
             </li>
 
         </ul>
