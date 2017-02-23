@@ -41,7 +41,7 @@
                 serial_num LIKE concat('%',#{q_serialNum},'%')
             </if>
         </where>
-        ORDER BY id desc
+        ORDER BY state desc,rent_date desc
         limit ${start},${length}
     </select>
     <select id="countDeviceRent" resultType="java.lang.Long">

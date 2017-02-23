@@ -61,9 +61,6 @@ public class DeviceRentController {
         queryParam.put("start", start);
         queryParam.put("length", length);
         queryParam.put("q_serialNum", q_serialNum);
-        System.out.println("q_serialNum:" + q_serialNum);
-        System.out.println("start:"+ start);
-        System.out.println("length:"+length);
 
         List<DeviceRent> rentList = deviceService.findRentByQueryParam(queryParam);
         Long count = deviceService.countDeviceRent();
