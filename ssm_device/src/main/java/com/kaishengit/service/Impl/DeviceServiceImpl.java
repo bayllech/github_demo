@@ -3,18 +3,13 @@ package com.kaishengit.service.Impl;
 import com.google.common.collect.Lists;
 import com.kaishengit.dto.DeviceRentDto;
 import com.kaishengit.exception.ServiceException.ServiceException;
-import com.kaishengit.mapper.DeviceMapper;
-import com.kaishengit.mapper.DeviceRentDetailMapper;
-import com.kaishengit.mapper.DeviceRentDocMapper;
-import com.kaishengit.mapper.RentMapper;
-import com.kaishengit.pojo.Device;
-import com.kaishengit.pojo.DeviceRent;
-import com.kaishengit.pojo.DeviceRentDetail;
-import com.kaishengit.pojo.DeviceRentDoc;
+import com.kaishengit.mapper.*;
+import com.kaishengit.pojo.*;
 import com.kaishengit.service.DeviceService;
 import com.kaishengit.shiro.ShiroUtil;
 import com.kaishengit.util.SerialNumberUtil;
 import org.apache.commons.io.IOUtils;
+import org.joda.time.DateTime;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,6 +39,12 @@ public class DeviceServiceImpl implements DeviceService {
 
     @Autowired
     private DeviceRentDocMapper docMapper;
+
+    @Autowired
+    private FinanceMapper financeMapper;
+
+    @Autowired
+    private WorkOutMapper workOutMapper;
 
     @Value("${uploadPath}")
     private String filePath;
@@ -99,7 +100,7 @@ public class DeviceServiceImpl implements DeviceService {
                 deviceRentDetail.setDevicePrice(bean.getPrice());
                 deviceRentDetail.setDeviceUnit(bean.getUnit());
                 deviceRentDetail.setNum(bean.getNum());
-                deviceRentDetail.setTotalPrice(bean.getPrice());
+                deviceRentDetail.setTotalPrice(bean.getTotal());
                 deviceRentDetail.setRentId(rent.getId());
 
                 detailList.add(deviceRentDetail);
@@ -123,6 +124,21 @@ public class DeviceServiceImpl implements DeviceService {
         if (!docList.isEmpty()) {
             docMapper.saveDoc(docList);
         }
+
+        //保存预付款财务数据
+        Finance preFinance = new Finance();
+
+        preFinance.setFinanceSerial(SerialNumberUtil.getFinanceSerial());
+        preFinance.setSerialNum(rent.getSerialNum());
+        preFinance.setType(Finance.TYPE_INCOME);
+        preFinance.setCreateDate(DateTime.now().toString("yyyy-MM-dd"));
+        preFinance.setCreateUser(ShiroUtil.getCurrentUserName());
+        preFinance.setModule(Finance.MODULE_DEVICE);
+        preFinance.setState(Finance.STATE_UNCOMPLETE);
+        preFinance.setMoney(rent.getPreCost());
+        preFinance.setRemark(Finance.REMARK_PRE);
+
+        financeMapper.saveDeviceRentFinance(preFinance);
 
         //返回财务流水
         return rent.getSerialNum();
@@ -211,7 +227,43 @@ public class DeviceServiceImpl implements DeviceService {
     }
 
     @Override
+    @Transactional
     public void updateRentState(DeviceRent rent) {
+        //工种或设备数量恢复
+        List<DeviceRentDetail> deviceDetailList = detailMapper.findRentDetailByRentId(rent.getId());
+        if (deviceDetailList == null) {
+            for (DeviceRentDetail detail : deviceDetailList) {
+                Device device = deviceMapper.findDeviceByName(detail.getDeviceName());
+                device.setCurrentNum((int) (device.getCurrentNum() + detail.getNum()));
+                deviceMapper.updateDeviceCurrent(device);
+            }
+        } else {
+            List<WorkTypeDetail> workTypeDetailList = workOutMapper.findDetailByRentId(rent.getId());
+            for (WorkTypeDetail detail : workTypeDetailList) {
+                WorkType workType = workOutMapper.findWorkTypeByName(detail.getWorkTypeName());
+                workType.setCurrentNum((int) (workType.getCurrentNum()+detail.getNum()));
+                workOutMapper.updateWorkTypeCurrent(workType);
+            }
+        }
+
+        //添加尾款财务数据
+        Finance lastFinance = new Finance();
+
+        lastFinance.setFinanceSerial(SerialNumberUtil.getFinanceSerial());
+        lastFinance.setSerialNum(rent.getSerialNum());
+        lastFinance.setType(Finance.TYPE_INCOME);
+        lastFinance.setCreateDate(DateTime.now().toString("yyyy-MM-dd"));
+        lastFinance.setCreateUser(ShiroUtil.getCurrentUserName());
+        //查询Module业务类型
+        Finance finance = financeMapper.findByRentSerial(rent.getSerialNum());
+        lastFinance.setModule(finance.getModule());
+
+        lastFinance.setState(Finance.STATE_UNCOMPLETE);
+        lastFinance.setMoney(rent.getLastCost());
+        lastFinance.setRemark(Finance.REMARK_LAST);
+
+        financeMapper.saveDeviceRentFinance(lastFinance);
+
         deviceMapper.updateRentState(rent);
     }
 

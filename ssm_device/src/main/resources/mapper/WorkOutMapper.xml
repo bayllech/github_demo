@@ -12,6 +12,9 @@
         INSERT INTO t_worktype (name, total_num, current_num, price)
         VALUES (#{name},#{totalNum},#{currentNum},#{price})
     </insert>
+    <update id="updateWorkTypeCurrent">
+        UPDATE t_worktype SET current_num = #{currentNum} where id = #{id}
+    </update>
 
     <select id="findAllWorkType" resultType="com.kaishengit.pojo.WorkType">
         SELECT * FROM t_workType
@@ -23,5 +26,8 @@
 
     <select id="findDetailByRentId" resultType="com.kaishengit.pojo.WorkTypeDetail">
         SELECT * FROM t_worktype_detail where rent_id = #{rentId}
+    </select>
+    <select id="findWorkTypeByName" resultType="com.kaishengit.pojo.WorkType">
+        SELECT * FROM t_worktype where name = #{workTypeName}
     </select>
 </mapper>

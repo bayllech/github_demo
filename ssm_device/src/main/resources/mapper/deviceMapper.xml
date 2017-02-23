@@ -12,6 +12,9 @@
     <update id="updateRentState">
         update t_device_rent set state = #{state} where id=#{id};
     </update>
+    <update id="updateDeviceCurrent">
+        update t_device set current_num = #{currentNum} where id = #{id}
+    </update>
 
     <select id="findAllDevice" resultType="com.kaishengit.pojo.Device">
         SELECT * FROM t_device
@@ -51,5 +54,8 @@
                 serial_num LIKE concat('%',#{q_serialNum},'%')
             </if>
         </where>
+    </select>
+    <select id="findDeviceByName" resultType="com.kaishengit.pojo.Device">
+        SELECT * FROM t_device where name = #{deviceName}
     </select>
 </mapper>

@@ -39,10 +39,15 @@
                 </a>
             </li>
                 <li class="header">财务模块</li>
-                <li class="treeview">
+                <li class="treeview ${param.menu == 'finance' ? 'active' : ''}">
                     <a href="#">
-                        <i class="fa fa-pie-chart"></i> <span>财务报表</span> <i class="fa fa-angle-left pull-right"></i>
+                        <i class="fa fa-pie-chart"></i> <span>财务报表</span>
+                        <i class="fa fa-angle-left pull-right"></i>
                     </a>
+                    <ul class="treeview-menu">
+                        <li><a href="/finance/manage"><i class="fa fa-circle-o"></i> 财务管理</a></li>
+                        <li><a href="/finance/statistics"><i class="fa fa-circle-o"></i> 财务统计</a></li>
+                    </ul>
                 </li>
             <%--<shiro:hasRole name="role_admin">
                 <li class="header">设置模块</li>

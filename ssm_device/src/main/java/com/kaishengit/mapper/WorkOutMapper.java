@@ -15,4 +15,8 @@ public interface WorkOutMapper {
     List<WorkTypeDetail> findDetailByRentId(Integer rentId);
 
     void addWorkType(WorkType workType);
+
+    WorkType findWorkTypeByName(String workTypeName);
+
+    void updateWorkTypeCurrent(WorkType workType);
 }

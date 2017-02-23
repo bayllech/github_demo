@@ -165,7 +165,7 @@ public class DeviceRentDto  {
         private String unit;
         private Float price;
         private Float num;
-        private Integer total;
+        private Float total;
 
         public Integer getId() {
             return id;
@@ -207,11 +207,11 @@ public class DeviceRentDto  {
             this.num = num;
         }
 
-        public Integer getTotal() {
+        public Float getTotal() {
             return total;
         }
 
-        public void setTotal(Integer total) {
+        public void setTotal(Float total) {
             this.total = total;
         }
     }

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.kaishengit.mapper.FinanceMapper">
+    <insert id="saveDeviceRentFinance">
+        INSERT INTO t_finance (serial_num, type, money, state, module, create_date, create_user, remark)
+        VALUES (#{finance.serialNum},#{finance.type},#{finance.money},#{finance.state},#{finance.module},#{finance.createDate},#{finance.createUser},#{finance.remark})
+    </insert>
+
+    <select id="findAll" resultType="com.kaishengit.pojo.Finance">
+        SELECT * FROM t_finance
+    </select>
+    <select id="findByRentSerial" resultType="com.kaishengit.pojo.Finance">
+        SELECT * FROM t_finance where serial_num = #{serialNum}
+    </select>
+</mapper>

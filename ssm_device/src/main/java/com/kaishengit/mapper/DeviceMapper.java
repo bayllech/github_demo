@@ -30,4 +30,8 @@ public interface DeviceMapper {
     Long filterCountRent(Map<String, Object> queryParam);
 
     void updateRentState(DeviceRent rent);
+
+    Device findDeviceByName(String deviceName);
+
+    void updateDeviceCurrent(Device device);
 }

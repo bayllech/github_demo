@@ -13,4 +13,5 @@
     <select id="findRentDetailByRentId" resultType="com.kaishengit.pojo.DeviceRentDetail">
         SELECT * FROM t_device_rent_detail where rent_id = #{id}
     </select>
+
 </mapper>

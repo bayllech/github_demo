@@ -3,12 +3,14 @@ package com.kaishengit.service.Impl;
 import com.google.common.collect.Lists;
 import com.kaishengit.dto.DeviceRentDto;
 import com.kaishengit.mapper.DeviceRentDocMapper;
+import com.kaishengit.mapper.FinanceMapper;
 import com.kaishengit.mapper.RentMapper;
 import com.kaishengit.mapper.WorkOutMapper;
 import com.kaishengit.pojo.*;
 import com.kaishengit.service.WorkTypeService;
 import com.kaishengit.shiro.ShiroUtil;
 import com.kaishengit.util.SerialNumberUtil;
+import org.joda.time.DateTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -25,6 +27,8 @@ public class WorkTypeServiceImpl implements WorkTypeService {
 
     @Autowired
     private DeviceRentDocMapper docMapper;
+
+    private FinanceMapper financeMapper;
 
     @Override
     public WorkType findDeviceById(Integer id) {
@@ -67,7 +71,7 @@ public class WorkTypeServiceImpl implements WorkTypeService {
             workTypeDetail.setWorkTypePrice(bean.getPrice());
 //            deviceRentDetail.setDeviceUnit(bean.getUnit());
             workTypeDetail.setNum(bean.getNum());
-            workTypeDetail.setTotalPrice(bean.getPrice());
+            workTypeDetail.setTotalPrice(bean.getTotal());
             workTypeDetail.setRentId(rent.getId());
 
             detailList.add(workTypeDetail);
@@ -92,6 +96,19 @@ public class WorkTypeServiceImpl implements WorkTypeService {
         if (!docList.isEmpty()) {
             docMapper.saveDoc(docList);
         }
+
+        //保存预付款财务数据
+        Finance preFinance = new Finance();
+
+        preFinance.setFinanceSerial(SerialNumberUtil.getFinanceSerial());
+        preFinance.setSerialNum(rent.getSerialNum());
+        preFinance.setType(Finance.TYPE_INCOME);
+        preFinance.setCreateDate(DateTime.now().toString("yyyy-MM-dd"));
+        preFinance.setCreateUser(ShiroUtil.getCurrentUserName());
+        preFinance.setModule(Finance.MODULE_WORKOUT);
+        preFinance.setState(Finance.STATE_UNCOMPLETE);
+
+        financeMapper.saveDeviceRentFinance(preFinance);
 
         //返回财务流水
         return rent.getSerialNum();
