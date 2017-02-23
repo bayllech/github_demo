@@ -2,6 +2,7 @@ package com.kaishengit.service.Impl;
 
 import com.google.common.collect.Lists;
 import com.kaishengit.dto.DeviceRentDto;
+import com.kaishengit.exception.ServiceException.ServiceException;
 import com.kaishengit.mapper.DeviceRentDocMapper;
 import com.kaishengit.mapper.FinanceMapper;
 import com.kaishengit.mapper.RentMapper;
@@ -13,6 +14,7 @@ import com.kaishengit.util.SerialNumberUtil;
 import org.joda.time.DateTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -28,6 +30,7 @@ public class WorkTypeServiceImpl implements WorkTypeService {
     @Autowired
     private DeviceRentDocMapper docMapper;
 
+    @Autowired
     private FinanceMapper financeMapper;
 
     @Override
@@ -41,6 +44,7 @@ public class WorkTypeServiceImpl implements WorkTypeService {
     }
 
     @Override
+    @Transactional
     public String saveRent(DeviceRentDto deviceRentDto) {
         //保存公司合同
         DeviceRent rent = new DeviceRent();
@@ -66,6 +70,16 @@ public class WorkTypeServiceImpl implements WorkTypeService {
         List<WorkTypeDetail> detailList = Lists.newArrayList();
 
         for (DeviceRentDto.DeviceArrayBean bean : deviceArray) {
+            //查询库存
+            WorkType workType = findDeviceById(bean.getId());
+            if (workType.getCurrentNum() < bean.getNum()) {
+                throw new ServiceException(bean.getName()+" 库存不足");
+            } else {
+                workType.setCurrentNum((int) (workType.getCurrentNum() - bean.getNum()));
+                workOutMapper.updateCurrentNum(workType);
+            }
+
+
             WorkTypeDetail workTypeDetail = new WorkTypeDetail();
             workTypeDetail.setWorkTypeName(bean.getName());
             workTypeDetail.setWorkTypePrice(bean.getPrice());
@@ -107,6 +121,8 @@ public class WorkTypeServiceImpl implements WorkTypeService {
         preFinance.setCreateUser(ShiroUtil.getCurrentUserName());
         preFinance.setModule(Finance.MODULE_WORKOUT);
         preFinance.setState(Finance.STATE_UNCOMPLETE);
+        preFinance.setMoney(rent.getPreCost());
+        preFinance.setRemark(Finance.REMARK_PRE);
 
         financeMapper.saveDeviceRentFinance(preFinance);
 

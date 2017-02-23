@@ -18,4 +18,9 @@ public class FinanceServiceImpl implements FinanceService {
     public List<Finance> findAll() {
         return financeMapper.findAll();
     }
+
+    @Override
+    public List<Finance> findDay() {
+        return financeMapper.findDay();
+    }
 }

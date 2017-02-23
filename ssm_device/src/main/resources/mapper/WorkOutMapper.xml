@@ -15,6 +15,9 @@
     <update id="updateWorkTypeCurrent">
         UPDATE t_worktype SET current_num = #{currentNum} where id = #{id}
     </update>
+    <update id="updateCurrentNum">
+        update t_worktype set current_num = #{currentNum} where id = #{id};
+    </update>
 
     <select id="findAllWorkType" resultType="com.kaishengit.pojo.WorkType">
         SELECT * FROM t_workType

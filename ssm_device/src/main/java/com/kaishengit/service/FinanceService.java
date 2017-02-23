@@ -7,4 +7,6 @@ import java.util.List;
 public interface FinanceService {
 
     List<Finance> findAll();
+
+    List<Finance> findDay();
 }

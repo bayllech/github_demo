@@ -24,7 +24,7 @@
             <value>
                 /static/** == anon
                 /user/** = roles[role_admin]
-                /device/** = anon
+                /device/** = customRolesFilter[role_admin,role_sale]
                 /workOut/** = customRolesFilter[role_admin,role_sale]
                 /** == authc
             </value>

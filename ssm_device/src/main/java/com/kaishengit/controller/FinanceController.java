@@ -18,20 +18,16 @@ public class FinanceController {
     private FinanceService financeService;
 
     /**
-     * 财务列表
+     * 日报
      * @param model
      * @return
      */
-    @GetMapping("/manage")
+    @GetMapping("/day")
     public String manage(Model model) {
-        List<Finance> financeList = financeService.findAll();
+        List<Finance> financeList = financeService.findDay();
         model.addAttribute("financeList", financeList);
-        return "/finance/list";
+        return "/finance/day";
     }
 
-    /*@GetMapping("/add")
-    public String add() {
-        return "/finance/add";
-    }*/
 
 }

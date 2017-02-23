@@ -7,7 +7,9 @@ import java.util.List;
 public interface FinanceMapper {
     List<Finance> findAll();
 
-    void saveDeviceRentFinance(Finance financeList);
+    void saveDeviceRentFinance(Finance finance);
 
     Finance findByRentSerial(String serialNum);
+
+    List<Finance> findDay();
 }

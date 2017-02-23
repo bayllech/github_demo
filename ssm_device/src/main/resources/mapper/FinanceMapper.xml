@@ -2,8 +2,8 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.kaishengit.mapper.FinanceMapper">
     <insert id="saveDeviceRentFinance">
-        INSERT INTO t_finance (serial_num, type, money, state, module, create_date, create_user, remark)
-        VALUES (#{finance.serialNum},#{finance.type},#{finance.money},#{finance.state},#{finance.module},#{finance.createDate},#{finance.createUser},#{finance.remark})
+        INSERT INTO t_finance (finance_serial,serial_num, type, money, state, module, create_date, create_user, remark)
+        VALUES (#{financeSerial},#{serialNum},#{type},#{money},#{state},#{module},#{createDate},#{createUser},#{remark})
     </insert>
 
     <select id="findAll" resultType="com.kaishengit.pojo.Finance">
@@ -11,5 +11,8 @@
     </select>
     <select id="findByRentSerial" resultType="com.kaishengit.pojo.Finance">
         SELECT * FROM t_finance where serial_num = #{serialNum}
+    </select>
+    <select id="findDay" resultType="com.kaishengit.pojo.Finance">
+
     </select>
 </mapper>

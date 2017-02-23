@@ -45,8 +45,9 @@
                         <i class="fa fa-angle-left pull-right"></i>
                     </a>
                     <ul class="treeview-menu">
-                        <li><a href="/finance/manage"><i class="fa fa-circle-o"></i> 财务管理</a></li>
-                        <li><a href="/finance/statistics"><i class="fa fa-circle-o"></i> 财务统计</a></li>
+                        <li><a href="/finance/day"><i class="fa fa-circle-o"></i> 日报</a></li>
+                        <li><a href="/finance/month"><i class="fa fa-circle-o"></i> 月报</a></li>
+                        <li><a href="/finance/year"><i class="fa fa-circle-o"></i> 年报</a></li>
                     </ul>
                 </li>
             <%--<shiro:hasRole name="role_admin">

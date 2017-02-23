@@ -234,7 +234,7 @@ public class DeviceServiceImpl implements DeviceService {
         if (deviceDetailList == null) {
             for (DeviceRentDetail detail : deviceDetailList) {
                 Device device = deviceMapper.findDeviceByName(detail.getDeviceName());
-                device.setCurrentNum((int) (device.getCurrentNum() + detail.getNum()));
+                device.setCurrentNum((int) (device.getCurrentNum()+detail.getNum()));
                 deviceMapper.updateDeviceCurrent(device);
             }
         } else {

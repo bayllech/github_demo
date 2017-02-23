@@ -19,4 +19,6 @@ public interface WorkOutMapper {
     WorkType findWorkTypeByName(String workTypeName);
 
     void updateWorkTypeCurrent(WorkType workType);
+
+    void updateCurrentNum(WorkType workType);
 }
