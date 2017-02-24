@@ -13,12 +13,12 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 @Controller
 public class HomeController {
 
-    @GetMapping("/login")
+    @GetMapping("/")
     public String login() {
         return "/login";
     }
 
-    @PostMapping("/login")
+    @PostMapping("/")
     public String home(String userName, String password, RedirectAttributes redirectAttributes) {
 
 //        shiro登录
@@ -29,7 +29,7 @@ public class HomeController {
         } catch (AuthenticationException ex) {
             ex.printStackTrace();
             redirectAttributes.addFlashAttribute("message", "账号或密码错误");
-            return "redirect:/login";
+            return "redirect:/";
         }
     }
 
@@ -38,7 +38,7 @@ public class HomeController {
         //安全退出
         SecurityUtils.getSubject().logout();
         redirectAttributes.addFlashAttribute("message","你已安全退出");
-        return "redirect:/login";
+        return "redirect:/";
     }
 
     @RequestMapping("/403")

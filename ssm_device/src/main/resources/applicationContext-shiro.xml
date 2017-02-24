@@ -17,12 +17,13 @@
 
     <bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
         <property name="securityManager" ref="securityManager"/>
-        <property name="loginUrl" value="/login"/>
+        <property name="loginUrl" value="/"/>
         <property name="successUrl" value="/device/rent"/>
         <property name="unauthorizedUrl" value="/403"/>
         <property name="filterChainDefinitions">
             <value>
                 /static/** == anon
+                /wx/** == anon
                 /user/** = roles[role_admin]
                 /device/** = customRolesFilter[role_admin,role_sale]
                 /workOut/** = customRolesFilter[role_admin,role_sale]
