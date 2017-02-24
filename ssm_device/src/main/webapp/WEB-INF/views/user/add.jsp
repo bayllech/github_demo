@@ -48,6 +48,10 @@
                                 <input type="password" name="password" class="form-control">
                             </div>
                             <div class="form-group">
+                                <label>手机号(与微信号关联):</label>
+                                <input type="text" name="mobile" class="form-control">
+                            </div>
+                            <div class="form-group">
                                 <label>部门:</label>
                                 <div>
                                     <c:forEach items="${roleList}" var="role">

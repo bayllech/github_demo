@@ -4,17 +4,17 @@ import com.google.common.cache.CacheBuilder;
 import com.google.common.cache.CacheLoader;
 import com.google.common.cache.LoadingCache;
 import com.google.gson.Gson;
+import com.kaishengit.dto.wx.User;
 import com.kaishengit.exception.ServiceException.ServiceException;
 import com.qq.wx.mp.aes.AesException;
 import com.qq.wx.mp.aes.WXBizMsgCrypt;
-import okhttp3.OkHttpClient;
-import okhttp3.Request;
-import okhttp3.Response;
+import okhttp3.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
+import java.io.IOException;
 import java.text.MessageFormat;
 import java.util.HashMap;
 import java.util.Map;
@@ -52,7 +52,7 @@ public class WXService {
                     String result = response.body().string();
                     response.close();
 
-                    Map<String, Objects> map = new Gson().fromJson(result, HashMap.class);
+                    Map<String, Object> map = new Gson().fromJson(result, HashMap.class);
                     if(map.containsKey("errcode")) {
                         logger.error("获取微信AccessToken异常:{}", map.get("errcode"));
                         throw new ServiceException("获取AccessToken异常:" + map.get("errcode"));
@@ -92,8 +92,30 @@ public class WXService {
         }
     }
 
-    public String saveUser() {
-        
+    /**
+     * 同步保存用户到微信
+     * @param user
+     */
+    public void saveUser(User user) {
+        String url = MessageFormat.format(CREATE_USER_URL,getAccessToken());
+
+        String json = new Gson().toJson(user);
+        RequestBody requestBody = RequestBody.create(MediaType.parse("application/json;charset=UTF-8"),json);
+        Request request = new Request.Builder().post(requestBody).url(url).build();
+        try {
+            Response response = new OkHttpClient().newCall(request).execute();
+            String resultJson = response.body().string();
+            response.close();
+
+            Map<String,Object> result = new Gson().fromJson(resultJson,HashMap.class);
+            Object errorCode = result.get("errcode");
+            if("0".equals(errorCode.toString())) {
+                logger.error("微信创建用户异常:{}",resultJson);
+                throw new ServiceException("微信创建用户异常:"+resultJson);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
 }
