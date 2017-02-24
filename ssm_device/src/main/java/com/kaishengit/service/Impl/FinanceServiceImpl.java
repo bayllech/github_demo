@@ -49,4 +49,9 @@ public class FinanceServiceImpl implements FinanceService {
     public void updateState(Finance finance) {
         financeMapper.updateState(finance);
     }
+
+    @Override
+    public List<Map<String, Object>> getDayData(String type, String today) {
+        return financeMapper.getDayData(type,today);
+    }
 }

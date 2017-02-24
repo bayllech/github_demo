@@ -1,6 +1,7 @@
 package com.kaishengit.mapper;
 
 import com.kaishengit.pojo.Finance;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 import java.util.Map;
@@ -23,4 +24,6 @@ public interface FinanceMapper {
     Finance findById(Integer id);
 
     void updateState(Finance finance);
+
+    List<Map<String,Object>> getDayData(@Param("type") String type,@Param("today") String today);
 }

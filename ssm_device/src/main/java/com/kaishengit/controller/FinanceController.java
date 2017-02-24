@@ -9,10 +9,7 @@ import com.kaishengit.service.FinanceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
@@ -55,6 +52,11 @@ public class FinanceController {
         return new DataTableResult(draw,count,filterCount,financeList);
     }
 
+    /**
+     * 确认收付款
+     * @param id
+     * @return
+     */
     @PostMapping("/confirm")
     @ResponseBody
     public String confirm(Integer id) {
@@ -67,6 +69,14 @@ public class FinanceController {
             financeService.updateState(finance);
             return "success";
         }
+    }
+
+    @GetMapping("/day/{type}/{today}")
+    @ResponseBody
+    public AjaxResult day(@PathVariable String type,@PathVariable String today) {
+        type = "in".equals(type) ? "收入" : "支出";
+        List<Map<String,Object>> dayData = financeService.getDayData(type,today);
+        return new AjaxResult(dayData);
     }
 
 

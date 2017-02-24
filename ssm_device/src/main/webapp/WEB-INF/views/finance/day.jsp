@@ -22,10 +22,10 @@
     <div class="content-wrapper">
         <!-- Main content -->
         <section class="content">
-
-            <div class="box box-solid box-primary">
+            <!-- Default box -->
+            <div class="box box-primary box-solid">
                 <div class="box-header with-border">
-                    <h3 class="box-title"><i class="fa fa-search"></i> 搜索日报</h3>
+                    <h3 class="box-title">财务日报</h3>
                 </div>
                 <div class="box-body">
                     <form class="form-inline">
@@ -33,13 +33,6 @@
                             <input type="text" id="date" class="form-control">
                         </div>
                     </form>
-                </div>
-            </div>
-            <!-- Default box -->
-            <div class="box box-primary box-solid">
-                <div class="box-header with-border">
-                    <h3 class="box-title">财务日报</h3>
-
                 </div>
                 <div class="box-body">
                     <table class="table">
@@ -57,33 +50,32 @@
                             <th>#</th>
                         </tr>
                         </thead>
-                        <%-- <tbody>
-                         <tr>
-                             <c:forEach items="${rentList}" var="rent">
-                                 <tr>
-                                     <td>${rent.id}</td>
-                                     <td>${rent.serialNum}</td>
-                                     <td>${rent.companyName}</td>
-                                     <td>${rent.tel}</td>
-                                     <td>${rent.rentDate}</td>
-                                     <td>${rent.backDate}</td>
-                                     <td>未完成</td>
-                                     <td>${rent.totalPrice}</td>
-                                     <td>暂无</td>
-                                     <td><a href="javascript:;">续费</a>
-                                         <a href="javascript:;">入库</a>
-                                 </tr>
-                             </c:forEach>
-                         </tr>
-                         </tbody>--%>
                     </table>
                 </div>
                 <!-- /.box-body -->
             </div>
             <!-- /.box -->
 
+            <%--图表--%>
+            <div class="box box-solid box-primary">
+                <div class="box-header with-border">
+                    <h3 class="box-title"> 日报收支统计</h3>
+                </div>
+                <div class="box-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div id="inChart" style="width: 100%;height: 300px"></div>
+                        </div>
+                        <div class="col-md-6">
+                            <div id="outChart" style="width: 100%;height: 300px"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
         </section>
         <!-- /.content -->
+
     </div>
     <!-- /.content-wrapper -->
 
@@ -95,6 +87,7 @@
 <script src="/static/plugins/moment.js"></script>
 <script src="/static/plugins/datepicker/bootstrap-datepicker.js"></script>
 <script src="/static/plugins/datepicker/locales/bootstrap-datepicker.zh-CN.js"></script>
+<script src="/static/js/echarts.js"></script>
 <script>
     $(function () {
         $("#date").val(moment().format("YYYY-MM-DD"));
@@ -106,6 +99,7 @@
         }).on("changeDate",function (e) {
             var today = e.format(0, "yyyy-mm-dd");
             table.ajax.reload();
+            loadPie();
         });
 
         var table = $(".table").DataTable({
@@ -136,7 +130,7 @@
                 {"data":"type"},
                 {"data":function(obj){
                     if(obj.state == "未完成"){
-                        return "<a href='javascript:;' rel='" + obj.id + "' class='btn btn-xs btn-default confirm'><i class='fa fa-check'></i>完成</a>"
+                        return "<a href='javascript:;' rel='" + obj.id + "' class='btn btn-xs btn-default confirm'><i class='fa fa-check'></i>确认</a>"
                     } else {
                         return "";
                     }
@@ -185,7 +179,81 @@
             });
         });
 
+        //图表
+        var inChart = echarts.init(document.getElementById('inChart'));
+        var outChart = echarts.init($("#outChart")[0]);
 
+        // 指定图表的配置项和数据
+        var option = {
+            title: {
+                left:'center'
+            },
+            tooltip: {},
+            legend: {
+                left:20,
+                orient:'vertical',
+                data:[]
+            },
+            series: [{
+                type: 'pie'
+//                roseType: 'angle'
+            }]
+        };
+
+        // 使用刚指定的配置项和数据显示图表。
+        inChart.setOption(option);
+        outChart.setOption(option);
+
+        function loadPie() {
+            //收入统计
+            $.get("/finance/day/in/"+$("#date").val()+"/").done(function (resp) {
+                if (resp.status == "success") {
+                    var nameArray = [];
+                    for(var i = 0; i<resp.data.length; i++) {
+                        var obj = resp.data[i];
+                        nameArray.push(obj.name);
+                    }
+                    inChart.setOption({
+                        title:{
+                            text : "收入统计"
+                        },
+                        legend:{
+                            data:nameArray
+                        },
+                        series:[{
+                            data:resp.data,
+                            name:"收入:"
+                        }]
+                    });
+                }
+            }).error(function () {
+                layer.msg("服务器异常");
+            });
+            //支出统计
+            $.get("/finance/day/in/"+$("#date").val()+"/").done(function (resp) {
+                if (resp.status == "success") {
+                    var nameArray = [];
+                    for(var i = 0; i<resp.data.length; i++) {
+                        var obj = resp.data[i];
+                        nameArray.push(obj.name);
+                    }
+                    outChart.setOption({
+                        title:{
+                            text : "支出统计"
+                        },
+                        legend:{
+                            data:nameArray
+                        },
+                        series:[{
+                            name:"支出:",
+                            data:resp.data
+                        }]
+                    });
+                }
+            }).error(function () {
+                layer.msg("服务器异常");
+            });
+        }
 
     });
 </script>

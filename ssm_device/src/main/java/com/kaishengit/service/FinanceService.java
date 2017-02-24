@@ -20,4 +20,6 @@ public interface FinanceService {
     Finance findFinanceById(Integer id);
 
     void updateState(Finance finance);
+
+    List<Map<String,Object>> getDayData(String type, String today);
 }
