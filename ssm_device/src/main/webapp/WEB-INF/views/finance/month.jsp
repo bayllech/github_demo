@@ -39,14 +39,9 @@
                         <thead>
                         <tr>
                             <th>id</th>
-                            <th>财务流水</th>
-                            <th>财务名称</th>
-                            <th>业务模块</th>
-                            <th>业务流水</th>
-                            <th>金额</th>
-                            <th>状态</th>
-                            <th>创建时间</th>
-                            <th>类型</th>
+                            <th>日期</th>
+                            <th>当日收入</th>
+                            <th>当日支出</th>
                             <th>#</th>
                         </tr>
                         </thead>
@@ -59,7 +54,7 @@
             <%--图表--%>
             <div class="box box-solid box-primary">
                 <div class="box-header with-border">
-                    <h3 class="box-title"> 日报收支统计</h3>
+                    <h3 class="box-title"> 月报收支统计</h3>
                 </div>
                 <div class="box-body">
                     <div class="row">
@@ -120,14 +115,9 @@
             "order":[[0,'desc']],//默认排序方式
             "columns":[
                 {"data":"id","name":"id"},
-                {"data":"financeSerial"},
-                {"data":"remark"},
-                {"data":"module"},
-                {"data":"serialNum"},
-                {"data":"money"},
-                {"data":"state"},
-                {"data":"createDate"},
-                {"data":"type"},
+                {"data":"day"},
+                {"data":"dayIn"},
+                {"data":"dayOut"},
                 {"data":function(obj){
                     if(obj.state == "未完成"){
                         return "<a href='javascript:;' rel='" + obj.id + "' class='btn btn-xs btn-default confirm'><i class='fa fa-check'></i>确认</a>"
