@@ -33,7 +33,7 @@ public class ShiroDbRealm extends AuthorizingRealm {
         if(!roleList.isEmpty()) {
             SimpleAuthorizationInfo info = new SimpleAuthorizationInfo();
             for (Role role:roleList) {
-                info.addRole(role.getViewRole());
+                info.addRole(role.getPartRole());
             }
             return info;
         }

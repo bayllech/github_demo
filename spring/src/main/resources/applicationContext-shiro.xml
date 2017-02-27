@@ -20,7 +20,7 @@
         <property name="filterChainDefinitions">
             <value>
                 /static/** == anon
-                /user = roles[role_admin]
+                /user/** = roles[role_admin]
                 /setting/** = roles[role_admin]
                 /** == authc
             </value>
