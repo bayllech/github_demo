@@ -2,14 +2,14 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.kaishengit</groupId>
+    <groupId>com.bayllech</groupId>
     <artifactId>ssm-util</artifactId>
     <version>1.0</version>
     <packaging>jar</packaging>
 
     <parent>
         <artifactId>ssm-parent</artifactId>
-        <groupId>com.kaishengit</groupId>
+        <groupId>com.bayllech</groupId>
         <version>1.0</version>
         <relativePath>../pom.xml</relativePath>
     </parent>

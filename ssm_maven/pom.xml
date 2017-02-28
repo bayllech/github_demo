@@ -2,7 +2,7 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.kaishengit</groupId>
+    <groupId>com.bayllech</groupId>
     <artifactId>ssm-parent</artifactId>
     <version>1.0</version>
     <packaging>pom</packaging>
@@ -46,22 +46,22 @@
                <version>1.2</version>
            </dependency>
            <dependency>
-               <groupId>com.kaishengit</groupId>
+               <groupId>com.bayllech</groupId>
                <artifactId>ssm-entity</artifactId>
                <version>1.0</version>
            </dependency>
            <dependency>
-               <groupId>com.kaishengit</groupId>
+               <groupId>com.bayllech</groupId>
                <artifactId>ssm-service</artifactId>
                <version>1.0</version>
            </dependency>
            <dependency>
-               <groupId>com.kaishengit</groupId>
+               <groupId>com.bayllech</groupId>
                <artifactId>ssm-util</artifactId>
                <version>1.0</version>
            </dependency>
            <dependency>
-               <groupId>com.kaishengit</groupId>
+               <groupId>com.bayllech</groupId>
                <artifactId>ssm-web</artifactId>
                <version>1.0</version>
            </dependency>
@@ -69,6 +69,18 @@
        </dependencies>
    </dependencyManagement>
 
+   <!-- <distributionManagement>
+        <repository>
+            <id>kaishengit-release</id>
+            <name>release</name>
+            <url>http://192.168.1.222:8088/repository/kaishengit-release/</url>
+        </repository>
+        <snapshotRepository>
+            <id>kaishengit-snapshot</id>
+            <name>snapshot</name>
+            <url>http://192.168.1.222:8088/repository/kaishengit-snapshot/</url>
+        </snapshotRepository>
+    </distributionManagement>-->
     <build>
         <pluginManagement>
             <plugins>
