@@ -1,5 +1,6 @@
 package cn.bayllech;
 
+import org.activiti.engine.ProcessEngine;
 import org.activiti.engine.ProcessEngineConfiguration;
 import org.junit.Test;
 
@@ -14,7 +15,9 @@ public class ActivitiTest {
         processEngineConfiguration.setJdbcUsername("root");
         processEngineConfiguration.setJdbcPassword("root");
 
-        
+        processEngineConfiguration.setDatabaseSchemaUpdate(ProcessEngineConfiguration.DB_SCHEMA_UPDATE_TRUE);
+        ProcessEngine processEngine = processEngineConfiguration.buildProcessEngine();
+        System.out.println("processEngine: " + processEngine);
     }
 
 
