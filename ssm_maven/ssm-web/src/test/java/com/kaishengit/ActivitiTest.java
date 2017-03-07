@@ -4,6 +4,7 @@ import org.activiti.engine.ProcessEngine;
 import org.activiti.engine.ProcessEngineConfiguration;
 import org.activiti.engine.ProcessEngines;
 import org.activiti.engine.repository.Deployment;
+import org.activiti.engine.runtime.ProcessInstance;
 import org.junit.Test;
 
 public class ActivitiTest {
@@ -39,4 +40,13 @@ public class ActivitiTest {
     }
 
 
+    //启动流程
+    @Test
+    public void startProcessInstance() {
+        ProcessInstance pi = engine.getRuntimeService()
+                .startProcessInstanceByKey("myProcess_1");
+        System.out.println("流程定义ID: " + pi.getId());
+        System.out.println("流程定义名：" + pi.getName());
+
+    }
 }
