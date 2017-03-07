@@ -39,7 +39,6 @@ public class ActivitiTest {
         System.out.println("id: "+ deployment.getId());
     }
 
-
     //启动流程
     @Test
     public void startProcessInstance() {
@@ -48,5 +47,11 @@ public class ActivitiTest {
         System.out.println("流程定义ID: " + pi.getId());
         System.out.println("流程定义名：" + pi.getName());
 
+    }
+
+    //删除流程
+    @Test
+    public void deleteProcess() {
+        engine.getRepositoryService().deleteDeployment("2501", true);
     }
 }
