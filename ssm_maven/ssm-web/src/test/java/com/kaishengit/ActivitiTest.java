@@ -5,7 +5,12 @@ import org.activiti.engine.ProcessEngineConfiguration;
 import org.activiti.engine.ProcessEngines;
 import org.activiti.engine.repository.Deployment;
 import org.activiti.engine.runtime.ProcessInstance;
+import org.activiti.engine.task.Task;
 import org.junit.Test;
+
+import java.io.InputStream;
+import java.util.List;
+import java.util.zip.ZipInputStream;
 
 public class ActivitiTest {
 
@@ -31,12 +36,23 @@ public class ActivitiTest {
     public void deploy() {
         Deployment deployment = engine.getRepositoryService()
                 .createDeployment()
-                .name("helloword")
-                .addClasspathResource("diagrams/HelloWord.bpmn")
-                .addClasspathResource("diagrams/HelloWord.png")
+                .name("并行流程")
+                .addClasspathResource("diagrams/Hello.bpmn")
                 .deploy();
         System.out.println("name: "+ deployment.getName());
         System.out.println("id: "+ deployment.getId());
+    }
+
+    //zip格式部署流程
+    @Test
+    public void zipDeploy() {
+        InputStream inputStream = this.getClass().getClassLoader().getResourceAsStream("diagrams/Hello.bpmn");
+        ZipInputStream zipInputStream = new ZipInputStream(inputStream);
+        Deployment deployment = engine.getRepositoryService()
+                .createDeployment()
+                .name("hello")
+                .addZipInputStream(zipInputStream)
+                .deploy();
     }
 
     //启动流程
@@ -52,6 +68,27 @@ public class ActivitiTest {
     //删除流程
     @Test
     public void deleteProcess() {
-        engine.getRepositoryService().deleteDeployment("2501", true);
+        engine.getRepositoryService().deleteDeployment("15001", true);
     }
+
+    //查看任务列表
+    @Test
+    public void getTaskList() {
+        String assignee = "part";
+        List<Task> taskList = engine.getTaskService()
+                .createTaskQuery()
+                .taskAssignee(assignee)
+                .orderByTaskAssignee()
+                .desc()
+                .list();
+        System.out.println("list size: " + taskList.size());
+        for (Task task : taskList) {
+            System.out.println("办理人：" + task.getAssignee());
+            System.out.println("name: " + task.getName());
+            System.out.println("流程定义ID: " + task.getProcessDefinitionId());
+
+        }
+    }
+
+
 }
