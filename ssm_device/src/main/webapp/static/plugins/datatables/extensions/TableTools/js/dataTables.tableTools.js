@@ -2432,7 +2432,7 @@ TableTools.prototype = {
 			} );
 		}
 
-		/* Remove the other DataTables feature nodes - but leave the table! and info div */
+		/* Remove the other DataTables feature nodes - but listner the table! and info div */
 		var anFeature = oSetDT.aanFeatures;
 		for ( var cFeature in anFeature )
 		{
