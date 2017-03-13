@@ -2,6 +2,7 @@ package cn.bayllech.test;
 
 
 import cn.bayllech.pojo.User;
+import cn.bayllech.util.HibernateUtil;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
@@ -27,6 +28,15 @@ public class HibernateBasicTest {
 
         session.save(user);
 
+        session.getTransaction().commit();
+    }
+
+    @Test
+    public void findById() {
+        Session session = HibernateUtil.getSession();
+        session.beginTransaction();
+        User user = (User) session.get(User.class, 1025);
+        System.out.println(user);
         session.getTransaction().commit();
     }
 }
