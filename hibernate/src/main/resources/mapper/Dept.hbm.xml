@@ -7,7 +7,7 @@
         <id name="id"><generator class="native"/></id>
         <property name="deptname"/>
 
-        <set name="employmentSet">
+        <set name="employmentSet" inverse="true">
             <key column="deptid"/>
             <one-to-many class="Employment"/>
         </set>

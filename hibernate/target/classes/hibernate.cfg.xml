@@ -19,5 +19,7 @@
 
         <!--读取映射文件-->
         <mapping resource="mapper/User.hbm.xml"/>
+        <mapping resource="mapper/Dept.hbm.xml"/>
+        <mapping resource="mapper/Employment.hbm.xml"/>
     </session-factory>
 </hibernate-configuration>

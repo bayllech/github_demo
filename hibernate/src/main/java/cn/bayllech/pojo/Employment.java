@@ -2,7 +2,6 @@ package cn.bayllech.pojo;
 
 import lombok.Data;
 
-@Data
 public class Employment {
 
   private Integer id;
@@ -11,4 +10,35 @@ public class Employment {
 
   private Dept dept;
 
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public Integer getDeptid() {
+        return deptid;
+    }
+
+    public void setDeptid(Integer deptid) {
+        this.deptid = deptid;
+    }
+
+    public Dept getDept() {
+        return dept;
+    }
+
+    public void setDept(Dept dept) {
+        this.dept = dept;
+    }
 }
