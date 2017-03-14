@@ -27,5 +27,18 @@ public class HibernateSQLTest {
 
         session.getTransaction().commit();
     }
-    
+
+    @Test
+    public void uniqueFind() {
+        Session session = HibernateUtil.getSession();
+        session.beginTransaction();
+
+        String sql = "select id,username,password,mobile from user where id = 1027";
+        User user = (User) session.createSQLQuery(sql).addEntity(User.class).uniqueResult();
+        user.setUsername("张三");
+        System.out.println(user);
+
+        session.getTransaction().commit();
+    }
+
 }
