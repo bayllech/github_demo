@@ -23,5 +23,7 @@
         <mapping resource="mapper/Employment.hbm.xml"/>
         <mapping resource="mapper/Person.hbm.xml"/>
         <mapping resource="mapper/Card.hbm.xml"/>
+        <mapping resource="mapper/Topic.hbm.xml"/>
+        <mapping resource="mapper/TopicContent.hbm.xml"/>
     </session-factory>
 </hibernate-configuration>
