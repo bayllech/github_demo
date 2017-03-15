@@ -1,12 +1,18 @@
 package cn.bayllech.pojo;
 
+import javax.persistence.*;
 import java.util.Set;
 
+@Entity
+@Table(name = "t_dept")
 public class Dept {
-  private Integer id;
-  private String deptname;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
+    private String deptname;
 
-  private Set<Employment> employmentSet;
+    @OneToMany(mappedBy = "dept")
+    private Set<Employment> employmentSet;
 
     public Integer getId() {
         return id;

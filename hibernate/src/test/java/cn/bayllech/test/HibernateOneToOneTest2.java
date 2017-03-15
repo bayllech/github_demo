@@ -13,16 +13,17 @@ public class HibernateOneToOneTest2 {
         session.beginTransaction();
 
         Topic topic = new Topic();
-        topic.setTitle("T3");
+        topic.setTitle("T8");
 
         TitleContent titleContent = new TitleContent();
-        titleContent.setContent("33333");
+        titleContent.setContent("88888");
 
-        titleContent.setTopic(topic);
         topic.setTitleContent(titleContent);
+        titleContent.setTopic(topic);
 
-        session.save(topic);
         session.save(titleContent);
+        session.save(topic);
+
 
         session.getTransaction().commit();
     }

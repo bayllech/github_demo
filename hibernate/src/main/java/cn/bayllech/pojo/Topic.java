@@ -1,9 +1,16 @@
 package cn.bayllech.pojo;
 
+import javax.persistence.*;
+
+@Entity
+@Table(name = "t_topic")
 public class Topic {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private String title;
-    private Integer contentid;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "contentid")
     private TitleContent titleContent;
 
     public Integer getId() {
@@ -20,14 +27,6 @@ public class Topic {
 
     public void setTitle(String title) {
         this.title = title;
-    }
-
-    public Integer getContentid() {
-        return contentid;
-    }
-
-    public void setContentid(Integer contentid) {
-        this.contentid = contentid;
     }
 
     public TitleContent getTitleContent() {

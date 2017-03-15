@@ -13,10 +13,10 @@ public class HibernateOneToOneTest {
         session.beginTransaction();
 
         Person person = new Person();
-        person.setName("刘");
+        person.setName("赵");
 
         Card card = new Card();
-        card.setNum("A003");
+        card.setNum("A004");
         card.setPerson(person);
 
         session.save(card);
@@ -44,7 +44,7 @@ public class HibernateOneToOneTest {
     public void delete() {
         Session session = HibernateUtil.getSession();
         session.beginTransaction();
-        Person person = (Person) session.get(Person.class, 2);
+        Person person = (Person) session.get(Person.class, 3);
 
         session.delete(person);
 

@@ -45,7 +45,7 @@ public class HibernateBasicTest {
 
         Cache cache = HibernateUtil.getSessionFactory().getCache();
         System.out.println(cache.containsEntity(User.class, 1025));
-        cache.evictEntityRegion(User.class);
+//        cache.evictEntityRegion(User.class);
 
         Session session2 = HibernateUtil.getSession();
         session2.beginTransaction();

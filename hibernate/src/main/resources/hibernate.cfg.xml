@@ -21,8 +21,19 @@
             org.hibernate.cache.ehcache.EhCacheRegionFactory
         </property>
 
+        <!--pojo支持注解-->
+        <mapping class="cn.bayllech.pojo.User"/>
+        <mapping class="cn.bayllech.pojo.Card"/>
+        <mapping class="cn.bayllech.pojo.Dept"/>
+        <mapping class="cn.bayllech.pojo.Employment"/>
+        <mapping class="cn.bayllech.pojo.Person"/>
+        <mapping class="cn.bayllech.pojo.Student"/>
+        <mapping class="cn.bayllech.pojo.Teacher"/>
+        <mapping class="cn.bayllech.pojo.TitleContent"/>
+        <mapping class="cn.bayllech.pojo.Topic"/>
+
         <!--读取映射文件-->
-        <mapping resource="mapper/User.hbm.xml"/>
+       <!-- <mapping resource="mapper/User.hbm.xml"/>
         <mapping resource="mapper/Dept.hbm.xml"/>
         <mapping resource="mapper/Employment.hbm.xml"/>
         <mapping resource="mapper/Person.hbm.xml"/>
@@ -30,6 +41,6 @@
         <mapping resource="mapper/Topic.hbm.xml"/>
         <mapping resource="mapper/TopicContent.hbm.xml"/>
         <mapping resource="mapper/Student.hbm.xml"/>
-        <mapping resource="mapper/Teacher.hbm.xml"/>
+        <mapping resource="mapper/Teacher.hbm.xml"/>-->
     </session-factory>
 </hibernate-configuration>

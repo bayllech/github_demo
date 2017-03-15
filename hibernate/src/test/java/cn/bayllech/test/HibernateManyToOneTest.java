@@ -3,10 +3,13 @@ package cn.bayllech.test;
 import cn.bayllech.pojo.Dept;
 import cn.bayllech.pojo.Employment;
 import cn.bayllech.util.HibernateUtil;
+import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.junit.Test;
 
+import javax.persistence.Table;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 public class HibernateManyToOneTest {
@@ -58,6 +61,19 @@ public class HibernateManyToOneTest {
         Set<Employment> employments = dept.getEmploymentSet();
         for (Employment e : employments) {
             System.out.println(e);
+        }
+
+        session.getTransaction().commit();
+    }
+
+    @Test
+    public void NAnd1() {
+        Session session = HibernateUtil.getSession();
+        session.beginTransaction();
+        Criteria criteria = session.createCriteria(Employment.class);
+        List<Employment> employments = criteria.list();
+        for (Employment e : employments) {
+            System.out.println(e.getDept().getDeptname());
         }
 
         session.getTransaction().commit();

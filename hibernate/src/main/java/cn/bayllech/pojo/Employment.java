@@ -1,24 +1,27 @@
 package cn.bayllech.pojo;
 
-import lombok.Data;
+import javax.persistence.*;
 
+@Entity
+@Table(name = "t_employment")
 public class Employment {
 
-  private Integer id;
-  private String name;
-  private Integer deptid;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
+    private String name;
 
+    @ManyToOne
+    @JoinColumn(name = "deptid")
+    private Dept dept;
     @Override
     public String toString() {
         return "Employment{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
-                ", deptid=" + deptid +
                 ", dept=" + dept +
                 '}';
     }
-
-    private Dept dept;
 
     public Integer getId() {
         return id;
@@ -34,14 +37,6 @@ public class Employment {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public Integer getDeptid() {
-        return deptid;
-    }
-
-    public void setDeptid(Integer deptid) {
-        this.deptid = deptid;
     }
 
     public Dept getDept() {
