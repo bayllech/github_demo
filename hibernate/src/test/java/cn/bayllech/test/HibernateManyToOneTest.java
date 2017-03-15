@@ -49,4 +49,17 @@ public class HibernateManyToOneTest {
 
         session.getTransaction().commit();
     }
+
+    @Test
+    public void findManyFromOne() {
+        Session session = HibernateUtil.getSession();
+        session.beginTransaction();
+        Dept dept = (Dept) session.get(Dept.class, 5);
+        Set<Employment> employments = dept.getEmploymentSet();
+        for (Employment e : employments) {
+            System.out.println(e);
+        }
+
+        session.getTransaction().commit();
+    }
 }
