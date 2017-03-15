@@ -16,6 +16,10 @@
         <property name="current_session_context_class">thread</property>
         <!--数据库连接池,根据需求更改-->
         <property name="hibernate.connection.pool_size">1</property>
+        <!--开启二级缓存-->
+        <property name="hibernate.cache.region.factory_class">
+            org.hibernate.cache.ehcache.EhCacheRegionFactory
+        </property>
 
         <!--读取映射文件-->
         <mapping resource="mapper/User.hbm.xml"/>

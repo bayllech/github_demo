@@ -3,6 +3,7 @@ package cn.bayllech.test;
 
 import cn.bayllech.pojo.User;
 import cn.bayllech.util.HibernateUtil;
+import org.hibernate.Cache;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -41,6 +42,18 @@ public class HibernateBasicTest {
         User user = (User) session.get(User.class, 1025);
         System.out.println(user);
         session.getTransaction().commit();
+
+        Cache cache = HibernateUtil.getSessionFactory().getCache();
+        System.out.println(cache.containsEntity(User.class, 1025));
+        cache.evictEntityRegion(User.class);
+
+        Session session2 = HibernateUtil.getSession();
+        session2.beginTransaction();
+
+        User user2 = (User) session2.get(User.class, 1025);
+        System.out.println(user2);
+
+        session2.getTransaction().commit();
     }
 
     @Test
