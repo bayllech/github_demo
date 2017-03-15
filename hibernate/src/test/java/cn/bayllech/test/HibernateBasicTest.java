@@ -11,7 +11,6 @@ import org.hibernate.cfg.Configuration;
 import org.hibernate.service.ServiceRegistry;
 import org.junit.Test;
 
-import javax.sound.midi.Soundbank;
 import java.util.List;
 
 public class HibernateBasicTest {
@@ -27,8 +26,8 @@ public class HibernateBasicTest {
         session.getTransaction().begin();
 
         User user = new User();
-        user.setUsername("hibernate");
-        user.setPassword("666");
+        user.setUsername("hbm");
+        user.setPassword("777");
 
         session.save(user);
 

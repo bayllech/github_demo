@@ -8,7 +8,17 @@ public class Employment {
   private String name;
   private Integer deptid;
 
-  private Dept dept;
+    @Override
+    public String toString() {
+        return "Employment{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", deptid=" + deptid +
+                ", dept=" + dept +
+                '}';
+    }
+
+    private Dept dept;
 
     public Integer getId() {
         return id;

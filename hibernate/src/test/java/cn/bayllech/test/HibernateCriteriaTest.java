@@ -1,8 +1,8 @@
-package cn.bayllech.test;
+package java.cn.bayllech.test;
 
 import cn.bayllech.pojo.User;
 import cn.bayllech.util.HibernateUtil;
-import org.hibernate.Criteria;;
+import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.criterion.*;
 import org.junit.Test;
