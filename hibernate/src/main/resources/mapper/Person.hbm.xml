@@ -3,9 +3,11 @@
         "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
         "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <hibernate-mapping package="cn.bayllech.pojo">
-    <class name="Employment" table="t_employment">
-        <id name="id"><generator class="native"/></id>
+    <class name="Person" table="t_person">
+        <id name="id">
+            <generator class="native"/>
+        </id>
         <property name="name"/>
-        <many-to-one name="dept" class="Dept" column="deptid" fetch="join"/>
+        <one-to-one name="card" class="Card" cascade="delete"></one-to-one>
     </class>
 </hibernate-mapping>

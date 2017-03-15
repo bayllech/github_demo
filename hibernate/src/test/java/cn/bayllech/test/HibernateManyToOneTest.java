@@ -44,8 +44,8 @@ public class HibernateManyToOneTest {
         Session session = HibernateUtil.getSession();
         session.beginTransaction();
         Employment employment = (Employment) session.get(Employment.class, 9);
-        System.out.println(employment);
-//        System.out.println(employment.getDept().getDeptname());
+//        System.out.println(employment);
+        System.out.println(employment.getDept().getDeptname());
 
         session.getTransaction().commit();
     }
