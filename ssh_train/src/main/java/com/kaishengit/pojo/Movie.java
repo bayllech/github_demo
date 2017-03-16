@@ -1,6 +1,7 @@
 package com.kaishengit.pojo;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table
@@ -14,6 +15,11 @@ public class Movie {
     private String sendtime;
     private String daoyan;
     private String jianjie;
+    @ManyToMany
+    @JoinTable(name = "movie_category",
+    joinColumns = @JoinColumn(name = "mid"),
+    inverseJoinColumns = @JoinColumn(name = "cid"))
+    private List<Category> categoryList;
 
     public Integer getId() {
         return id;
@@ -69,5 +75,13 @@ public class Movie {
 
     public void setJianjie(String jianjie) {
         this.jianjie = jianjie;
+    }
+
+    public List<Category> getCategoryList() {
+        return categoryList;
+    }
+
+    public void setCategoryList(List<Category> categoryList) {
+        this.categoryList = categoryList;
     }
 }

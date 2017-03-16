@@ -18,4 +18,8 @@ public class MovieService {
     public List<Movie> findAll() {
         return movieDao.findAll();
     }
+
+    public Movie findById(Integer id) {
+        return movieDao.findById(id);
+    }
 }

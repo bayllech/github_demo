@@ -21,7 +21,7 @@
         <tbody>
         <c:forEach items="${movieList}" var="movie">
             <tr>
-                <td>${movie.title}</td>
+                <td><a href="/movie/${movie.id}">${movie.title}</a></td>
                 <td>${movie.daoyan}</td>
                 <td>${movie.rate}</td>
                 <td>${movie.releaseyear}</td>

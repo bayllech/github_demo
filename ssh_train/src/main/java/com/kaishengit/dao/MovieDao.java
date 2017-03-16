@@ -23,4 +23,8 @@ public class MovieDao {
         Criteria criteria = session().createCriteria(Movie.class);
         return criteria.list();
     }
+
+    public Movie findById(Integer id) {
+        return (Movie) session().get(Movie.class,id);
+    }
 }
