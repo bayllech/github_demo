@@ -10,9 +10,13 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public class MovieDao {
+public class MovieDao extends BaseDao<Movie,Integer> {
 
-    @Autowired
+
+
+
+
+    /*@Autowired
     private SessionFactory sessionFactory;
 
     public Session session(){
@@ -26,5 +30,5 @@ public class MovieDao {
 
     public Movie findById(Integer id) {
         return (Movie) session().get(Movie.class,id);
-    }
+    }*/
 }
