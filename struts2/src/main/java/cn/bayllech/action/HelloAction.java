@@ -1,11 +1,34 @@
 package cn.bayllech.action;
 
-public class HelloAction {
+import com.opensymphony.xwork2.ActionContext;
+import org.apache.struts2.ServletActionContext;
+import org.apache.struts2.util.ServletContextAware;
+
+import javax.servlet.ServletContext;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import java.util.Map;
+
+public class HelloAction extends BaseAction {
 
     private String code;
 
     public String execute() throws Exception{
         System.out.println("Hello,word!");
+        ActionContext actionContext = ActionContext.getContext();
+        Map<String,Object> session = actionContext.getSession();
+
+        HttpServletRequest request = ServletActionContext.getRequest();
+        HttpServletResponse response = ServletActionContext.getResponse();
+        Map<String,Object> servletApplication = ActionContext.getContext().getApplication();
+        ServletContext application = ServletActionContext.getServletContext();
+
+        HttpSession httpSession = getHttpSession();
+        httpSession.setAttribute("h1","v1");
+
+        session.put("K1", "V1");
+
         return "success";
     }
 
