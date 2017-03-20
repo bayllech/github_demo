@@ -6,6 +6,7 @@
 
     <include file="struts-account.xml"></include>
     <include file="struts-user.xml"></include>
+    <include file="struts-upload.xml"></include>
     <!--修改默认后缀-->
     <constant name="struts.action.extension" value=","/>
 
@@ -19,7 +20,7 @@
             <interceptor-stack name="myStack">
                 <interceptor-ref name="defaultStack"/>
                 <interceptor-ref name="timer"/>
-                <interceptor-ref name="login"/>
+                <!--<interceptor-ref name="login"/>-->
             </interceptor-stack>
         </interceptors>
 

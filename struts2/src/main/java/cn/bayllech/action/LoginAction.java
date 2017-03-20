@@ -12,7 +12,7 @@ public class LoginAction extends BaseAction {
     }
 
     public String login() throws Exception {
-        if (userName.equals("tom") && password.equals("123")) {
+        if ("tom".equals(userName) && password.equals("123")) {
             getSession().put("current_user", "tom");
             return SUCCESS;
         } else {

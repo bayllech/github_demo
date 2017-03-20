@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+        "http://struts.apache.org/dtds/struts-2.3.dtd">
+<struts>
+    <package name="uploadPackage" extends="basePackage" namespace="/file">
+        <action name="new" class="cn.bayllech.action.UploadAction">
+            <result>/WEB-INF/views/upload.jsp</result>
+        </action>
+        <action name="upload" class="cn.bayllech.action.UploadAction" method="upload">
+            <result type="redirectAction">
+                <param name="actionName">new</param>
+            </result>
+        </action>
+    </package>
+</struts>
