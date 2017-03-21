@@ -1,62 +1,70 @@
 package cn.bayllech.action;
 
 import cn.bayllech.pojo.User;
+import org.apache.struts2.convention.annotation.Action;
+import org.apache.struts2.convention.annotation.Namespace;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class UserAction {
+@Namespace("/user")
+public class UserAction extends BaseAction {
 
-    /*private String username;
-    private String password;*/
+    private String code;
     private User user;
-    private List<String> names;
+    private List<String> nameList;
+    private String name;
 
-
-    public String newUser() {
-        names = Arrays.asList("aa", "bb", "cc");
-        /*names.add("aa");
-        names.add("bb");
-        names.add("cc");*/
-        return "success";
+    @Action("list")
+    @Override
+    public String execute() throws Exception {
+        return SUCCESS;
     }
 
+    @Action("save")
     public String save() throws Exception {
-        System.out.println("username: " + user.getUsername());
-        return "success";
+        code = "1002";
+
+        user = new User();
+        user.setPassword("123");
+        user.setUsername("中国");
+
+        nameList = Arrays.asList("aa", "bb", "cc");
+
+        name = "tom";
+
+        return SUCCESS;
     }
-
-
 
     public User getUser() {
         return user;
     }
+
     public void setUser(User user) {
         this.user = user;
     }
 
-    public List<String> getNames() {
-        return names;
+    public List<String> getNameList() {
+        return nameList;
     }
 
-    public void setNames(List<String> names) {
-        this.names = names;
+    public void setNameList(List<String> nameList) {
+        this.nameList = nameList;
     }
 
-    /* public String getUsername() {
-        return username;
+    public String getName() {
+        return name;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public String getPassword() {
-        return password;
+    public String getCode() {
+        return code;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
-    }*/
+    public void setCode(String code) {
+        this.code = code;
+    }
 }

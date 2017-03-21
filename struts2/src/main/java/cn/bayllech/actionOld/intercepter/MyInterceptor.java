@@ -1,4 +1,4 @@
-package cn.bayllech.action.intercepter;
+package cn.bayllech.actionOld.intercepter;
 
 import com.opensymphony.xwork2.Action;
 import com.opensymphony.xwork2.ActionContext;
