@@ -7,10 +7,12 @@
     <include file="struts-account.xml"></include>
     <include file="struts-user.xml"></include>
     <include file="struts-upload.xml"></include>
+    <include file="struts-gson.xml"></include>
+    <include file="struts-json.xml"></include>
     <!--修改默认后缀-->
     <constant name="struts.action.extension" value=","/>
 
-    <package name="basePackage" extends="struts-default" abstract="true">
+    <package name="basePackage" extends="struts-default,json-default" abstract="true">
         <interceptors>
             <interceptor name="login" class="cn.bayllech.action.intercepter.MyInterceptor">
                 <param name="namespace">/</param>
