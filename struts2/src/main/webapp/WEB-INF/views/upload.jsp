@@ -9,6 +9,7 @@
     <form action="/file/upload" method="post" enctype="multipart/form-data">
         <input type="file" name="file">
         <input type="file" name="file">
+        <a href="/file/download">下载文件</a>
         <button>Upload</button>
     </form>
 </body>

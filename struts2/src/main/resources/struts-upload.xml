@@ -12,5 +12,18 @@
                 <param name="actionName">new</param>
             </result>
         </action>
+        <action name="download" class="cn.bayllech.action.UploadAction" method="download">
+            <!--<param name="fileName">${}</param>-->
+            <result type="stream">
+                <param name="contentType">${contentType}</param>
+                <param name="contentDisposition">attachment;filename="${fileName}"</param>
+                <param name="bufferSize">1024</param>
+                <param name="inputName">inputStream</param>
+                <param name="allowCache">true</param>
+                <param name="contentCharSet">UTF-8</param>
+                <param name="contentLength">${size}</param>
+            </result>
+
+        </action>
     </package>
 </struts>
