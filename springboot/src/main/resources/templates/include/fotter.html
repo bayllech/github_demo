@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <div class="foot" th:fragment="ft(name,year)">
+        @ <span th:text="${name} + '-' + ${year}"></span>
+    </div>
+    <div id="copy">
+        2017-2018
+    </div>
+</body>
+</html>

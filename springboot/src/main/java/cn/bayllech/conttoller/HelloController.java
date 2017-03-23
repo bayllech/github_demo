@@ -19,4 +19,9 @@ public class HelloController {
         return "index";
     }
 
+    @GetMapping("/main")
+    public String main() {
+        return "main";
+    }
+
 }
