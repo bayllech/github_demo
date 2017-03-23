@@ -11,6 +11,9 @@
     <!--<div class="zzz" th:replace="~{icnlude/fotter::#copy}"></div>-->
     <div layout:fragment="content">
         main 内容
+        <ul>
+            <li th:each="user : ${userList}" th:text="${user.username}"></li>
+        </ul>
     </div>
     <div layout:fragment="footer">@fotter</div>
 </body>
