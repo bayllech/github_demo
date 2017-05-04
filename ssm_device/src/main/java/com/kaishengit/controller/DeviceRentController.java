@@ -187,7 +187,7 @@ public class DeviceRentController {
     /**
      * 根据文档id查找文档并下载
      * @param id
-     * @param response
+     * @param
      */
    /* @GetMapping("/doc")
     public void loadDoc(Integer id, HttpServletResponse response) throws IOException {

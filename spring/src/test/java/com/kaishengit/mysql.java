@@ -17,6 +17,6 @@ public class mysql {
         Statement statement = connection.createStatement();
         statement.executeUpdate(sql);
 
-        
+
     }
 }

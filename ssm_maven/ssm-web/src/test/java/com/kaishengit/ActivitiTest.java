@@ -90,5 +90,19 @@ public class ActivitiTest {
         }
     }
 
+    //完成任务
+    @Test
+    public void completeTask() {
+        engine.getTaskService().complete("22507");
+        System.out.println("任务完成");
+    }
+
+
+    //排他网关
+    @Test
+    public void testSquence() {
+
+    }
+
 
 }
