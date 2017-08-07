@@ -25,8 +25,12 @@
 <body class="hold-transition login-page" style="background-image: url(/static/img/blue-gradients.jpg);">
 <div class="login-box">
     <div class="login-logo">
-        <a href="#"><h2 style="color: rgba(17,17,34,0.98);">备有网管理系统登录</h2></a>
+        <a href="#"><h2 style="color: rgba(17,17,34,0.98);">公司系统登录</h2></a>
     </div>
+    <c:if test="${not empty message}">
+        <div class="alert alert-danger">${message}</div>
+    </c:if>
+
     <!-- /.login-logo -->
     <div class="login-box-body" style="background-color: #ffe;">
         <p class="login-box-msg">请输入帐号密码</p>

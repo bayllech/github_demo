@@ -6,12 +6,15 @@ import com.kaishengit.dto.DataTableResult;
 import com.kaishengit.pojo.DeviceRent;
 import com.kaishengit.pojo.Finance;
 import com.kaishengit.service.FinanceService;
+import com.kaishengit.shiro.ShiroUtil;
+import org.joda.time.DateTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import java.sql.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -66,6 +69,8 @@ public class FinanceController {
             return "error";
         } else {
             finance.setState(Finance.STATE_COMPLETE);
+            finance.setConfirmDate(DateTime.now().toString("yyyy-MM-dd"));
+            finance.setConfirmUser(ShiroUtil.getCurrentUserName());
             financeService.updateState(finance);
             return "success";
         }

@@ -92,7 +92,6 @@
     <!-- /.content-wrapper -->
 
 </div>
-
 <%@include file="../../include/js.jsp"%>
 <script src="/static/plugins/datatables/jquery.dataTables.min.js"></script>
 <script src="/static/layer.js"></script>

@@ -22,12 +22,12 @@ public class HomeController {
     public String home(String userName, String password, RedirectAttributes redirectAttributes) {
 
 //        shiro登录
-        Subject subject = SecurityUtils.getSubject();
+
         try {
+            Subject subject = SecurityUtils.getSubject();
             subject.login(new UsernamePasswordToken(userName, password));
             return "redirect:/device/rent";
         } catch (AuthenticationException ex) {
-            ex.printStackTrace();
             redirectAttributes.addFlashAttribute("message", "账号或密码错误");
             return "redirect:/";
         }

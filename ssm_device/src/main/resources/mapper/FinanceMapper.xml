@@ -6,7 +6,7 @@
         VALUES (#{financeSerial},#{serialNum},#{type},#{money},#{state},#{module},#{createDate},#{createUser},#{remark})
     </insert>
     <update id="updateState">
-        update t_finance set state = #{state} where id = #{id}
+         update t_finance set state = #{state},confirm_user=#{confirmUser},confirm_date=#{confirmDate} where id = #{id}
     </update>
 
     <select id="findAll" resultType="com.kaishengit.pojo.Finance">

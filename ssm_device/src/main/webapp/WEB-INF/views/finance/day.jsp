@@ -168,7 +168,7 @@
                     if(data == "success") {
                         layer.msg("确认成功");
                         //dataTables重新加载
-                        table.ajax.reload(false,null);
+                        table.ajax.reload();
                     } else {
                         layer.msg("此流水号已不存在");
                     }
@@ -206,7 +206,7 @@
 
         function loadPie() {
             //收入统计
-            $.get("/finance/day/in/"+$("#date").val()+"/").done(function (resp) {
+            $.get("/finance/day/in/"+$("#date").val()).done(function (resp) {
                 if (resp.status == "success") {
                     var nameArray = [];
                     for(var i = 0; i<resp.data.length; i++) {
@@ -227,10 +227,10 @@
                     });
                 }
             }).error(function () {
-                layer.msg("服务器异常");
+                layer.msg("加载饼状图服异常");
             });
             //支出统计
-            $.get("/finance/day/in/"+$("#date").val()+"/").done(function (resp) {
+            $.get("/finance/day/out/"+$("#date").val()).done(function (resp) {
                 if (resp.status == "success") {
                     var nameArray = [];
                     for(var i = 0; i<resp.data.length; i++) {
@@ -254,6 +254,8 @@
                 layer.msg("服务器异常");
             });
         }
+
+        loadPie();
 
     });
 </script>

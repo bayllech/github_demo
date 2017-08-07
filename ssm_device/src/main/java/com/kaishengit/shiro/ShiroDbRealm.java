@@ -24,29 +24,34 @@ public class ShiroDbRealm extends AuthorizingRealm {
 
     @Override
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principalCollection) {
+        //返回当前登录的对象
         User user = (User) principalCollection.getPrimaryPrincipal();
+        //获取当前对象拥有的角色
         List<Role> roleList = roleMapper.findByUserId(user.getId());
         if(!roleList.isEmpty()) {
-            SimpleAuthorizationInfo info = new SimpleAuthorizationInfo();
-            for (Role role:roleList) {
-                info.addRole(role.getPartRole());
+            SimpleAuthorizationInfo authorizationInfo = new SimpleAuthorizationInfo();
+            for(Role role : roleList) {
+                authorizationInfo.addRole(role.getPartRole());
             }
-            return info;
+            return authorizationInfo;
         }
-
         return null;
     }
 
+    /**
+     * 登录认证
+     * @param authenticationToken
+     * @return
+     * @throws AuthenticationException
+     */
     @Override
     protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken authenticationToken) throws AuthenticationException {
         UsernamePasswordToken usernamePasswordToken = (UsernamePasswordToken) authenticationToken;
         String userName = usernamePasswordToken.getUsername();
         User user = userMapper.findByUserName(userName);
-
-        if (user != null) {
-            return new SimpleAuthenticationInfo(user, user.getPassword(), getName());
+        if(user != null) {
+            return new SimpleAuthenticationInfo(user,user.getPassword(),getName());
         }
-
         return null;
     }
 }
