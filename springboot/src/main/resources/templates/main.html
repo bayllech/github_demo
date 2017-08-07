@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout}">
+<head>
+    <title>Main</title>
+</head>
+<body>
+    <!--<h1>Main Content</h1>
+    <div class="xyz" th:include="include/fotter::ft('bayllech',2017)">main</div>-->
+    <!--<div class="zzz" th:replace="~{icnlude/fotter::#copy}"></div>-->
+    <div layout:fragment="content">
+        main 内容
+        <ul>
+            <li th:each="user : ${userList}" th:text="${user.username}"></li>
+        </ul>
+    </div>
+    <div layout:fragment="footer">@fotter</div>
+</body>
+</html>

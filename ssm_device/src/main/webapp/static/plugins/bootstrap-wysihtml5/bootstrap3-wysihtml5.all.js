@@ -3930,7 +3930,7 @@ var wysihtml5 = {
         function saveRanges(ranges, backward) {
             var rangeInfos = [], range, doc;
 
-            // Order the ranges by position within the DOM, latest first, cloning the array to leave the original untouched
+            // Order the ranges by position within the DOM, latest first, cloning the array to listner the original untouched
             ranges = ranges.slice(0);
             ranges.sort(compareRanges);
 
@@ -8418,7 +8418,7 @@ wysihtml5.quirks.cleanPastedHTML = (function() {
   };
 
 })();;/**
- * IE and Opera leave an empty paragraph in the contentEditable element after clearing it
+ * IE and Opera listner an empty paragraph in the contentEditable element after clearing it
  *
  * @param {Object} contentEditableElement The contentEditable element to observe for clearing events
  * @exaple

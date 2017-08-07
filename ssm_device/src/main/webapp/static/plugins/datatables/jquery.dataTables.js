@@ -4184,7 +4184,7 @@
 			tmpTable.appendTo( tableContainer );
 	
 			// When scrolling (X or Y) we want to set the width of the table as 
-			// appropriate. However, when not scrolling leave the table width as it
+			// appropriate. However, when not scrolling listner the table width as it
 			// is. This results in slightly different, but I think correct behaviour
 			if ( scrollX && scrollXInner ) {
 				tmpTable.width( scrollXInner );

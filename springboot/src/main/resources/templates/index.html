@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+    <h1 th:text="${name}"></h1>
+    <h1 th:text="${names}">Hello,SpringBoot</h1>
+    <!--<h1 th:text="${session.sid}"></h1>-->
+    <h1 th:if="${name} != 'jack'">Hello,!Jack</h1>
+    <h1 th:unless="${name == 'rose'}">Hello,!Rose</h1>
+    <h1 th:if="${name} == 'tom'">Hello,Tom!</h1>
+
+    <ul th:switch="${name}">
+        <li th:case="'jack'">Jack</li>
+        <li th:case="'tom'">Tom</li>
+        <li th:case="*">xxx</li>
+    </ul>
+    <ul>
+        <li th:each="n,itemStat : ${nameList}" th:text="${itemStat.count}"
+        th:class="${itemStat.odd ?'odd' : 'even'}"></li>
+    </ul>
+    <hr>
+    <input type="text" th:value="${name}" th:attr="rel=${name},data_rel=${name}">
+    <br>
+    <a th:href="@{/del(name=${name})}">删除/del?name=xxx</a>
+    <br>
+    <a th:href="@{/user/{username}/del(username=${name})}">删除/user/username/del</a>
+    <hr>
+
+    <script th:inline="javascript">
+        [# th:if="${name != null}"]
+        var username = [[${name}]];
+        [/]
+
+    </script>
+</body>
+</html>

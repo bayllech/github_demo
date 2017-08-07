@@ -5327,7 +5327,7 @@ function toMs (s) {
 function enter (vnode, toggleDisplay) {
   var el = vnode.elm;
 
-  // call leave callback now
+  // call listner callback now
   if (el._leaveCb) {
     el._leaveCb.cancelled = true;
     el._leaveCb();
@@ -5409,7 +5409,7 @@ function enter (vnode, toggleDisplay) {
   });
 
   if (!vnode.data.show) {
-    // remove pending leave element on enter by injecting an insert hook
+    // remove pending listner element on enter by injecting an insert hook
     mergeVNodeHook(vnode.data.hook || (vnode.data.hook = {}), 'insert', function () {
       var parent = el.parentNode;
       var pendingNode = parent && parent._pending && parent._pending[vnode.key];
@@ -5479,7 +5479,7 @@ function leave (vnode, rm) {
   var expectsCSS = css !== false && !isIE9;
   var userWantsControl =
     leave &&
-    // leave hook may be a bound method which exposes
+    // listner hook may be a bound method which exposes
     // the length of original fn as _length
     (leave._length || leave.length) > 1;
 
@@ -5510,7 +5510,7 @@ function leave (vnode, rm) {
   }
 
   function performLeave () {
-    // the delayed leave may have already been cancelled
+    // the delayed listner may have already been cancelled
     if (cb.cancelled) {
       return
     }
@@ -5557,13 +5557,13 @@ function resolveTransition (def$$1) {
 var autoCssTransition = cached(function (name) {
   return {
     enterClass: (name + "-enter"),
-    leaveClass: (name + "-leave"),
+    leaveClass: (name + "-listner"),
     appearClass: (name + "-enter"),
     enterToClass: (name + "-enter-to"),
-    leaveToClass: (name + "-leave-to"),
+    leaveToClass: (name + "-listner-to"),
     appearToClass: (name + "-enter-to"),
     enterActiveClass: (name + "-enter-active"),
-    leaveActiveClass: (name + "-leave-active"),
+    leaveActiveClass: (name + "-listner-active"),
     appearActiveClass: (name + "-enter-active")
   }
 });
@@ -5968,7 +5968,7 @@ var Transition = {
       var oldData = oldChild && (oldChild.data.transition = extend({}, data));
       // handle transition mode
       if (mode === 'out-in') {
-        // return placeholder node and queue update when leave finishes
+        // return placeholder node and queue update when listner finishes
         this._leaving = true;
         mergeVNodeHook(oldData, 'afterLeave', function () {
           this$1._leaving = false;
@@ -6234,7 +6234,7 @@ var isUnaryTag = makeMap(
   true
 );
 
-// Elements that you can, intentionally, leave open
+// Elements that you can, intentionally, listner open
 // (and which close themselves)
 var canBeLeftOpenTag = makeMap(
   'colgroup,dd,dt,li,options,p,td,tfoot,th,thead,tr,source',
